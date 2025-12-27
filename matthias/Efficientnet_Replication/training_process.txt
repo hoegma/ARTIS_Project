@@ -1,0 +1,126 @@
+=== Starting Training ===
+Epoch 1/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 302ms/step - accuracy: 0.7702 - auc: 0.8456 - loss: 0.5082   
+Epoch 1: val_loss improved from None to 0.34005, saving model to best_model_model3.keras
+
+Epoch 1: finished saving model to best_model_model3.keras
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2261s 360ms/step - accuracy: 0.7967 - auc: 0.8770 - loss: 0.4439 - val_accuracy: 0.8485 - val_auc: 0.9287 - val_loss: 0.3400 - learning_rate: 0.0010
+Epoch 2/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 297ms/step - accuracy: 0.8195 - auc: 0.9003 - loss: 0.3995   
+Epoch 2: val_loss improved from 0.34005 to 0.31523, saving model to best_model_model3.keras
+
+Epoch 2: finished saving model to best_model_model3.keras
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2220s 355ms/step - accuracy: 0.8239 - auc: 0.9047 - loss: 0.3911 - val_accuracy: 0.8637 - val_auc: 0.9391 - val_loss: 0.3152 - learning_rate: 0.0010
+Epoch 3/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 299ms/step - accuracy: 0.8352 - auc: 0.9137 - loss: 0.3736   
+Epoch 3: val_loss improved from 0.31523 to 0.29345, saving model to best_model_model3.keras
+
+Epoch 3: finished saving model to best_model_model3.keras
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2237s 358ms/step - accuracy: 0.8364 - auc: 0.9152 - loss: 0.3703 - val_accuracy: 0.8747 - val_auc: 0.9477 - val_loss: 0.2935 - learning_rate: 0.0010
+Epoch 4/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 300ms/step - accuracy: 0.8451 - auc: 0.9234 - loss: 0.3525   
+Epoch 4: val_loss improved from 0.29345 to 0.27848, saving model to best_model_model3.keras
+
+Epoch 4: finished saving model to best_model_model3.keras
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2242s 358ms/step - accuracy: 0.8497 - auc: 0.9274 - loss: 0.3435 - val_accuracy: 0.8836 - val_auc: 0.9529 - val_loss: 0.2785 - learning_rate: 1.0000e-04
+Epoch 5/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 303ms/step - accuracy: 0.8556 - auc: 0.9317 - loss: 0.3335   
+Epoch 5: val_loss improved from 0.27848 to 0.27399, saving model to best_model_model3.keras
+
+Epoch 5: finished saving model to best_model_model3.keras
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2259s 361ms/step - accuracy: 0.8590 - auc: 0.9341 - loss: 0.3276 - val_accuracy: 0.8850 - val_auc: 0.9544 - val_loss: 0.2740 - learning_rate: 1.0000e-04
+Epoch 6/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 300ms/step - accuracy: 0.8590 - auc: 0.9352 - loss: 0.3253   
+Epoch 6: val_loss improved from 0.27399 to 0.26769, saving model to best_model_model3.keras
+
+Epoch 6: finished saving model to best_model_model3.keras
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2239s 358ms/step - accuracy: 0.8605 - auc: 0.9355 - loss: 0.3244 - val_accuracy: 0.8892 - val_auc: 0.9566 - val_loss: 0.2677 - learning_rate: 1.0000e-04
+Epoch 7/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 300ms/step - accuracy: 0.8639 - auc: 0.9361 - loss: 0.3231   
+Epoch 7: val_loss improved from 0.26769 to 0.26441, saving model to best_model_model3.keras
+
+Epoch 7: finished saving model to best_model_model3.keras
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2241s 358ms/step - accuracy: 0.8648 - auc: 0.9374 - loss: 0.3198 - val_accuracy: 0.8896 - val_auc: 0.9575 - val_loss: 0.2644 - learning_rate: 1.0000e-04
+Epoch 8/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 301ms/step - accuracy: 0.8630 - auc: 0.9367 - loss: 0.3215   
+Epoch 8: val_loss improved from 0.26441 to 0.25805, saving model to best_model_model3.keras
+
+Epoch 8: finished saving model to best_model_model3.keras
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2247s 359ms/step - accuracy: 0.8662 - auc: 0.9395 - loss: 0.3145 - val_accuracy: 0.8941 - val_auc: 0.9596 - val_loss: 0.2580 - learning_rate: 1.0000e-04
+Epoch 9/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 302ms/step - accuracy: 0.8660 - auc: 0.9398 - loss: 0.3137   
+Epoch 9: val_loss improved from 0.25805 to 0.25323, saving model to best_model_model3.keras
+
+Epoch 9: finished saving model to best_model_model3.keras
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2253s 360ms/step - accuracy: 0.8667 - auc: 0.9406 - loss: 0.3117 - val_accuracy: 0.8970 - val_auc: 0.9613 - val_loss: 0.2532 - learning_rate: 1.0000e-04
+Epoch 10/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 303ms/step - accuracy: 0.8689 - auc: 0.9418 - loss: 0.3084   
+Epoch 10: val_loss did not improve from 0.25323
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2256s 361ms/step - accuracy: 0.8699 - auc: 0.9429 - loss: 0.3053 - val_accuracy: 0.8949 - val_auc: 0.9606 - val_loss: 0.2545 - learning_rate: 1.0000e-04
+Epoch 11/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 304ms/step - accuracy: 0.8693 - auc: 0.9421 - loss: 0.3076   
+Epoch 11: val_loss improved from 0.25323 to 0.24853, saving model to best_model_model3.keras
+
+Epoch 11: finished saving model to best_model_model3.keras
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2261s 361ms/step - accuracy: 0.8711 - auc: 0.9438 - loss: 0.3030 - val_accuracy: 0.8986 - val_auc: 0.9626 - val_loss: 0.2485 - learning_rate: 1.0000e-04
+Epoch 12/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 305ms/step - accuracy: 0.8691 - auc: 0.9434 - loss: 0.3041   
+Epoch 12: val_loss improved from 0.24853 to 0.24237, saving model to best_model_model3.keras
+
+Epoch 12: finished saving model to best_model_model3.keras
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2269s 363ms/step - accuracy: 0.8709 - auc: 0.9444 - loss: 0.3014 - val_accuracy: 0.9023 - val_auc: 0.9645 - val_loss: 0.2424 - learning_rate: 1.0000e-04
+Epoch 13/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 306ms/step - accuracy: 0.8750 - auc: 0.9453 - loss: 0.2991   
+Epoch 13: val_loss did not improve from 0.24237
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2273s 363ms/step - accuracy: 0.8756 - auc: 0.9460 - loss: 0.2972 - val_accuracy: 0.8993 - val_auc: 0.9638 - val_loss: 0.2441 - learning_rate: 1.0000e-04
+Epoch 14/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 306ms/step - accuracy: 0.8725 - auc: 0.9455 - loss: 0.2985   
+Epoch 14: val_loss improved from 0.24237 to 0.23934, saving model to best_model_model3.keras
+
+Epoch 14: finished saving model to best_model_model3.keras
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2274s 364ms/step - accuracy: 0.8746 - auc: 0.9469 - loss: 0.2947 - val_accuracy: 0.9031 - val_auc: 0.9656 - val_loss: 0.2393 - learning_rate: 1.0000e-04
+Epoch 15/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 306ms/step - accuracy: 0.8730 - auc: 0.9467 - loss: 0.2953   
+Epoch 15: val_loss did not improve from 0.23934
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2277s 364ms/step - accuracy: 0.8756 - auc: 0.9480 - loss: 0.2917 - val_accuracy: 0.8992 - val_auc: 0.9632 - val_loss: 0.2457 - learning_rate: 1.0000e-04
+Epoch 16/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 307ms/step - accuracy: 0.8790 - auc: 0.9493 - loss: 0.2880   
+Epoch 16: val_loss improved from 0.23934 to 0.23209, saving model to best_model_model3.keras
+
+Epoch 16: finished saving model to best_model_model3.keras
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2282s 365ms/step - accuracy: 0.8792 - auc: 0.9503 - loss: 0.2853 - val_accuracy: 0.9074 - val_auc: 0.9675 - val_loss: 0.2321 - learning_rate: 1.0000e-04
+Epoch 17/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 307ms/step - accuracy: 0.8815 - auc: 0.9511 - loss: 0.2832   
+Epoch 17: val_loss improved from 0.23209 to 0.22881, saving model to best_model_model3.keras
+
+Epoch 17: finished saving model to best_model_model3.keras
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2284s 365ms/step - accuracy: 0.8810 - auc: 0.9512 - loss: 0.2827 - val_accuracy: 0.9089 - val_auc: 0.9685 - val_loss: 0.2288 - learning_rate: 1.0000e-05
+Epoch 18/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 308ms/step - accuracy: 0.8787 - auc: 0.9503 - loss: 0.2855   
+Epoch 18: val_loss did not improve from 0.22881
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2287s 366ms/step - accuracy: 0.8797 - auc: 0.9510 - loss: 0.2833 - val_accuracy: 0.9056 - val_auc: 0.9667 - val_loss: 0.2342 - learning_rate: 1.0000e-05
+Epoch 19/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 309ms/step - accuracy: 0.8808 - auc: 0.9503 - loss: 0.2853   
+Epoch 19: val_loss did not improve from 0.22881
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2295s 367ms/step - accuracy: 0.8811 - auc: 0.9508 - loss: 0.2838 - val_accuracy: 0.9080 - val_auc: 0.9680 - val_loss: 0.2304 - learning_rate: 1.0000e-05
+Epoch 20/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 310ms/step - accuracy: 0.8802 - auc: 0.9503 - loss: 0.2854   
+Epoch 20: val_loss did not improve from 0.22881
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2298s 367ms/step - accuracy: 0.8812 - auc: 0.9512 - loss: 0.2828 - val_accuracy: 0.9068 - val_auc: 0.9670 - val_loss: 0.2333 - learning_rate: 1.0000e-05
+Epoch 21/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 310ms/step - accuracy: 0.8809 - auc: 0.9501 - loss: 0.2860   
+Epoch 21: val_loss did not improve from 0.22881
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2300s 368ms/step - accuracy: 0.8814 - auc: 0.9507 - loss: 0.2842 - val_accuracy: 0.9050 - val_auc: 0.9660 - val_loss: 0.2365 - learning_rate: 1.0000e-05
+Epoch 22/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 311ms/step - accuracy: 0.8827 - auc: 0.9512 - loss: 0.2831   
+Epoch 22: val_loss did not improve from 0.22881
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2305s 368ms/step - accuracy: 0.8823 - auc: 0.9517 - loss: 0.2815 - val_accuracy: 0.9051 - val_auc: 0.9661 - val_loss: 0.2361 - learning_rate: 1.0000e-05
+Epoch 23/30
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 0s 310ms/step - accuracy: 0.8812 - auc: 0.9507 - loss: 0.2841   
+Epoch 23: val_loss did not improve from 0.22881
+6250/6250 ━━━━━━━━━━━━━━━━━━━━ 2302s 368ms/step - accuracy: 0.8816 - auc: 0.9513 - loss: 0.2824 - val_accuracy: 0.9061 - val_auc: 0.9670 - val_loss: 0.2335 - learning_rate: 1.0000e-05
+Epoch 23: early stopping
+Restoring model weights from the end of the best epoch: 17.
+=== Evaluating BEST Model on Test Set ===
+1250/1250 ━━━━━━━━━━━━━━━━━━━━ 387s 307ms/step - accuracy: 0.9087 - auc: 0.9694 - loss: 0.2263
+WARNING:absl:You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
