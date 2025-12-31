@@ -10,6 +10,7 @@ class FLClient(fl.client.NumPyClient):
     def get_parameters(self, config):
         return self.model.get_weights()
 
+    #  local training
     def fit(self, parameters, config):
         self.model.set_weights(parameters)
         self.model.fit(self.train_ds, epochs=3, verbose=0)

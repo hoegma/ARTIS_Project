@@ -1,23 +1,52 @@
 import tensorflow as tf
 import numpy as np
-from tensorflow.keras.applications.efficientnet import preprocess_input
+
 
 AUTOTUNE = tf.data.AUTOTUNE
 BATCH_SIZE = 32
+IMG_SIZE = (224, 224)
 
-def load_dataset(path):
-    ds = tf.keras.preprocessing.image_dataset_from_directory(
-        path,
-        image_size=(224, 224),
+
+def load_dataset(path_to_train, path_to_test, path_to_validation):
+    train_ds = tf.keras.preprocessing.image_dataset_from_directory(
+        path_to_train,
+        image_size=IMG_SIZE,
         batch_size=BATCH_SIZE,
-        label_mode="categorical",
-        shuffle=True,
-        seed=42
+        label_mode="categorical"
     )
-    ds = ds.map(lambda x, y: (preprocess_input(x), y))
-    return ds.prefetch(AUTOTUNE)
+
+    val_ds = tf.keras.preprocessing.image_dataset_from_directory(
+        path_to_validation,
+        image_size=IMG_SIZE,
+        batch_size=BATCH_SIZE,
+        label_mode="categorical"
+    )
+
+    test_ds = tf.keras.preprocessing.image_dataset_from_directory(
+        path_to_test,
+        image_size=IMG_SIZE,
+        batch_size=BATCH_SIZE,
+        shuffle=False,
+        label_mode="categorical"
+    )
+
+    return train_ds, val_ds, test_ds
 
 
+# def load_dataset(path):
+#     ds = tf.keras.preprocessing.image_dataset_from_directory(
+#         path,
+#         image_size=(224, 224),
+#         batch_size=BATCH_SIZE,
+#         label_mode="categorical",
+#         shuffle=True,
+#         seed=42
+#     )
+#     ds = ds.map(lambda x, y: (preprocess_input(x), y))
+#     return ds.prefetch(AUTOTUNE)
+
+
+# Simulates idea that data on each client is not equally distributed
 def non_iid_split(dataset, num_clients):
     """
     Non-IID partitioning via class skew
