@@ -14,6 +14,9 @@
 \usepackage{parskip}
 \usepackage{enumerate}
 
+\usepackage[backend=biber]{biblatex}
+\addbibresource{references.bib}
+
 \geometry{margin=1in}
 \setlength{\parskip}{1em}
 \setlength{\parindent}{0pt}
@@ -50,10 +53,13 @@
 \thispagestyle{empty}
 
 \input{sections/1-introduction}
-\input{sections/2-background}
-\input{sections/3-methodology}
-\input{sections/4-results}
-\input{sections/5-discussion}
-\input{sections/6-conclusion}
+\input{sections/2-related_work}
+\input{sections/3-background}
+\input{sections/4-methodology}
+\input{sections/5-results}
+\input{sections/6-discussion}
+\input{sections/7-conclusion}
+\printbibliography
+
 
 \end{document}

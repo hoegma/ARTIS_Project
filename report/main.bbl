@@ -1,0 +1,54 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{khudeyer2023fake}{article}{}
+      \name{author}{2}{}{%
+        {{hash=34957be428c7c82e73ece42d2268ee76}{%
+           family={Khudeyer},
+           familyi={K\bibinitperiod},
+           given={Raidah\bibnamedelima Salim},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=664c46c58a5800ff43c0415c0e695d2d}{%
+           family={Almoosawi},
+           familyi={A\bibinitperiod},
+           given={Noor\bibnamedelima Mohammed},
+           giveni={N\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{488547504e6deb359ffec0cadba84a4d}
+      \strng{fullhash}{488547504e6deb359ffec0cadba84a4d}
+      \strng{bibnamehash}{488547504e6deb359ffec0cadba84a4d}
+      \strng{authorbibnamehash}{488547504e6deb359ffec0cadba84a4d}
+      \strng{authornamehash}{488547504e6deb359ffec0cadba84a4d}
+      \strng{authorfullhash}{488547504e6deb359ffec0cadba84a4d}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Informatica}
+      \field{number}{7}
+      \field{title}{Fake Image Detection Using Deep Learning}
+      \field{volume}{47}
+      \field{year}{2023}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
