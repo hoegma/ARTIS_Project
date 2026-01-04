@@ -1,0 +1,59 @@
+\documentclass[11pt,a4paper]{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{enumerate}
+
+\geometry{margin=1in}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textit{Advanced Research Topics in IT Security (ARTIS)}}
+\lhead{\textit{Project Report}}
+\rfoot{\thepage}
+
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+
+\title{
+    \vspace{-2cm}
+    \textbf{Project Report – Privacy-Preserving and Explainable Federated Learning for Robust Digital Forensics}\\
+    \large{Advanced Research Topics in IT Security (ARTIS)}\\
+    \vspace{0.5cm}
+}
+\author{
+    \begin{tabular}{lll}
+        \textit{Omar Abushanab} & \textit{(mail)} \\
+        \textit{Ibrahim Selim} & \textit{(mail)} \\
+        \textit{Malak Abdelaziz} & \textit{(mail)} \\
+        \textit{Peter Schropp} & \textit{(mail)} \\
+        \textit{Matthias Högel} & \textit{(matthias.hoegel@uni-ulm.de)} \\
+    \end{tabular}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\input{sections/1-introduction}
+\input{sections/2-background}
+\input{sections/3-methodology}
+\input{sections/4-results}
+\input{sections/5-discussion}
+\input{sections/6-conclusion}
+
+\end{document}
