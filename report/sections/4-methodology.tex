@@ -1,20 +1,35 @@
 \section{Methodology}
 \label{sec:old-methods}
 
-\subsection{Centralized Fake Face Detection Model}
+\subsection{Experimental Setup}
 
+A fake face detection model is developed using federated learning (FL) to distinguish between real and fake faces.
+First, a centrally trained model without FL is implemented and used as a baseline for performance comparison.
+Second, a decentralized fake face detection model is trained using FL in a simulated multi-client environment.
 
-The authors of~\cite{khudeyer2023fake} developed a method for fake face detection using CNN, which achieves an accuracy of 99.06%.
-This approach is to be used as a benchmark for comparing central fake face detection with fake face detection using FL.
-This work was reimplemented for verification purposes in order to ensure a meaningful comparison.
-\newline
-The dataset used was the well-known 140k real-fake faces dataset, which consists of 70,000 real faces and 70,000 fake faces.
-The dataset was divided into 100.000 training images, 20.000 test images, and 20.000 validation images.
-EfficientNetB0 with transfer learning was used as the model.
+\subsubsection{Dataset}
+
+The well-known 140k real-fake faces dataset was used, which consists of 70,000 real faces and 70,000 fake faces with a image size of 256px~\cite{tunguz2020_140kreal_fake_faces}.
+The fake faces were generated using StyleGAN, a generative adversarial network developed by NVIDIA that is capable of producing highly photorealistic synthetic facial images.
+
+\subsubsection{Model}\label{subsubsec:model}
+
+The base model chosen is EfficientNet-B0, a convolutional neural network (CNN), which was also used by Khudeyer et al.~\cite{khudeyer2023fake}.
+The authors trained a fake face detection model using transfer learning.
 For this purpose, the model was initialized with the pretrained weights of EfficientNetB0 on the ImageNet dataset.
 A lightweight head was attached to the pre-trained base model, consisting of global average pooling, a 256-dimensional fully connected layer with ReLU activation, batch normalization, and dropout, followed by a 2 dimensional softmax output layer.
 The output is a 2-dimensional vector with probabilities indicating whether the input image is a fake or real face.
 The model was optimized with binary cross-entropy loss and the Adam optimizer.
+All input images for training were resized to 244px.
+
+\subsection{Centralized Fake Face Detection Model}
+
+The authors of~\cite{khudeyer2023fake} developed a method for fake face detection using CNN, which achieves an accuracy of 99.06\%.
+This approach is used as a benchmark for comparing central fake face detection with fake face detection using FL.
+This work was reimplemented for verification purposes in order to ensure a meaningful comparison.
+\newline
+The dataset was divided into 100.000 training images, 20.000 test images, and 20.000 validation images.
+EfficientNetB0 with the hyperparameters of section~\ref{subsubsec:model} is used.
 Training was performed with a batch size of 32 over 30 epochs with early stopping to reduce training time.
 \newline
 The paper presented a learning rate scheduler that adjusts the learning rate during training based on the epoch, as shown in Table~\ref{tab:learning_rate_scheduler}.
@@ -40,7 +55,7 @@ Due to time constraints, the model was only trained once, as training was very c
 
 \subsection{Decentralized Fake Face Detection using FL}
 
-In this section a decentralized trained fake face detection model is to be developed.
+In this section a decentralized trained fake face detection model is developed.
 The training process will be explained below.
 In addition, we will discuss how privacy attacks can be prevented during training.
 
@@ -67,9 +82,37 @@ Weights sent by participants to the trusted third party could be captured during
 Capturing the weights of individual organizations represents an attack vector for privacy attacks.
 This attack vector should be reduced by the proposed encryption.
 
+\subsubsection{FL Simulation}
+
+A simulation environment is developed to simulate a global model with any number of participants.
+The EfficientNetB0 with the hyperparameters of section~\ref{subsubsec:model} is used as the base model.
+A batch size of 128 is selected.
+The training data set was divided among five participants, with each receiving approximately 20,000 images, comprising 10,000 real faces and 10,000 fake faces.
+On the server, the global model is initialized with the weights from EfficientNetB0, which was pre-trained on the ImageNet dataset.
+The global model is trained in 10 epochs.
+\newline
+Each epoch consists of the following steps.
+\newline
+First, the weights of the global model are distributed among the 5 participants.
+Each participant initializes their local model with the global weights.
+The participants train their local models in 3 epochs.
+The weights of the local models are encrypted to prevent privacy attacks by intercepting the weights.
+The server receives the weights and decrypts them.
+The global model parameters are updated using weighted federated averaging (FedAvg), where each client's contribution is proportional to the number of local samples.
+
 \subsubsection{FL attack mitigations}
 
+If the local updates of the participants are captured during transmission to the server, privacy attacks on the participants' data can be carried out.
+To counteract this, the weight updates must be encrypted.
+The weights are serialized in bytes and encrypted with AES-128.
+Each participant has a secret key that the server knows as a trusted third party.
+When a server receives the encrypted data, it can decrypt it for further processing.
+
 \subsection{Explainability using SHAP}
+
+In order to analyze the centrally trained model and the decentralized trained model, the decisions made by the models should be compared for individual inputs.
+The aim is to clarify whether the models have developed differently as a result of the different training processes and whether they focus on different details when making decisions.
+The SHAP method is used for this purpose.
 
 
 
