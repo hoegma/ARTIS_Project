@@ -4,3 +4,4 @@ dataset
 140k-real-and-fake-faces
 venv
 *.pkl
+real-vs-fake/
