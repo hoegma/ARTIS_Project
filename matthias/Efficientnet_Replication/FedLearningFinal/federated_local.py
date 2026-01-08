@@ -1,14 +1,13 @@
 import os
 import sys
 import time
-import gc
 import pickle
 import numpy as np
 import tensorflow as tf
 import flwr as fl
 
 from cryptography.fernet import Fernet
-from typing import List, Tuple, Dict
+from typing import List
 from tensorflow.keras.applications import EfficientNetB0
 from tensorflow.keras.applications.efficientnet import preprocess_input
 from tensorflow.keras import layers, models
@@ -32,19 +31,21 @@ TEST_PATH = f"{BASE_PATH}/test"
 AUTOTUNE = tf.data.AUTOTUNE
 
 # -------------------------------------------------------------
-# 🔐 ENCRYPTION SETUP (STATIC SHARED KEY)
+# 🔐 ENCRYPTION (runtime injected key)
 # -------------------------------------------------------------
-# Generate once with Fernet.generate_key() and reuse
-FERNET_KEY = b"REPLACE_WITH_YOUR_GENERATED_KEY_HERE"
-cipher = Fernet(FERNET_KEY)
+cipher: Fernet | None = None
+
+def set_cipher(key: bytes):
+    global cipher
+    cipher = Fernet(key)
 
 def encrypt_weights(weights: List[np.ndarray]) -> bytes:
-    serialized = pickle.dumps(weights)
-    return cipher.encrypt(serialized)
+    assert cipher is not None, "Cipher not initialized"
+    return cipher.encrypt(pickle.dumps(weights))
 
-def decrypt_weights(encrypted: bytes) -> List[np.ndarray]:
-    decrypted = cipher.decrypt(encrypted)
-    return pickle.loads(decrypted)
+def decrypt_weights(blob: bytes) -> List[np.ndarray]:
+    assert cipher is not None, "Cipher not initialized"
+    return pickle.loads(cipher.decrypt(blob))
 
 # -------------------------------------------------------------
 # GPU SETUP
@@ -66,7 +67,7 @@ def create_model():
     base_model = EfficientNetB0(
         weights="imagenet",
         include_top=False,
-        input_shape=(IMG_SIZE[0], IMG_SIZE[1], 3)
+        input_shape=(224, 224, 3)
     )
     base_model.trainable = False
 
@@ -76,11 +77,11 @@ def create_model():
         layers.Dense(256, activation="relu"),
         layers.BatchNormalization(),
         layers.Dropout(0.5),
-        layers.Dense(2, activation="softmax", dtype='float32')
+        layers.Dense(2, activation="softmax", dtype="float32")
     ])
 
     model.compile(
-        optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+        optimizer=tf.keras.optimizers.Adam(0.001),
         loss="categorical_crossentropy",
         metrics=["accuracy", tf.keras.metrics.AUC(name="auc")]
     )
@@ -91,28 +92,23 @@ def create_model():
 # -------------------------------------------------------------
 def load_datasets():
     train_ds = tf.keras.preprocessing.image_dataset_from_directory(
-        TRAIN_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE,
-        label_mode="categorical", shuffle=True, seed=42
+        TRAIN_PATH, image_size=IMG_SIZE,
+        batch_size=BATCH_SIZE, label_mode="categorical",
+        shuffle=True, seed=42
     )
     val_ds = tf.keras.preprocessing.image_dataset_from_directory(
-        VAL_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE,
-        label_mode="categorical"
-    )
-    test_ds = tf.keras.preprocessing.image_dataset_from_directory(
-        TEST_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE,
-        shuffle=False, label_mode="categorical"
+        VAL_PATH, image_size=IMG_SIZE,
+        batch_size=BATCH_SIZE, label_mode="categorical"
     )
 
     preprocess = lambda x, y: (preprocess_input(x), y)
-
     return (
         train_ds.map(preprocess).prefetch(AUTOTUNE),
-        val_ds.map(preprocess).prefetch(AUTOTUNE),
-        test_ds.map(preprocess).prefetch(AUTOTUNE)
+        val_ds.map(preprocess).prefetch(AUTOTUNE)
     )
 
 # -------------------------------------------------------------
-# 🔐 FLOWER CLIENT
+# CLIENT
 # -------------------------------------------------------------
 class FakeImageClient(fl.client.NumPyClient):
     def __init__(self, cid, train_ds, num_samples):
@@ -121,92 +117,106 @@ class FakeImageClient(fl.client.NumPyClient):
         self.num_samples = num_samples
         self.model = create_model()
 
-    def get_parameters(self, config):
-        weights = self.model.get_weights()
-        encrypted = encrypt_weights(weights)
-        return ndarrays_to_parameters([np.frombuffer(encrypted, dtype=np.uint8)])
-
     def fit(self, parameters, config):
-        server_round = config.get("server_round", "?")
-        print(f"\n[Client {self.cid}] Round {server_round} training")
+        global cipher
 
-        encrypted_blob = parameters_to_ndarrays(parameters)[0].tobytes()
-        weights = decrypt_weights(encrypted_blob)
-        self.model.set_weights(weights)
+        # 🔑 Receive encryption key once
+        if cipher is None:
+            key = config["fernet_key"].encode()
+            set_cipher(key)
+            print(f"[Client {self.cid}] Encryption key received")
 
-        history = self.model.fit(self.train_ds, epochs=LOCAL_EPOCHS, verbose=1)
+            # First round → unencrypted weights
+            self.model.set_weights(parameters)
+        else:
+            encrypted = parameters_to_ndarrays(parameters)[0].tobytes()
+            self.model.set_weights(decrypt_weights(encrypted))
 
-        updated_weights = self.model.get_weights()
-        encrypted_update = encrypt_weights(updated_weights)
+        self.model.fit(self.train_ds, epochs=LOCAL_EPOCHS, verbose=1)
 
-        return (
-            ndarrays_to_parameters([np.frombuffer(encrypted_update, dtype=np.uint8)]),
-            self.num_samples,
-            {"loss": history.history["loss"][-1]}
-        )
+        updated = self.model.get_weights()
+
+        if cipher is None:
+            return updated, self.num_samples, {}
+        else:
+            encrypted = encrypt_weights(updated)
+            return (
+                ndarrays_to_parameters([np.frombuffer(encrypted, dtype=np.uint8)]),
+                self.num_samples,
+                {}
+            )
 
     def evaluate(self, parameters, config):
         return 0.0, self.num_samples, {}
 
 # -------------------------------------------------------------
-# 🔐 SERVER STRATEGY
+# SERVER STRATEGY
 # -------------------------------------------------------------
 class EncryptedFedAvg(fl.server.strategy.FedAvg):
-    def __init__(self, val_ds, **kwargs):
+    def __init__(self, val_ds, fernet_key: bytes, **kwargs):
         super().__init__(**kwargs)
         self.val_ds = val_ds
+        self.fernet_key = fernet_key
         self.global_model = create_model()
+        set_cipher(fernet_key)
 
-    def aggregate_fit(self, server_round, results, failures):
+    def aggregate_fit(self, rnd, results, failures):
         decrypted_results = []
 
-        for client_proxy, fit_res in results:
-            encrypted_blob = parameters_to_ndarrays(fit_res.parameters)[0].tobytes()
-            weights = decrypt_weights(encrypted_blob)
-            decrypted_results.append(
-                (client_proxy, fl.common.FitRes(
-                    parameters=ndarrays_to_parameters(weights),
-                    num_examples=fit_res.num_examples,
-                    metrics=fit_res.metrics
-                ))
-            )
+        for client, fit_res in results:
+            if rnd == 1:
+                decrypted_results.append((client, fit_res))
+            else:
+                blob = parameters_to_ndarrays(fit_res.parameters)[0].tobytes()
+                weights = decrypt_weights(blob)
+                decrypted_results.append(
+                    (client, fl.common.FitRes(
+                        parameters=ndarrays_to_parameters(weights),
+                        num_examples=fit_res.num_examples,
+                        metrics=fit_res.metrics
+                    ))
+                )
 
-        aggregated = super().aggregate_fit(server_round, decrypted_results, failures)
+        aggregated = super().aggregate_fit(rnd, decrypted_results, failures)
         if aggregated[0] is None:
             return aggregated
 
-        weights = parameters_to_ndarrays(aggregated[0])
-        self.global_model.set_weights(weights)
-
+        self.global_model.set_weights(parameters_to_ndarrays(aggregated[0]))
         loss, acc, auc = self.global_model.evaluate(self.val_ds, verbose=0)
-        print(f"[Server] Round {server_round} | Val Acc: {acc:.4f} | AUC: {auc:.4f}")
+        print(f"[Server] Round {rnd} | Val Acc: {acc:.4f} | AUC: {auc:.4f}")
 
-        encrypted = encrypt_weights(weights)
-        encrypted_params = ndarrays_to_parameters(
-            [np.frombuffer(encrypted, dtype=np.uint8)]
+        if rnd == 1:
+            return aggregated
+
+        encrypted = encrypt_weights(parameters_to_ndarrays(aggregated[0]))
+        return (
+            ndarrays_to_parameters([np.frombuffer(encrypted, dtype=np.uint8)]),
+            aggregated[1],
+            aggregated[2]
         )
-
-        return encrypted_params, aggregated[1], aggregated[2]
 
 # -------------------------------------------------------------
 # SERVER
 # -------------------------------------------------------------
 def start_server():
     setup_gpu()
-    _, val_ds, _ = load_datasets()
+    _, val_ds = load_datasets()
+
+    # 🔑 Generate key ONCE
+    fernet_key = Fernet.generate_key()
+    print("🔐 Server generated encryption key")
 
     def on_fit_config(server_round):
-        return {"server_round": server_round}
+        return {"fernet_key": fernet_key.decode()}
 
     strategy = EncryptedFedAvg(
         val_ds=val_ds,
+        fernet_key=fernet_key,
         fraction_fit=1.0,
         min_fit_clients=NUM_CLIENTS,
         min_available_clients=NUM_CLIENTS,
         on_fit_config_fn=on_fit_config,
-        initial_parameters=ndarrays_to_parameters(
-            [np.frombuffer(encrypt_weights(create_model().get_weights()), dtype=np.uint8)]
-        )
+        initial_parameters=ndarrays_to_parameters(create_model().get_weights())
     )
 
     fl.server.start_server(
@@ -215,17 +225,21 @@ def start_server():
         strategy=strategy
     )
 
+
 # -------------------------------------------------------------
 # CLIENT
 # -------------------------------------------------------------
-def start_client(cid: int):
+def start_client(cid):
     setup_gpu()
-    train_ds, _, _ = load_datasets()
+    train_ds, _ = load_datasets()
     client_ds = train_ds.shard(NUM_CLIENTS, cid)
     num_samples = sum(1 for _ in client_ds) * BATCH_SIZE
 
-    client = FakeImageClient(cid, client_ds, num_samples)
-    fl.client.start_numpy_client(SERVER_ADDRESS, client)
+    fl.client.start_numpy_client(
+        server_address=SERVER_ADDRESS,
+        client=FakeImageClient(cid, client_ds, num_samples)
+    )
+
 
 # -------------------------------------------------------------
 # MAIN

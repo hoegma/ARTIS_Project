@@ -73,6 +73,24 @@ The clients initialize their local model with the parameters of the global model
 \newline
 The last two steps are repeated until a specified number of epochs or a desired accuracy has been achieved.
 
+\subsection{The Flower Federated Learning Framework}
+\label{subsec:flower-framework}
+
+Flower is an open-source framework designed for FL applications. It provides a flexible and extensible architecture that enables machine learning across decentralized data while maintaing data privacy on client devices.
+
+\subsubsection*{Key Advantages}
+
+\begin{enumerate}
+  
+    \item \textbf{Framework Agnosticism}: Flower supports many ML frameworks such as PyTorch, TensorFlow, JAX, and scikit-learn. This allowed us freedom in development without compatibility issues.
+    
+    \item \textbf{Low Learning Curve and Ease of Use}: Flower is specifically designed with developer experience in mind. Its clean, minimal API allows for quick prototyping—a working FL system can be implemented with just a few lines of code. Compared to alternatives like TensorFlow Federated (which requires learning specialized abstractions) or PySyft (with its complex privacy-preserving cryptography integration), Flower offers a more intuitive approach that reduces the barrier to entry for both researchers and practitioners.
+    
+    \item \textbf{Scalability}: The framework supports deployments ranging from small-scale simulations to production systems with hundreds of clients. This scalability enables both algorithm development in simulated environments and real-world deployment across distributed devices.
+    
+    \item \textbf{Production Readiness}: Beyond research use cases, Flower includes features necessary for production deployment, including fault tolerance, client management, and monitoring capabilities. This makes it suitable for both experimental validation and real-world applications.
+\end{enumerate}
+
 
 \subsubsection{Attack Vectors in FL}
 
