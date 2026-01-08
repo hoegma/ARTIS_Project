@@ -1,22 +1,15 @@
-# Federated Learning with Flower Framework - LOCAL MODE
-# Run server and clients as separate processes on your laptop
-
-#i created a bash file to run the multiple clients and server
-#to run use this command in a single terminal:
-# open bash terminal and run this to open the folder that holds the script: 
-#  cd \matthias\\Efficientnet_Replication\\FederatedLearning\\FedLearningFinal
-#  chmod +x run_federated.sh
-#  ./run_federated.sh
+# # chmod +x run_federated.sh
+# # ./run_federated.sh
 
 import os
 import sys
+import time
 import numpy as np
 import pickle
 import tensorflow as tf
 from tensorflow.keras.applications import EfficientNetB0
 from tensorflow.keras.applications.efficientnet import preprocess_input
 from tensorflow.keras import layers, models
-from tensorflow.keras import backend as K
 import flwr as fl
 from flwr.common import ndarrays_to_parameters, parameters_to_ndarrays
 from typing import List, Tuple, Dict
@@ -26,14 +19,13 @@ import gc
 # CONFIG
 # -------------------------------------------------------------
 IMG_SIZE = (224, 224)
-BATCH_SIZE = 128
+BATCH_SIZE = 32
 LOCAL_EPOCHS = 3
 FEDERATED_ROUNDS = 10
 NUM_CLIENTS = 5
-SERVER_ADDRESS = "localhost:8080"
+SERVER_ADDRESS = "localhost:8000"
 
-# Update these paths to your local dataset location
-BASE_PATH = "./real-vs-fake"  # Change this to your dataset path
+BASE_PATH = "./real-vs-fake"
 TRAIN_PATH = f"{BASE_PATH}/train"
 VAL_PATH = f"{BASE_PATH}/valid"
 TEST_PATH = f"{BASE_PATH}/test"
@@ -41,22 +33,27 @@ TEST_PATH = f"{BASE_PATH}/test"
 AUTOTUNE = tf.data.AUTOTUNE
 
 # -------------------------------------------------------------
-# GPU Setup
+# GPU Setup (CRITICAL FOR MULTI-PROCESS)
 # -------------------------------------------------------------
 def setup_gpu():
+    """Configures GPU to allow multiple processes to share memory"""
+    # Force TensorFlow to only see the GPU if it's actually there
+    os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
+    
     gpus = tf.config.list_physical_devices('GPU')
     if gpus:
         try:
             for gpu in gpus:
+                # This prevents one client from taking 100% of VRAM
                 tf.config.experimental.set_memory_growth(gpu, True)
             print(f"✓ GPU enabled: {len(gpus)} GPU(s)")
         except RuntimeError as e:
             print(f"GPU error: {e}")
     else:
-        print("⚠ No GPU - using CPU")
+        print("⚠ No GPU detected by TensorFlow. Check CUDA/cuDNN installation.")
 
 # -------------------------------------------------------------
-# Create Model
+# Create Model & Datasets (Same logic as yours)
 # -------------------------------------------------------------
 def create_model():
     """Create EfficientNetB0 model with custom top layers"""
@@ -84,317 +81,337 @@ def create_model():
 
     return model
 
-# -------------------------------------------------------------
-# Load Datasets
-# -------------------------------------------------------------
 def load_datasets():
-    """Load training, validation, and test datasets"""
-    train_ds = tf.keras.preprocessing.image_dataset_from_directory(
-        TRAIN_PATH,
-        image_size=IMG_SIZE,
-        batch_size=BATCH_SIZE,
-        label_mode="categorical",
-        shuffle=True,
-        seed=42
-    )
+    train_ds = tf.keras.preprocessing.image_dataset_from_directory(TRAIN_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE, label_mode="categorical", shuffle=True, seed=42)
+    val_ds = tf.keras.preprocessing.image_dataset_from_directory(VAL_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE, label_mode="categorical")
+    test_ds = tf.keras.preprocessing.image_dataset_from_directory(TEST_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE, shuffle=False, label_mode="categorical")
 
-    val_ds = tf.keras.preprocessing.image_dataset_from_directory(
-        VAL_PATH,
-        image_size=IMG_SIZE,
-        batch_size=BATCH_SIZE,
-        label_mode="categorical"
-    )
-
-    test_ds = tf.keras.preprocessing.image_dataset_from_directory(
-        TEST_PATH,
-        image_size=IMG_SIZE,
-        batch_size=BATCH_SIZE,
-        shuffle=False,
-        label_mode="categorical"
-    )
-
-    # Preprocessing
-    train_ds = train_ds.map(lambda x, y: (preprocess_input(x), y), num_parallel_calls=AUTOTUNE)
-    val_ds = val_ds.map(lambda x, y: (preprocess_input(x), y), num_parallel_calls=AUTOTUNE)
-    test_ds = test_ds.map(lambda x, y: (preprocess_input(x), y), num_parallel_calls=AUTOTUNE)
-
-    # Optimize
-    train_ds = train_ds.prefetch(AUTOTUNE)
-    val_ds = val_ds.prefetch(AUTOTUNE)
-    test_ds = test_ds.prefetch(AUTOTUNE)
-
-    return train_ds, val_ds, test_ds
+    preprocess = lambda x, y: (preprocess_input(x), y)
+    return (train_ds.map(preprocess, num_parallel_calls=AUTOTUNE).prefetch(AUTOTUNE),
+            val_ds.map(preprocess, num_parallel_calls=AUTOTUNE).prefetch(AUTOTUNE),
+            test_ds.map(preprocess, num_parallel_calls=AUTOTUNE).prefetch(AUTOTUNE))
 
 # -------------------------------------------------------------
-# Partition Data for Clients
-# -------------------------------------------------------------
-def get_client_data(train_ds, client_id: int, num_clients: int):
-    """Get data partition for a specific client"""
-    client_ds = train_ds.shard(num_shards=num_clients, index=client_id)
-    client_samples = sum(int(batch_x.shape[0]) for batch_x, _ in client_ds)
-    client_ds = client_ds.prefetch(AUTOTUNE)
-    
-    print(f"  Client {client_id}: {client_samples} samples")
-    return client_ds, client_samples
-
-# -------------------------------------------------------------
-# FLOWER CLIENT
+# FLOWER CLIENT (Updated with timing and verbose)
 # -------------------------------------------------------------
 class FakeImageClient(fl.client.NumPyClient):
-    """Flower client for federated fake image detection"""
-    
-    def __init__(self, client_id: int, train_ds, num_samples: int):
+    def __init__(self, client_id, train_ds, num_samples):
         self.client_id = client_id
         self.train_ds = train_ds
         self.num_samples = num_samples
         self.model = create_model()
-        print(f"[Client {client_id}] Initialized with {num_samples} samples")
-    
-    def get_parameters(self, config: Dict) -> List[np.ndarray]:
-        """Return current model parameters"""
+
+    def get_parameters(self, config):
         return self.model.get_weights()
-    
-    def fit(self, parameters: List[np.ndarray], config: Dict) -> Tuple[List[np.ndarray], int, Dict]:
-        """Train model on local data"""
-        print(f"\n[Client {self.client_id}] Starting local training (Epoch {config.get('server_round', '?')})...")
+
+    def fit(self, parameters, config):
+        server_round = config.get("server_round", "?")
+        print(f"\n[Client {self.client_id}] Round {server_round} - Training...")
         
-        # Update model with global parameters
+        start_time = time.time()
         self.model.set_weights(parameters)
         
-        # Train on local data
-        history = self.model.fit(
-            self.train_ds,
-            epochs=LOCAL_EPOCHS,
-            verbose=0
-        )
+        # Verbose=1 shows progress bar per client
+        history = self.model.fit(self.train_ds, epochs=LOCAL_EPOCHS, verbose=1)
         
-        # Get metrics
-        final_loss = history.history['loss'][-1]
-        final_acc = history.history['accuracy'][-1]
+        duration = time.time() - start_time
+        print(f"[Client {self.client_id}] Round {server_round} finished in {duration:.2f}s")
         
-        print(f"[Client {self.client_id}] Training complete - Loss: {final_loss:.4f}, Acc: {final_acc:.4f}")
-        
-        # Return updated weights and metrics
-        updated_weights = self.model.get_weights()
-        metrics = {
-            "loss": final_loss,
-            "accuracy": final_acc
-        }
-        
-        # Cleanup
-        del history
-        gc.collect()
-        
-        return updated_weights, self.num_samples, metrics
-    
-    def evaluate(self, parameters: List[np.ndarray], config: Dict) -> Tuple[float, int, Dict]:
-        """Evaluate model (optional)"""
+        return self.model.get_weights(), self.num_samples, {"loss": history.history['loss'][-1], "accuracy": history.history['accuracy'][-1]}
+
+    def evaluate(self, parameters, config):
         return 0.0, self.num_samples, {}
 
 # -------------------------------------------------------------
-# FLOWER STRATEGY (Server-side)
+# FLOWER STRATEGY (Updated with timing and round config)
 # -------------------------------------------------------------
 class WeightedFedAvg(fl.server.strategy.FedAvg):
-    """Custom FedAvg strategy with evaluation"""
-    
-    def __init__(self, val_ds, test_ds, **kwargs):
+    def __init__(self, val_ds, **kwargs):
         super().__init__(**kwargs)
         self.val_ds = val_ds
-        self.test_ds = test_ds
         self.global_model = create_model()
-        self.history = {
-            'round': [],
-            'train_loss': [],
-            'train_acc': [],
-            'val_loss': [],
-            'val_acc': [],
-            'val_auc': []
-        }
-    
+        self.history = {'round': [], 'val_acc': [], 'duration': []}
+
     def aggregate_fit(self, server_round, results, failures):
-        """Aggregate client updates"""
-        if failures:
-            print(f"⚠ {len(failures)} clients failed")
-        
-        print(f"\n{'='*60}")
-        print(f"[Server] Round {server_round}/{FEDERATED_ROUNDS} - Aggregating {len(results)} client updates")
-        print(f"{'='*60}")
-        
-        # Extract metrics
-        train_losses = [fit_res.metrics["loss"] for _, fit_res in results]
-        train_accs = [fit_res.metrics["accuracy"] for _, fit_res in results]
-        
-        # Perform weighted aggregation
-        aggregated_parameters, aggregated_metrics = super().aggregate_fit(
-            server_round, results, failures
-        )
-        
-        # Evaluate global model
-        if aggregated_parameters is not None:
-            print(f"[Server] Evaluating global model on validation set...")
-            global_weights = parameters_to_ndarrays(aggregated_parameters)
-            self.global_model.set_weights(global_weights)
+        agg_res = super().aggregate_fit(server_round, results, failures)
+        if agg_res[0] is not None:
+            print(f"\n[Server] Round {server_round} aggregated. Evaluating...")
+            start_eval = time.time()
+            self.global_model.set_weights(parameters_to_ndarrays(agg_res[0]))
+            loss, acc, auc = self.global_model.evaluate(self.val_ds, verbose=0)
             
-            val_results = self.global_model.evaluate(self.val_ds, verbose=0)
-            val_loss, val_acc, val_auc = val_results
-            
-            # Store metrics
             self.history['round'].append(server_round)
-            self.history['train_loss'].append(np.mean(train_losses))
-            self.history['train_acc'].append(np.mean(train_accs))
-            self.history['val_loss'].append(val_loss)
-            self.history['val_acc'].append(val_acc)
-            self.history['val_auc'].append(val_auc)
+            self.history['val_acc'].append(acc)
             
-            print(f"\n{'='*60}")
-            print(f"Round {server_round} Summary:")
-            print(f"  Avg Client Train Loss: {np.mean(train_losses):.4f}")
-            print(f"  Avg Client Train Acc:  {np.mean(train_accs):.4f}")
-            print(f"  Global Val Loss:       {val_loss:.4f}")
-            print(f"  Global Val Acc:        {val_acc:.4f}")
-            print(f"  Global Val AUC:        {val_auc:.4f}")
-            print(f"{'='*60}\n")
-            
-            # Save checkpoint
-            if server_round % 2 == 0:
-                self.global_model.save(f"federated_model_round_{server_round}.keras")
-                print(f"✓ Checkpoint saved: federated_model_round_{server_round}.keras\n")
-        
-        return aggregated_parameters, aggregated_metrics
+            print(f"--- Round {server_round} Results ---")
+            print(f"Val Acc: {acc:.4f} | Val AUC: {auc:.4f} | Eval Time: {time.time()-start_eval:.2f}s")
+        return agg_res
 
 # -------------------------------------------------------------
-# SERVER MODE
+# EXECUTION LOGIC
+# -------------------------------------------------------------
+# def start_server():
+#     setup_gpu()
+#     _, val_ds, test_ds = load_datasets()
+    
+#     # This sends the round number to clients so they can print it
+#     def on_fit_config(server_round: int):
+#         return {"server_round": server_round}
+
+#     strategy = WeightedFedAvg(
+#         val_ds=val_ds,
+#         fraction_fit=1.0,
+#         min_fit_clients=NUM_CLIENTS,
+#         min_available_clients=NUM_CLIENTS,
+#         on_fit_config_fn=on_fit_config,
+#         initial_parameters=ndarrays_to_parameters(create_model().get_weights())
+#     )
+#     fl.server.start_server(server_address=SERVER_ADDRESS, config=fl.server.ServerConfig(num_rounds=FEDERATED_ROUNDS), strategy=strategy)
+
+# -------------------------------------------------------------
+# EXECUTION LOGIC
 # -------------------------------------------------------------
 def start_server():
-    """Start the Flower server"""
     setup_gpu()
-    
-    print("\n" + "="*60)
-    print("FLOWER FEDERATED LEARNING SERVER")
-    print("="*60)
-    print(f"Server Address: {SERVER_ADDRESS}")
-    print(f"Expected Clients: {NUM_CLIENTS}")
-    print(f"Federated Rounds: {FEDERATED_ROUNDS}")
-    print(f"Local Epochs: {LOCAL_EPOCHS}")
-    print("="*60 + "\n")
-    
-    # Load validation and test datasets
-    print("Loading validation and test datasets...")
     _, val_ds, test_ds = load_datasets()
     
-    # Initialize model
-    initial_model = create_model()
-    initial_parameters = ndarrays_to_parameters(initial_model.get_weights())
+    # 1. Define the folder and file name
+    SAVE_DIR = "saved_models"
+    MODEL_NAME = "final_federated_model.h5"
     
-    # Create strategy
+    # 2. Create the folder if it doesn't exist
+    if not os.path.exists(SAVE_DIR):
+        os.makedirs(SAVE_DIR)
+        print(f"Created directory: {SAVE_DIR}")
+
+    def on_fit_config(server_round: int):
+        return {"server_round": server_round}
+
     strategy = WeightedFedAvg(
         val_ds=val_ds,
-        test_ds=test_ds,
         fraction_fit=1.0,
-        fraction_evaluate=0.0,
         min_fit_clients=NUM_CLIENTS,
-        min_evaluate_clients=0,
         min_available_clients=NUM_CLIENTS,
-        initial_parameters=initial_parameters,
+        on_fit_config_fn=on_fit_config,
+        initial_parameters=ndarrays_to_parameters(create_model().get_weights())
     )
     
-    print("✓ Server ready! Waiting for clients to connect...\n")
-    
-    # Start server
+    # This call blocks until all FEDERATED_ROUNDS are finished
     fl.server.start_server(
-        server_address=SERVER_ADDRESS,
-        config=fl.server.ServerConfig(num_rounds=FEDERATED_ROUNDS),
-        strategy=strategy,
+        server_address=SERVER_ADDRESS, 
+        config=fl.server.ServerConfig(num_rounds=FEDERATED_ROUNDS), 
+        strategy=strategy
     )
-    
-    # Final evaluation
-    print("\n" + "="*60)
-    print("FINAL EVALUATION ON TEST SET")
-    print("="*60)
-    
-    final_model = strategy.global_model
-    test_results = final_model.evaluate(test_ds, verbose=1)
-    test_loss, test_acc, test_auc = test_results
-    
-    print(f"\nFinal Test Results:")
-    print(f"  Test Loss:     {test_loss:.4f}")
-    print(f"  Test Accuracy: {test_acc*100:.2f}%")
-    print(f"  Test AUC:      {test_auc:.4f}")
-    
-    # Save final model
-    final_model.save("federated_final_model.h5")
-    with open("federated_history.pkl", "wb") as f:
-        pickle.dump(strategy.history, f)
-    
-    print("\n✓ Training Complete!")
-    print("✓ Model saved: federated_final_model.h5")
-    print("✓ History saved: federated_history.pkl")
 
-# -------------------------------------------------------------
-# CLIENT MODE
-# -------------------------------------------------------------
-def start_client(client_id: int):
-    """Start a Flower client"""
+    # 3. After training, save the final weights from the strategy's global_model
+    print("\n--- Training Complete. Saving Global Model ---")
+    save_path = os.path.join(SAVE_DIR, MODEL_NAME)
+    strategy.global_model.save(save_path)
+    print(f"✓ Model successfully saved to: {save_path}")
+
+def start_client(client_id):
     setup_gpu()
-    
-    print("\n" + "="*60)
-    print(f"FLOWER CLIENT {client_id}")
-    print("="*60)
-    print(f"Connecting to: {SERVER_ADDRESS}")
-    print("="*60 + "\n")
-    
-    # Load training data
-    print("Loading training dataset...")
     train_ds, _, _ = load_datasets()
+    client_ds = train_ds.shard(num_shards=NUM_CLIENTS, index=client_id)
+    # Count samples for weighting
+    num_samples = sum(1 for _ in client_ds) * BATCH_SIZE 
     
-    # Get client's data partition
-    client_ds, num_samples = get_client_data(train_ds, client_id, NUM_CLIENTS)
-    
-    # Create client
-    client = FakeImageClient(
-        client_id=client_id,
-        train_ds=client_ds,
-        num_samples=num_samples
-    )
-    
-    print(f"\n✓ Client {client_id} ready! Connecting to server...\n")
-    
-    # Start client
-    fl.client.start_numpy_client(
-        server_address=SERVER_ADDRESS,
-        client=client
-    )
-    
-    print(f"\n✓ Client {client_id} finished training!")
+    client = FakeImageClient(client_id, client_ds, num_samples)
+    fl.client.start_numpy_client(server_address=SERVER_ADDRESS, client=client)
 
-# -------------------------------------------------------------
-# MAIN ENTRY POINT
-# -------------------------------------------------------------
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage:")
-        print("  Server: python federated_local.py server")
-        print("  Client: python federated_local.py client <client_id>")
-        print(f"  Example: python federated_local.py client 0")
-        print(f"           python federated_local.py client 1")
-        print(f"           ... (up to client {NUM_CLIENTS-1})")
-        sys.exit(1)
-    
     mode = sys.argv[1].lower()
-    
     if mode == "server":
         start_server()
     elif mode == "client":
-        if len(sys.argv) < 3:
-            print("Error: Client ID required")
-            print(f"Usage: python federated_local.py client <0-{NUM_CLIENTS-1}>")
-            sys.exit(1)
-        client_id = int(sys.argv[2])
-        if client_id < 0 or client_id >= NUM_CLIENTS:
-            print(f"Error: Client ID must be between 0 and {NUM_CLIENTS-1}")
-            sys.exit(1)
-        start_client(client_id)
-    else:
-        print(f"Error: Unknown mode '{mode}'")
-        print("Use 'server' or 'client'")
-        sys.exit(1)
+        start_client(int(sys.argv[2]))
+
+# chmod +x run_federated.sh
+# ./run_federated.sh
+
+# import os
+# import sys
+# import time
+# import numpy as np
+# import pickle
+# import tensorflow as tf
+# from tensorflow.keras.applications import EfficientNetB0
+# from tensorflow.keras.applications.efficientnet import preprocess_input
+# from tensorflow.keras import layers, models
+# import flwr as fl
+# from flwr.common import ndarrays_to_parameters, parameters_to_ndarrays
+# from sklearn.metrics import confusion_matrix, classification_report, precision_recall_fscore_support
+
+# # -------------------------------------------------------------
+# # CONFIG
+# # -------------------------------------------------------------
+# IMG_SIZE = (224, 224)
+# BATCH_SIZE = 32
+# LOCAL_EPOCHS = 3
+# FEDERATED_ROUNDS = 10
+# NUM_CLIENTS = 5
+# SERVER_ADDRESS = "localhost:7999"
+
+# BASE_PATH = "./real-vs-fake"
+# TRAIN_PATH = f"{BASE_PATH}/train"
+# VAL_PATH = f"{BASE_PATH}/valid"
+# TEST_PATH = f"{BASE_PATH}/test"
+
+# OUTPUT_DIR = "./outputs"
+# os.makedirs(OUTPUT_DIR, exist_ok=True)
+# AUTOTUNE = tf.data.AUTOTUNE
+
+# # -------------------------------------------------------------
+# # GPU Setup
+# # -------------------------------------------------------------
+# def setup_gpu():
+#     os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
+#     gpus = tf.config.list_physical_devices('GPU')
+#     if gpus:
+#         for gpu in gpus:
+#             tf.config.experimental.set_memory_growth(gpu, True)
+#         print(f"✓ GPU enabled: {len(gpus)} GPU(s)")
+#     else:
+#         print("⚠ No GPU detected")
+
+# # -------------------------------------------------------------
+# # Model & Dataset
+# # -------------------------------------------------------------
+# def create_model():
+#     base_model = EfficientNetB0(weights="imagenet", include_top=False, input_shape=(IMG_SIZE[0], IMG_SIZE[1], 3))
+#     base_model.trainable = False
+
+#     model = models.Sequential([
+#         base_model,
+#         layers.GlobalAveragePooling2D(),
+#         layers.Dense(256, activation="relu"),
+#         layers.BatchNormalization(),
+#         layers.Dropout(0.5),
+#         layers.Dense(2, activation="softmax", dtype="float32")
+#     ])
+
+#     model.compile(
+#         optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+#         loss="categorical_crossentropy",
+#         metrics=["accuracy", tf.keras.metrics.AUC(name="auc")]
+#     )
+#     return model
+
+# def load_datasets():
+#     train_ds = tf.keras.preprocessing.image_dataset_from_directory(
+#         TRAIN_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE, label_mode="categorical", shuffle=True, seed=42
+#     )
+#     val_ds = tf.keras.preprocessing.image_dataset_from_directory(
+#         VAL_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE, label_mode="categorical"
+#     )
+#     test_ds = tf.keras.preprocessing.image_dataset_from_directory(
+#         TEST_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE, shuffle=False, label_mode="categorical"
+#     )
+
+#     preprocess = lambda x, y: (preprocess_input(x), y)
+#     return (
+#         train_ds.map(preprocess).prefetch(AUTOTUNE),
+#         val_ds.map(preprocess).prefetch(AUTOTUNE),
+#         test_ds.map(preprocess).prefetch(AUTOTUNE),
+#     )
+
+# # -------------------------------------------------------------
+# # Flower Client
+# # -------------------------------------------------------------
+# class FakeImageClient(fl.client.NumPyClient):
+#     def __init__(self, client_id, train_ds, num_samples):
+#         self.client_id = client_id
+#         self.train_ds = train_ds
+#         self.num_samples = num_samples
+#         self.model = create_model()
+
+#     def get_parameters(self, config):
+#         return self.model.get_weights()
+
+#     def fit(self, parameters, config):
+#         self.model.set_weights(parameters)
+#         history = self.model.fit(self.train_ds, epochs=LOCAL_EPOCHS, verbose=1)
+#         return self.model.get_weights(), self.num_samples, {
+#             "loss": float(history.history["loss"][-1]),
+#             "accuracy": float(history.history["accuracy"][-1]),
+#         }
+
+#     def evaluate(self, parameters, config):
+#         return 0.0, self.num_samples, {}
+
+# # -------------------------------------------------------------
+# # Flower Strategy
+# # -------------------------------------------------------------
+
+
+# class WeightedFedAvg(fl.server.strategy.FedAvg):
+#     def __init__(self, val_ds, test_ds, **kwargs):
+#         super().__init__(**kwargs)
+#         self.val_ds = val_ds
+#         self.test_ds = test_ds
+#         self.global_model = create_model()
+#         self.history = []
+
+#     def aggregate_fit(self, server_round, results, failures):
+#         agg = super().aggregate_fit(server_round, results, failures)
+#         if agg[0] is not None:
+#             self.global_model.set_weights(parameters_to_ndarrays(agg[0]))
+#             loss, acc, auc = self.global_model.evaluate(self.val_ds, verbose=0)
+            
+#             print(f"\n[Server] Round {server_round} | Val Acc: {acc:.4f} | Val AUC: {auc:.4f}")
+#             self.history.append({"round": server_round, "val_loss": loss, "val_acc": acc})
+
+#             if server_round == FEDERATED_ROUNDS:
+#                 self.final_evaluation()
+#         return agg
+
+#     def final_evaluation(self):
+#         print("\n=== PERFORMING FINAL TEST EVALUATION ===")
+#         # Save Model
+#         self.global_model.save(f"{OUTPUT_DIR}/global_model_final")
+        
+#         # Get Predictions
+#         y_true, y_pred = [], []
+#         for x, y in self.test_ds:
+#             preds = self.global_model.predict(x, verbose=0)
+#             y_true.extend(np.argmax(y.numpy(), axis=1))
+#             y_pred.extend(np.argmax(preds, axis=1))
+
+#         # Metrics
+#         report = classification_report(y_true, y_pred)
+#         cm = confusion_matrix(y_true, y_pred)
+#         print("\nFinal Classification Report:\n", report)
+        
+#         # Save Data
+#         with open(f"{OUTPUT_DIR}/final_metrics.pkl", "wb") as f:
+#             pickle.dump({"report": report, "cm": cm, "history": self.history}, f)
+#         np.save(f"{OUTPUT_DIR}/confusion_matrix.npy", cm)
+#         print(f"✓ Results saved to {OUTPUT_DIR}")
+
+# # -------------------------------------------------------------
+# # Execution Logic
+# # -------------------------------------------------------------
+# def start_server():
+#     setup_gpu()
+#     _, val_ds, test_ds = load_datasets()
+#     strategy = WeightedFedAvg(
+#         val_ds=val_ds, test_ds=test_ds,
+#         min_fit_clients=NUM_CLIENTS, min_available_clients=NUM_CLIENTS,
+#         initial_parameters=ndarrays_to_parameters(create_model().get_weights())
+#     )
+#     fl.server.start_server(server_address=SERVER_ADDRESS, config=fl.server.ServerConfig(num_rounds=FEDERATED_ROUNDS), strategy=strategy)
+
+# def start_client(client_id):
+#     setup_gpu()
+#     train_ds, _, _ = load_datasets()
+#     client_ds = train_ds.shard(NUM_CLIENTS, client_id)
+#     num_samples = len(list(client_ds)) * BATCH_SIZE 
+#     fl.client.start_numpy_client(server_address=SERVER_ADDRESS, client=FakeImageClient(client_id, client_ds, num_samples))
+
+# if __name__ == "__main__":
+#     mode = sys.argv[1].lower()
+#     if mode == "server":
+#         start_server()
+#     elif mode == "client":
+#         start_client(int(sys.argv[2]))
+        
