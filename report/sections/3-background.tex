@@ -22,16 +22,31 @@ The largest area for ML in DF is image forensics, accounting for 62.7\%.
 In the field of image forensics, convolutional neural networks (CNNs) are typically used to recognize such complex patterns in the data, 
 which is why this approach was pursued in the project. [DF 3]
 
+\subsection{CNNs for face fake detection}
 
-\subsection{CNNs}
+\subsubsection{Fundamentals}
 
+In recent years, there has been intensive research into CNNs in the areas of image classification, facial recognition, and facial expressions, resulting in significant improvements.
+However, with the emergence of increasingly sophisticated deepfakes, it is becoming more and more difficult to distinguish between real and fake faces [CNN 1].
+During the training process, CNNs learn complex patterns and can provide information about whether an input image is fake or real.
+Among CNN architectures, EfficientNet is one of the most modern models, as it is faster, has fewer parameters and has more capabilities for extracting features than other CNN models.
+These parameters are also called weights and can be learned by the model during the training process.
+During the training process, the model is shown many input images of positive (real faces) and negative (fake faces)~\cite{wang2019development}.
+The model independently learns complex patterns in the form of weights over several iterations (epochs) in order to distinguish positive from negative examples in the case of a binary classifier, or to assign probabilities to classes in the case of a multiple classifier system.~\cite{lorena2008review}\cite{hadjadji2014multiple}.
+What is special about CNNs are the convolutional layers, which reduce the resolution of the images and extract the spatial local features through weighted convolutions.
+Such local features can be low-level features such as edges, end points and corners in the first convolutional layers and complex high-level features in the last layers.
+In the final layers, the high-level features (3D vector) are combined into a fully connected layer (1D) to make a classification decision.
+In this project, the output consists of two output nodes with probabilities indicating whether the input image is a fake or real face~\cite{wang2019development}.
+
+\subsubsection{Transfer Learning}
+
+\subsubsection{Model Explainability using SHAP}
 
 \subsection{Federated Learning}
 
 \subsection{Attack Vectors in FL}
 
-\subsection{Fundamentals}
 
-\subsection{Transfer Learning}
 
-\subsection{Model Explainability using SHAP}
+
+

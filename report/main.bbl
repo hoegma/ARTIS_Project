@@ -19,6 +19,43 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{hadjadji2014multiple}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=3a1a2defd849d7746c13e7024a4abd24}{%
+           family={Hadjadji},
+           familyi={H\bibinitperiod},
+           given={Bilal},
+           giveni={B\bibinitperiod}}}%
+        {{hash=0b73818b332c624536884cbecb28f2b4}{%
+           family={Chibani},
+           familyi={C\bibinitperiod},
+           given={Youcef},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=9470dbdabca27ecd4b4972b82622c2ec}{%
+           family={Guerbai},
+           familyi={G\bibinitperiod},
+           given={Yasmine},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{9b8cb659f28320d782cc327fa3c88f94}
+      \strng{fullhash}{9b8cb659f28320d782cc327fa3c88f94}
+      \strng{bibnamehash}{9b8cb659f28320d782cc327fa3c88f94}
+      \strng{authorbibnamehash}{9b8cb659f28320d782cc327fa3c88f94}
+      \strng{authornamehash}{9b8cb659f28320d782cc327fa3c88f94}
+      \strng{authorfullhash}{9b8cb659f28320d782cc327fa3c88f94}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2014 22nd International Conference on Pattern Recognition}
+      \field{title}{Multiple one-class classifier combination for multi-class classification}
+      \field{year}{2014}
+      \field{pages}{2832\bibrangedash 2837}
+      \range{pages}{6}
+    \endentry
     \entry{khudeyer2023fake}{article}{}
       \name{author}{2}{}{%
         {{hash=34957be428c7c82e73ece42d2268ee76}{%
@@ -48,6 +85,44 @@
       \field{volume}{47}
       \field{year}{2023}
     \endentry
+    \entry{lorena2008review}{article}{}
+      \name{author}{3}{}{%
+        {{hash=1c1dd695358348c30262e543250c18a6}{%
+           family={Lorena},
+           familyi={L\bibinitperiod},
+           given={Ana\bibnamedelima Carolina},
+           giveni={A\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=13050f8a6b832d4a906244a6e16993af}{%
+           family={De\bibnamedelima Carvalho},
+           familyi={D\bibinitperiod\bibinitdelim C\bibinitperiod},
+           given={André\bibnamedelima CPLF},
+           giveni={A\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=46aab3a5eec36c9e84a7cb8dae69145c}{%
+           family={Gama},
+           familyi={G\bibinitperiod},
+           given={João\bibnamedelima MP},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{9fd70033e73da36dd4c9aeccb80606c4}
+      \strng{fullhash}{9fd70033e73da36dd4c9aeccb80606c4}
+      \strng{bibnamehash}{9fd70033e73da36dd4c9aeccb80606c4}
+      \strng{authorbibnamehash}{9fd70033e73da36dd4c9aeccb80606c4}
+      \strng{authornamehash}{9fd70033e73da36dd4c9aeccb80606c4}
+      \strng{authorfullhash}{9fd70033e73da36dd4c9aeccb80606c4}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Artificial Intelligence Review}
+      \field{title}{A review on the combination of binary classifiers in multiclass problems}
+      \field{volume}{30}
+      \field{year}{2008}
+      \field{pages}{19\bibrangedash 37}
+      \range{pages}{19}
+    \endentry
     \entry{tunguz2020_140kreal_fake_faces}{misc}{}
       \name{author}{1}{}{%
         {{hash=6a95ca8741d2939b5f18224024a35523}{%
@@ -70,6 +145,58 @@
       \field{note}{Accessed: 2025-01-05}
       \field{title}{140K Real and Fake Faces}
       \field{year}{2020}
+    \endentry
+    \entry{wang2019development}{article}{}
+      \name{author}{5}{}{%
+        {{hash=f27ec46ccd272a021fd78bdac92dd490}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod}}}%
+        {{hash=fc04fbea5b0ede79c78a671f7c0f9112}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Yujing},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=03d3e23852937fa39b0e34246c4ecd1d}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Xin},
+           giveni={X\bibinitperiod}}}%
+        {{hash=95a81c9902743f598da2616f71e3827d}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Weizheng},
+           giveni={W\bibinitperiod}}}%
+        {{hash=eddfe4f54afae41fd248eeffc46c6117}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Ji},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Society of Photo-Optical Instrumentation Engineers}%
+      }
+      \strng{namehash}{2e448f2e68ab2f1cd9e54269cab56966}
+      \strng{fullhash}{a95d9688f8a8ce63003e248e98e24f42}
+      \strng{bibnamehash}{2e448f2e68ab2f1cd9e54269cab56966}
+      \strng{authorbibnamehash}{2e448f2e68ab2f1cd9e54269cab56966}
+      \strng{authornamehash}{2e448f2e68ab2f1cd9e54269cab56966}
+      \strng{authorfullhash}{a95d9688f8a8ce63003e248e98e24f42}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Optical Engineering}
+      \field{number}{4}
+      \field{title}{Development of convolutional neural network and its application in image classification: a survey}
+      \field{volume}{58}
+      \field{year}{2019}
+      \field{pages}{040901\bibrangedash 040901}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1117/1.OE.58.4.040901
+      \endverb
     \endentry
   \enddatalist
 \endrefsection
