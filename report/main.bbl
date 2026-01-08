@@ -215,6 +215,51 @@
       \field{pages}{19\bibrangedash 37}
       \range{pages}{19}
     \endentry
+    \entry{mohamed2024harnessing}{article}{}
+      \name{author}{5}{}{%
+        {{hash=27b721f081a389e26a228ee9cc2fb532}{%
+           family={Mohamed},
+           familyi={M\bibinitperiod},
+           given={Hania},
+           giveni={H\bibinitperiod}}}%
+        {{hash=5728090d6e6bf420d66a79aa9b9e4b80}{%
+           family={Koroniotis},
+           familyi={K\bibinitperiod},
+           given={Nickolaos},
+           giveni={N\bibinitperiod}}}%
+        {{hash=ab9bcf08d864de16f62df4a541080d3c}{%
+           family={Moustafa},
+           familyi={M\bibinitperiod},
+           given={Nour},
+           giveni={N\bibinitperiod}}}%
+        {{hash=2fb04bd6c9a92e30d8a3051389862574}{%
+           family={Schiliro},
+           familyi={S\bibinitperiod},
+           given={Francesco},
+           giveni={F\bibinitperiod}}}%
+        {{hash=d913b7de1daa87c8658ba2dcad408248}{%
+           family={Zomaya},
+           familyi={Z\bibinitperiod},
+           given={Albert\bibnamedelima Y},
+           giveni={A\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{d12e0534c6e25386d0a8bace9f6748ff}
+      \strng{fullhash}{e74c1f90b27d9e836337b287071c8556}
+      \strng{bibnamehash}{d12e0534c6e25386d0a8bace9f6748ff}
+      \strng{authorbibnamehash}{d12e0534c6e25386d0a8bace9f6748ff}
+      \strng{authornamehash}{d12e0534c6e25386d0a8bace9f6748ff}
+      \strng{authorfullhash}{e74c1f90b27d9e836337b287071c8556}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Open Journal of the Communications Society}
+      \field{title}{Harnessing federated learning for digital forensics in IoT: A survey and introduction to the IoT-LF framework}
+      \field{year}{2024}
+    \endentry
     \entry{nayerifard2023machine}{article}{}
       \name{author}{4}{}{%
         {{hash=72f07fc7952fbc8cdb27040ad659628f}{%
@@ -326,6 +371,59 @@
       \verb{doi}
       \verb 10.1117/1.OE.58.4.040901
       \endverb
+    \endentry
+    \entry{zhang2021survey}{article}{}
+      \name{author}{6}{}{%
+        {{hash=c9191dc69bc22ce41fc456ae9eb63db8}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Chen},
+           giveni={C\bibinitperiod}}}%
+        {{hash=153176ff7963589ce0e40105874a1d1a}{%
+           family={Xie},
+           familyi={X\bibinitperiod},
+           given={Yu},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=00ed25deb8b38c0d7df60af69caa377a}{%
+           family={Bai},
+           familyi={B\bibinitperiod},
+           given={Hang},
+           giveni={H\bibinitperiod}}}%
+        {{hash=43d22dc81cc0e5bb1d24d5eeb65ecbae}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Bin},
+           giveni={B\bibinitperiod}}}%
+        {{hash=0c0616c994dd3fcf18aba8a8673cc353}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Weihong},
+           giveni={W\bibinitperiod}}}%
+        {{hash=a85dcf731e772b177341998a236d587a}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Yuan},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{2348f5826634af872a0634ea83f5916a}
+      \strng{fullhash}{588dacea021ed1b666199053970668cc}
+      \strng{bibnamehash}{2348f5826634af872a0634ea83f5916a}
+      \strng{authorbibnamehash}{2348f5826634af872a0634ea83f5916a}
+      \strng{authornamehash}{2348f5826634af872a0634ea83f5916a}
+      \strng{authorfullhash}{588dacea021ed1b666199053970668cc}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Knowledge-Based Systems}
+      \field{title}{A survey on federated learning}
+      \field{volume}{216}
+      \field{year}{2021}
+      \field{pages}{106775}
+      \range{pages}{1}
     \endentry
   \enddatalist
 \endrefsection

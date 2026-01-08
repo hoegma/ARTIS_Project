@@ -2371,9 +2371,11 @@
     <bcf:citekey order="8" intorder="1">hadjadji2014multiple</bcf:citekey>
     <bcf:citekey order="9" intorder="1">wang2019development</bcf:citekey>
     <bcf:citekey order="10" intorder="1">khudeyer2023fake</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">tunguz2020_140kreal_fake_faces</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">khudeyer2023fake</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">khudeyer2023fake</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">zhang2021survey</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">mohamed2024harnessing</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">tunguz2020_140kreal_fake_faces</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">khudeyer2023fake</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">khudeyer2023fake</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

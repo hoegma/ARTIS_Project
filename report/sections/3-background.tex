@@ -50,11 +50,32 @@ The weights in the back layers can then be adjusted to the new task during train
 
 \subsubsection{Model Explainability using SHAP}
 
+TBD
+
 \subsection{Federated Learning}
+
+In the age of big data, data privacy and security are becoming increasingly important and are receiving more attention. 
+The in 2018 published GDPR aims to protect individuals' data, users of services should be able to have their data deleted at any time and data may not be used for training ML models without consent.
+This leads to a problem in training classical ML models, as large amounts of data form the basis for them.
+However, the data volumes are now not stored centrally in a single data set but scattered across data islands.
+Federated learning addresses this problem by training ML models with data from data islands without moving the data from the islands, thereby preserving privacy.~\cite{zhang2021survey}
+\newline \newline
+To perform FL, three main steps must be carried out, as described in~\cite{mohamed2024harnessing}.
+\newline
+1 - Model selection: A global model must be selected, which is initialized with pre-trained weights to speed up the learning process. The global model is located on a central server. 
+\newline
+2 - Model training: The parameters of the global model are distributed to all clients. 
+Each of the clients owns a portion of the data for the training process. 
+The clients initialize their local model with the parameters of the global model and train it for several epochs.
+\newline
+3 - Parameter aggregation: All clients send their local parameters to the server. The server updates the global model with an algorithm that incorporates the local updates from the clients into the global model.
+\newline
+The last two steps are repeated until a specified number of epochs or a desired accuracy has been achieved.
+
 
 \subsection{Attack Vectors in FL}
 
-
+TBD
 
 
 

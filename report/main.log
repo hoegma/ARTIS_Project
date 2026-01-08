@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.10.26)  8 JAN 2026 12:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.10.26)  8 JAN 2026 13:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -734,8 +734,11 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (sections/3-background.tex [1
 
 {C:/Users/matth/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/matt
-h/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}]) (sections/4-met
-hodology.tex
+h/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}]
+Underfull \hbox (badness 10000) in paragraph at lines 57--74
+
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -743,7 +746,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[2]
+[2]) (sections/4-methodology.tex
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 38.
 
@@ -754,11 +757,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[3{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.en
-c}{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.en
-c}{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}])
-(sections/5-results.tex) (sections/6-discussion.tex) (sections/7-conclusion.tex
-)
+[3]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -766,7 +765,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[4]
+[4{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.en
+c}{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.en
+c}{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}])
+(sections/5-results.tex) (sections/6-discussion.tex) (sections/7-conclusion.tex
+)
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 6
 2.
  (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
@@ -779,7 +782,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[5] (main.aux)
+[5]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[6] (main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
@@ -791,10 +802,10 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18727 strings out of 474486
- 333757 string characters out of 5743754
+ 18736 strings out of 474486
+ 334115 string characters out of 5743754
  1940542 words of memory out of 5000000
- 40737 multiletter control sequences out of 15000+600000
+ 40743 multiletter control sequences out of 15000+600000
  603402 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,12n,81p,1195b,1775s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -809,9 +820,9 @@ b><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 ><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb
 ><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb
 >
-Output written on main.pdf (5 pages, 255128 bytes).
+Output written on main.pdf (6 pages, 258402 bytes).
 PDF statistics:
- 218 PDF objects out of 1000 (max. 8388607)
- 39 named destinations out of 1000 (max. 500000)
+ 226 PDF objects out of 1000 (max. 8388607)
+ 42 named destinations out of 1000 (max. 500000)
  193 words of extra memory for PDF output out of 10000 (max. 10000000)
 
