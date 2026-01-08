@@ -1,19 +1,18 @@
-# # chmod +x run_federated.sh
-# # ./run_federated.sh
-
 import os
 import sys
 import time
-import numpy as np
+import gc
 import pickle
+import numpy as np
 import tensorflow as tf
+import flwr as fl
+
+from cryptography.fernet import Fernet
+from typing import List, Tuple, Dict
 from tensorflow.keras.applications import EfficientNetB0
 from tensorflow.keras.applications.efficientnet import preprocess_input
 from tensorflow.keras import layers, models
-import flwr as fl
 from flwr.common import ndarrays_to_parameters, parameters_to_ndarrays
-from typing import List, Tuple, Dict
-import gc
 
 # -------------------------------------------------------------
 # CONFIG
@@ -33,30 +32,37 @@ TEST_PATH = f"{BASE_PATH}/test"
 AUTOTUNE = tf.data.AUTOTUNE
 
 # -------------------------------------------------------------
-# GPU Setup (CRITICAL FOR MULTI-PROCESS)
+# 🔐 ENCRYPTION SETUP (STATIC SHARED KEY)
 # -------------------------------------------------------------
-def setup_gpu():
-    """Configures GPU to allow multiple processes to share memory"""
-    # Force TensorFlow to only see the GPU if it's actually there
-    os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
-    
-    gpus = tf.config.list_physical_devices('GPU')
-    if gpus:
-        try:
-            for gpu in gpus:
-                # This prevents one client from taking 100% of VRAM
-                tf.config.experimental.set_memory_growth(gpu, True)
-            print(f"✓ GPU enabled: {len(gpus)} GPU(s)")
-        except RuntimeError as e:
-            print(f"GPU error: {e}")
-    else:
-        print("⚠ No GPU detected by TensorFlow. Check CUDA/cuDNN installation.")
+# Generate once with Fernet.generate_key() and reuse
+FERNET_KEY = b"REPLACE_WITH_YOUR_GENERATED_KEY_HERE"
+cipher = Fernet(FERNET_KEY)
+
+def encrypt_weights(weights: List[np.ndarray]) -> bytes:
+    serialized = pickle.dumps(weights)
+    return cipher.encrypt(serialized)
+
+def decrypt_weights(encrypted: bytes) -> List[np.ndarray]:
+    decrypted = cipher.decrypt(encrypted)
+    return pickle.loads(decrypted)
 
 # -------------------------------------------------------------
-# Create Model & Datasets (Same logic as yours)
+# GPU SETUP
+# -------------------------------------------------------------
+def setup_gpu():
+    os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
+    gpus = tf.config.list_physical_devices('GPU')
+    if gpus:
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+        print(f"✓ GPU enabled ({len(gpus)} GPU)")
+    else:
+        print("⚠ No GPU detected")
+
+# -------------------------------------------------------------
+# MODEL
 # -------------------------------------------------------------
 def create_model():
-    """Create EfficientNetB0 model with custom top layers"""
     base_model = EfficientNetB0(
         weights="imagenet",
         include_top=False,
@@ -78,340 +84,155 @@ def create_model():
         loss="categorical_crossentropy",
         metrics=["accuracy", tf.keras.metrics.AUC(name="auc")]
     )
-
     return model
 
+# -------------------------------------------------------------
+# DATA
+# -------------------------------------------------------------
 def load_datasets():
-    train_ds = tf.keras.preprocessing.image_dataset_from_directory(TRAIN_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE, label_mode="categorical", shuffle=True, seed=42)
-    val_ds = tf.keras.preprocessing.image_dataset_from_directory(VAL_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE, label_mode="categorical")
-    test_ds = tf.keras.preprocessing.image_dataset_from_directory(TEST_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE, shuffle=False, label_mode="categorical")
+    train_ds = tf.keras.preprocessing.image_dataset_from_directory(
+        TRAIN_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE,
+        label_mode="categorical", shuffle=True, seed=42
+    )
+    val_ds = tf.keras.preprocessing.image_dataset_from_directory(
+        VAL_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE,
+        label_mode="categorical"
+    )
+    test_ds = tf.keras.preprocessing.image_dataset_from_directory(
+        TEST_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE,
+        shuffle=False, label_mode="categorical"
+    )
 
     preprocess = lambda x, y: (preprocess_input(x), y)
-    return (train_ds.map(preprocess, num_parallel_calls=AUTOTUNE).prefetch(AUTOTUNE),
-            val_ds.map(preprocess, num_parallel_calls=AUTOTUNE).prefetch(AUTOTUNE),
-            test_ds.map(preprocess, num_parallel_calls=AUTOTUNE).prefetch(AUTOTUNE))
+
+    return (
+        train_ds.map(preprocess).prefetch(AUTOTUNE),
+        val_ds.map(preprocess).prefetch(AUTOTUNE),
+        test_ds.map(preprocess).prefetch(AUTOTUNE)
+    )
 
 # -------------------------------------------------------------
-# FLOWER CLIENT (Updated with timing and verbose)
+# 🔐 FLOWER CLIENT
 # -------------------------------------------------------------
 class FakeImageClient(fl.client.NumPyClient):
-    def __init__(self, client_id, train_ds, num_samples):
-        self.client_id = client_id
+    def __init__(self, cid, train_ds, num_samples):
+        self.cid = cid
         self.train_ds = train_ds
         self.num_samples = num_samples
         self.model = create_model()
 
     def get_parameters(self, config):
-        return self.model.get_weights()
+        weights = self.model.get_weights()
+        encrypted = encrypt_weights(weights)
+        return ndarrays_to_parameters([np.frombuffer(encrypted, dtype=np.uint8)])
 
     def fit(self, parameters, config):
         server_round = config.get("server_round", "?")
-        print(f"\n[Client {self.client_id}] Round {server_round} - Training...")
-        
-        start_time = time.time()
-        self.model.set_weights(parameters)
-        
-        # Verbose=1 shows progress bar per client
+        print(f"\n[Client {self.cid}] Round {server_round} training")
+
+        encrypted_blob = parameters_to_ndarrays(parameters)[0].tobytes()
+        weights = decrypt_weights(encrypted_blob)
+        self.model.set_weights(weights)
+
         history = self.model.fit(self.train_ds, epochs=LOCAL_EPOCHS, verbose=1)
-        
-        duration = time.time() - start_time
-        print(f"[Client {self.client_id}] Round {server_round} finished in {duration:.2f}s")
-        
-        return self.model.get_weights(), self.num_samples, {"loss": history.history['loss'][-1], "accuracy": history.history['accuracy'][-1]}
+
+        updated_weights = self.model.get_weights()
+        encrypted_update = encrypt_weights(updated_weights)
+
+        return (
+            ndarrays_to_parameters([np.frombuffer(encrypted_update, dtype=np.uint8)]),
+            self.num_samples,
+            {"loss": history.history["loss"][-1]}
+        )
 
     def evaluate(self, parameters, config):
         return 0.0, self.num_samples, {}
 
 # -------------------------------------------------------------
-# FLOWER STRATEGY (Updated with timing and round config)
+# 🔐 SERVER STRATEGY
 # -------------------------------------------------------------
-class WeightedFedAvg(fl.server.strategy.FedAvg):
+class EncryptedFedAvg(fl.server.strategy.FedAvg):
     def __init__(self, val_ds, **kwargs):
         super().__init__(**kwargs)
         self.val_ds = val_ds
         self.global_model = create_model()
-        self.history = {'round': [], 'val_acc': [], 'duration': []}
 
     def aggregate_fit(self, server_round, results, failures):
-        agg_res = super().aggregate_fit(server_round, results, failures)
-        if agg_res[0] is not None:
-            print(f"\n[Server] Round {server_round} aggregated. Evaluating...")
-            start_eval = time.time()
-            self.global_model.set_weights(parameters_to_ndarrays(agg_res[0]))
-            loss, acc, auc = self.global_model.evaluate(self.val_ds, verbose=0)
-            
-            self.history['round'].append(server_round)
-            self.history['val_acc'].append(acc)
-            
-            print(f"--- Round {server_round} Results ---")
-            print(f"Val Acc: {acc:.4f} | Val AUC: {auc:.4f} | Eval Time: {time.time()-start_eval:.2f}s")
-        return agg_res
+        decrypted_results = []
+
+        for client_proxy, fit_res in results:
+            encrypted_blob = parameters_to_ndarrays(fit_res.parameters)[0].tobytes()
+            weights = decrypt_weights(encrypted_blob)
+            decrypted_results.append(
+                (client_proxy, fl.common.FitRes(
+                    parameters=ndarrays_to_parameters(weights),
+                    num_examples=fit_res.num_examples,
+                    metrics=fit_res.metrics
+                ))
+            )
+
+        aggregated = super().aggregate_fit(server_round, decrypted_results, failures)
+        if aggregated[0] is None:
+            return aggregated
+
+        weights = parameters_to_ndarrays(aggregated[0])
+        self.global_model.set_weights(weights)
+
+        loss, acc, auc = self.global_model.evaluate(self.val_ds, verbose=0)
+        print(f"[Server] Round {server_round} | Val Acc: {acc:.4f} | AUC: {auc:.4f}")
+
+        encrypted = encrypt_weights(weights)
+        encrypted_params = ndarrays_to_parameters(
+            [np.frombuffer(encrypted, dtype=np.uint8)]
+        )
+
+        return encrypted_params, aggregated[1], aggregated[2]
 
 # -------------------------------------------------------------
-# EXECUTION LOGIC
-# -------------------------------------------------------------
-# def start_server():
-#     setup_gpu()
-#     _, val_ds, test_ds = load_datasets()
-    
-#     # This sends the round number to clients so they can print it
-#     def on_fit_config(server_round: int):
-#         return {"server_round": server_round}
-
-#     strategy = WeightedFedAvg(
-#         val_ds=val_ds,
-#         fraction_fit=1.0,
-#         min_fit_clients=NUM_CLIENTS,
-#         min_available_clients=NUM_CLIENTS,
-#         on_fit_config_fn=on_fit_config,
-#         initial_parameters=ndarrays_to_parameters(create_model().get_weights())
-#     )
-#     fl.server.start_server(server_address=SERVER_ADDRESS, config=fl.server.ServerConfig(num_rounds=FEDERATED_ROUNDS), strategy=strategy)
-
-# -------------------------------------------------------------
-# EXECUTION LOGIC
+# SERVER
 # -------------------------------------------------------------
 def start_server():
     setup_gpu()
-    _, val_ds, test_ds = load_datasets()
-    
-    # 1. Define the folder and file name
-    SAVE_DIR = "saved_models"
-    MODEL_NAME = "final_federated_model.h5"
-    
-    # 2. Create the folder if it doesn't exist
-    if not os.path.exists(SAVE_DIR):
-        os.makedirs(SAVE_DIR)
-        print(f"Created directory: {SAVE_DIR}")
+    _, val_ds, _ = load_datasets()
 
-    def on_fit_config(server_round: int):
+    def on_fit_config(server_round):
         return {"server_round": server_round}
 
-    strategy = WeightedFedAvg(
+    strategy = EncryptedFedAvg(
         val_ds=val_ds,
         fraction_fit=1.0,
         min_fit_clients=NUM_CLIENTS,
         min_available_clients=NUM_CLIENTS,
         on_fit_config_fn=on_fit_config,
-        initial_parameters=ndarrays_to_parameters(create_model().get_weights())
+        initial_parameters=ndarrays_to_parameters(
+            [np.frombuffer(encrypt_weights(create_model().get_weights()), dtype=np.uint8)]
+        )
     )
-    
-    # This call blocks until all FEDERATED_ROUNDS are finished
+
     fl.server.start_server(
-        server_address=SERVER_ADDRESS, 
-        config=fl.server.ServerConfig(num_rounds=FEDERATED_ROUNDS), 
+        server_address=SERVER_ADDRESS,
+        config=fl.server.ServerConfig(num_rounds=FEDERATED_ROUNDS),
         strategy=strategy
     )
 
-    # 3. After training, save the final weights from the strategy's global_model
-    print("\n--- Training Complete. Saving Global Model ---")
-    save_path = os.path.join(SAVE_DIR, MODEL_NAME)
-    strategy.global_model.save(save_path)
-    print(f"✓ Model successfully saved to: {save_path}")
-
-def start_client(client_id):
+# -------------------------------------------------------------
+# CLIENT
+# -------------------------------------------------------------
+def start_client(cid: int):
     setup_gpu()
     train_ds, _, _ = load_datasets()
-    client_ds = train_ds.shard(num_shards=NUM_CLIENTS, index=client_id)
-    # Count samples for weighting
-    num_samples = sum(1 for _ in client_ds) * BATCH_SIZE 
-    
-    client = FakeImageClient(client_id, client_ds, num_samples)
-    fl.client.start_numpy_client(server_address=SERVER_ADDRESS, client=client)
+    client_ds = train_ds.shard(NUM_CLIENTS, cid)
+    num_samples = sum(1 for _ in client_ds) * BATCH_SIZE
 
+    client = FakeImageClient(cid, client_ds, num_samples)
+    fl.client.start_numpy_client(SERVER_ADDRESS, client)
+
+# -------------------------------------------------------------
+# MAIN
+# -------------------------------------------------------------
 if __name__ == "__main__":
-    mode = sys.argv[1].lower()
+    mode = sys.argv[1]
     if mode == "server":
         start_server()
     elif mode == "client":
         start_client(int(sys.argv[2]))
-
-# chmod +x run_federated.sh
-# ./run_federated.sh
-
-# import os
-# import sys
-# import time
-# import numpy as np
-# import pickle
-# import tensorflow as tf
-# from tensorflow.keras.applications import EfficientNetB0
-# from tensorflow.keras.applications.efficientnet import preprocess_input
-# from tensorflow.keras import layers, models
-# import flwr as fl
-# from flwr.common import ndarrays_to_parameters, parameters_to_ndarrays
-# from sklearn.metrics import confusion_matrix, classification_report, precision_recall_fscore_support
-
-# # -------------------------------------------------------------
-# # CONFIG
-# # -------------------------------------------------------------
-# IMG_SIZE = (224, 224)
-# BATCH_SIZE = 32
-# LOCAL_EPOCHS = 3
-# FEDERATED_ROUNDS = 10
-# NUM_CLIENTS = 5
-# SERVER_ADDRESS = "localhost:7999"
-
-# BASE_PATH = "./real-vs-fake"
-# TRAIN_PATH = f"{BASE_PATH}/train"
-# VAL_PATH = f"{BASE_PATH}/valid"
-# TEST_PATH = f"{BASE_PATH}/test"
-
-# OUTPUT_DIR = "./outputs"
-# os.makedirs(OUTPUT_DIR, exist_ok=True)
-# AUTOTUNE = tf.data.AUTOTUNE
-
-# # -------------------------------------------------------------
-# # GPU Setup
-# # -------------------------------------------------------------
-# def setup_gpu():
-#     os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
-#     gpus = tf.config.list_physical_devices('GPU')
-#     if gpus:
-#         for gpu in gpus:
-#             tf.config.experimental.set_memory_growth(gpu, True)
-#         print(f"✓ GPU enabled: {len(gpus)} GPU(s)")
-#     else:
-#         print("⚠ No GPU detected")
-
-# # -------------------------------------------------------------
-# # Model & Dataset
-# # -------------------------------------------------------------
-# def create_model():
-#     base_model = EfficientNetB0(weights="imagenet", include_top=False, input_shape=(IMG_SIZE[0], IMG_SIZE[1], 3))
-#     base_model.trainable = False
-
-#     model = models.Sequential([
-#         base_model,
-#         layers.GlobalAveragePooling2D(),
-#         layers.Dense(256, activation="relu"),
-#         layers.BatchNormalization(),
-#         layers.Dropout(0.5),
-#         layers.Dense(2, activation="softmax", dtype="float32")
-#     ])
-
-#     model.compile(
-#         optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
-#         loss="categorical_crossentropy",
-#         metrics=["accuracy", tf.keras.metrics.AUC(name="auc")]
-#     )
-#     return model
-
-# def load_datasets():
-#     train_ds = tf.keras.preprocessing.image_dataset_from_directory(
-#         TRAIN_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE, label_mode="categorical", shuffle=True, seed=42
-#     )
-#     val_ds = tf.keras.preprocessing.image_dataset_from_directory(
-#         VAL_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE, label_mode="categorical"
-#     )
-#     test_ds = tf.keras.preprocessing.image_dataset_from_directory(
-#         TEST_PATH, image_size=IMG_SIZE, batch_size=BATCH_SIZE, shuffle=False, label_mode="categorical"
-#     )
-
-#     preprocess = lambda x, y: (preprocess_input(x), y)
-#     return (
-#         train_ds.map(preprocess).prefetch(AUTOTUNE),
-#         val_ds.map(preprocess).prefetch(AUTOTUNE),
-#         test_ds.map(preprocess).prefetch(AUTOTUNE),
-#     )
-
-# # -------------------------------------------------------------
-# # Flower Client
-# # -------------------------------------------------------------
-# class FakeImageClient(fl.client.NumPyClient):
-#     def __init__(self, client_id, train_ds, num_samples):
-#         self.client_id = client_id
-#         self.train_ds = train_ds
-#         self.num_samples = num_samples
-#         self.model = create_model()
-
-#     def get_parameters(self, config):
-#         return self.model.get_weights()
-
-#     def fit(self, parameters, config):
-#         self.model.set_weights(parameters)
-#         history = self.model.fit(self.train_ds, epochs=LOCAL_EPOCHS, verbose=1)
-#         return self.model.get_weights(), self.num_samples, {
-#             "loss": float(history.history["loss"][-1]),
-#             "accuracy": float(history.history["accuracy"][-1]),
-#         }
-
-#     def evaluate(self, parameters, config):
-#         return 0.0, self.num_samples, {}
-
-# # -------------------------------------------------------------
-# # Flower Strategy
-# # -------------------------------------------------------------
-
-
-# class WeightedFedAvg(fl.server.strategy.FedAvg):
-#     def __init__(self, val_ds, test_ds, **kwargs):
-#         super().__init__(**kwargs)
-#         self.val_ds = val_ds
-#         self.test_ds = test_ds
-#         self.global_model = create_model()
-#         self.history = []
-
-#     def aggregate_fit(self, server_round, results, failures):
-#         agg = super().aggregate_fit(server_round, results, failures)
-#         if agg[0] is not None:
-#             self.global_model.set_weights(parameters_to_ndarrays(agg[0]))
-#             loss, acc, auc = self.global_model.evaluate(self.val_ds, verbose=0)
-            
-#             print(f"\n[Server] Round {server_round} | Val Acc: {acc:.4f} | Val AUC: {auc:.4f}")
-#             self.history.append({"round": server_round, "val_loss": loss, "val_acc": acc})
-
-#             if server_round == FEDERATED_ROUNDS:
-#                 self.final_evaluation()
-#         return agg
-
-#     def final_evaluation(self):
-#         print("\n=== PERFORMING FINAL TEST EVALUATION ===")
-#         # Save Model
-#         self.global_model.save(f"{OUTPUT_DIR}/global_model_final")
-        
-#         # Get Predictions
-#         y_true, y_pred = [], []
-#         for x, y in self.test_ds:
-#             preds = self.global_model.predict(x, verbose=0)
-#             y_true.extend(np.argmax(y.numpy(), axis=1))
-#             y_pred.extend(np.argmax(preds, axis=1))
-
-#         # Metrics
-#         report = classification_report(y_true, y_pred)
-#         cm = confusion_matrix(y_true, y_pred)
-#         print("\nFinal Classification Report:\n", report)
-        
-#         # Save Data
-#         with open(f"{OUTPUT_DIR}/final_metrics.pkl", "wb") as f:
-#             pickle.dump({"report": report, "cm": cm, "history": self.history}, f)
-#         np.save(f"{OUTPUT_DIR}/confusion_matrix.npy", cm)
-#         print(f"✓ Results saved to {OUTPUT_DIR}")
-
-# # -------------------------------------------------------------
-# # Execution Logic
-# # -------------------------------------------------------------
-# def start_server():
-#     setup_gpu()
-#     _, val_ds, test_ds = load_datasets()
-#     strategy = WeightedFedAvg(
-#         val_ds=val_ds, test_ds=test_ds,
-#         min_fit_clients=NUM_CLIENTS, min_available_clients=NUM_CLIENTS,
-#         initial_parameters=ndarrays_to_parameters(create_model().get_weights())
-#     )
-#     fl.server.start_server(server_address=SERVER_ADDRESS, config=fl.server.ServerConfig(num_rounds=FEDERATED_ROUNDS), strategy=strategy)
-
-# def start_client(client_id):
-#     setup_gpu()
-#     train_ds, _, _ = load_datasets()
-#     client_ds = train_ds.shard(NUM_CLIENTS, client_id)
-#     num_samples = len(list(client_ds)) * BATCH_SIZE 
-#     fl.client.start_numpy_client(server_address=SERVER_ADDRESS, client=FakeImageClient(client_id, client_ds, num_samples))
-
-# if __name__ == "__main__":
-#     mode = sys.argv[1].lower()
-#     if mode == "server":
-#         start_server()
-#     elif mode == "client":
-#         start_client(int(sys.argv[2]))
-        
