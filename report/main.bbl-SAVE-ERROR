@@ -19,6 +19,135 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{bode2019every}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=4c29b806716b05b19bc7d8dc03e55281}{%
+           family={Bode},
+           familyi={B\bibinitperiod},
+           given={Jeroen},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{4c29b806716b05b19bc7d8dc03e55281}
+      \strng{fullhash}{4c29b806716b05b19bc7d8dc03e55281}
+      \strng{bibnamehash}{4c29b806716b05b19bc7d8dc03e55281}
+      \strng{authorbibnamehash}{4c29b806716b05b19bc7d8dc03e55281}
+      \strng{authornamehash}{4c29b806716b05b19bc7d8dc03e55281}
+      \strng{authorfullhash}{4c29b806716b05b19bc7d8dc03e55281}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Outside the Box: A Multi-Lingual Forum}
+      \field{title}{Every Contact Leaves a Trace: A Literary Reality of Locard’s Exchange Principle}
+      \field{year}{2019}
+      \field{pages}{18}
+      \range{pages}{1}
+    \endentry
+    \entry{casino2022research}{article}{}
+      \name{author}{9}{}{%
+        {{hash=9c08bd6394eb497ea4f80889f9cd1580}{%
+           family={Casino},
+           familyi={C\bibinitperiod},
+           given={Fran},
+           giveni={F\bibinitperiod}}}%
+        {{hash=7839e1372a1f5081ba305b8b0b7e4330}{%
+           family={Dasaklis},
+           familyi={D\bibinitperiod},
+           given={Thomas\bibnamedelima K},
+           giveni={T\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=fd62a10c14509b531fefc5124f6fa7bc}{%
+           family={Spathoulas},
+           familyi={S\bibinitperiod},
+           given={Georgios\bibnamedelima P},
+           giveni={G\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=7c86f3b15d6d96c848ec1d2517d618b6}{%
+           family={Anagnostopoulos},
+           familyi={A\bibinitperiod},
+           given={Marios},
+           giveni={M\bibinitperiod}}}%
+        {{hash=5387a3fd92b374cdb6eaf70892b9573f}{%
+           family={Ghosal},
+           familyi={G\bibinitperiod},
+           given={Amrita},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b4fcfc08991e2e03b74a87fff639a6f9}{%
+           family={Borocz},
+           familyi={B\bibinitperiod},
+           given={Istvan},
+           giveni={I\bibinitperiod}}}%
+        {{hash=47fa3698b8043a11a277ced70bf0529c}{%
+           family={Solanas},
+           familyi={S\bibinitperiod},
+           given={Agusti},
+           giveni={A\bibinitperiod}}}%
+        {{hash=c1c6cc37d38b38f6ff327e1eabebda0c}{%
+           family={Conti},
+           familyi={C\bibinitperiod},
+           given={Mauro},
+           giveni={M\bibinitperiod}}}%
+        {{hash=fb25a705ecb4db067d80a1f025858e97}{%
+           family={Patsakis},
+           familyi={P\bibinitperiod},
+           given={Constantinos},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{6fc5a2d14a123e1979df6c984c45f71a}
+      \strng{fullhash}{fa4b270b6fdf80537615d89407d2b29e}
+      \strng{bibnamehash}{6fc5a2d14a123e1979df6c984c45f71a}
+      \strng{authorbibnamehash}{6fc5a2d14a123e1979df6c984c45f71a}
+      \strng{authornamehash}{6fc5a2d14a123e1979df6c984c45f71a}
+      \strng{authorfullhash}{fa4b270b6fdf80537615d89407d2b29e}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Ieee Access}
+      \field{title}{Research trends, challenges, and emerging topics in digital forensics: A review of reviews}
+      \field{volume}{10}
+      \field{year}{2022}
+      \field{pages}{25464\bibrangedash 25493}
+      \range{pages}{30}
+    \endentry
+    \entry{hadjadji2014multiple}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=3a1a2defd849d7746c13e7024a4abd24}{%
+           family={Hadjadji},
+           familyi={H\bibinitperiod},
+           given={Bilal},
+           giveni={B\bibinitperiod}}}%
+        {{hash=0b73818b332c624536884cbecb28f2b4}{%
+           family={Chibani},
+           familyi={C\bibinitperiod},
+           given={Youcef},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=9470dbdabca27ecd4b4972b82622c2ec}{%
+           family={Guerbai},
+           familyi={G\bibinitperiod},
+           given={Yasmine},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{9b8cb659f28320d782cc327fa3c88f94}
+      \strng{fullhash}{9b8cb659f28320d782cc327fa3c88f94}
+      \strng{bibnamehash}{9b8cb659f28320d782cc327fa3c88f94}
+      \strng{authorbibnamehash}{9b8cb659f28320d782cc327fa3c88f94}
+      \strng{authornamehash}{9b8cb659f28320d782cc327fa3c88f94}
+      \strng{authorfullhash}{9b8cb659f28320d782cc327fa3c88f94}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2014 22nd International Conference on Pattern Recognition}
+      \field{title}{Multiple one-class classifier combination for multi-class classification}
+      \field{year}{2014}
+      \field{pages}{2832\bibrangedash 2837}
+      \range{pages}{6}
+    \endentry
     \entry{khudeyer2023fake}{article}{}
       \name{author}{2}{}{%
         {{hash=34957be428c7c82e73ece42d2268ee76}{%
@@ -48,6 +177,174 @@
       \field{volume}{47}
       \field{year}{2023}
     \endentry
+    \entry{lorena2008review}{article}{}
+      \name{author}{3}{}{%
+        {{hash=1c1dd695358348c30262e543250c18a6}{%
+           family={Lorena},
+           familyi={L\bibinitperiod},
+           given={Ana\bibnamedelima Carolina},
+           giveni={A\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=13050f8a6b832d4a906244a6e16993af}{%
+           family={De\bibnamedelima Carvalho},
+           familyi={D\bibinitperiod\bibinitdelim C\bibinitperiod},
+           given={André\bibnamedelima CPLF},
+           giveni={A\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=46aab3a5eec36c9e84a7cb8dae69145c}{%
+           family={Gama},
+           familyi={G\bibinitperiod},
+           given={João\bibnamedelima MP},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{9fd70033e73da36dd4c9aeccb80606c4}
+      \strng{fullhash}{9fd70033e73da36dd4c9aeccb80606c4}
+      \strng{bibnamehash}{9fd70033e73da36dd4c9aeccb80606c4}
+      \strng{authorbibnamehash}{9fd70033e73da36dd4c9aeccb80606c4}
+      \strng{authornamehash}{9fd70033e73da36dd4c9aeccb80606c4}
+      \strng{authorfullhash}{9fd70033e73da36dd4c9aeccb80606c4}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Artificial Intelligence Review}
+      \field{title}{A review on the combination of binary classifiers in multiclass problems}
+      \field{volume}{30}
+      \field{year}{2008}
+      \field{pages}{19\bibrangedash 37}
+      \range{pages}{19}
+    \endentry
+    \entry{mohamed2024harnessing}{article}{}
+      \name{author}{5}{}{%
+        {{hash=27b721f081a389e26a228ee9cc2fb532}{%
+           family={Mohamed},
+           familyi={M\bibinitperiod},
+           given={Hania},
+           giveni={H\bibinitperiod}}}%
+        {{hash=5728090d6e6bf420d66a79aa9b9e4b80}{%
+           family={Koroniotis},
+           familyi={K\bibinitperiod},
+           given={Nickolaos},
+           giveni={N\bibinitperiod}}}%
+        {{hash=ab9bcf08d864de16f62df4a541080d3c}{%
+           family={Moustafa},
+           familyi={M\bibinitperiod},
+           given={Nour},
+           giveni={N\bibinitperiod}}}%
+        {{hash=2fb04bd6c9a92e30d8a3051389862574}{%
+           family={Schiliro},
+           familyi={S\bibinitperiod},
+           given={Francesco},
+           giveni={F\bibinitperiod}}}%
+        {{hash=d913b7de1daa87c8658ba2dcad408248}{%
+           family={Zomaya},
+           familyi={Z\bibinitperiod},
+           given={Albert\bibnamedelima Y},
+           giveni={A\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{d12e0534c6e25386d0a8bace9f6748ff}
+      \strng{fullhash}{e74c1f90b27d9e836337b287071c8556}
+      \strng{bibnamehash}{d12e0534c6e25386d0a8bace9f6748ff}
+      \strng{authorbibnamehash}{d12e0534c6e25386d0a8bace9f6748ff}
+      \strng{authornamehash}{d12e0534c6e25386d0a8bace9f6748ff}
+      \strng{authorfullhash}{e74c1f90b27d9e836337b287071c8556}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Open Journal of the Communications Society}
+      \field{title}{Harnessing federated learning for digital forensics in IoT: A survey and introduction to the IoT-LF framework}
+      \field{year}{2024}
+    \endentry
+    \entry{nayerifard2023machine}{article}{}
+      \name{author}{4}{}{%
+        {{hash=72f07fc7952fbc8cdb27040ad659628f}{%
+           family={Nayerifard},
+           familyi={N\bibinitperiod},
+           given={Tahereh},
+           giveni={T\bibinitperiod}}}%
+        {{hash=48c5d2bc220a72ba93360de8307f061f}{%
+           family={Amintoosi},
+           familyi={A\bibinitperiod},
+           given={Haleh},
+           giveni={H\bibinitperiod}}}%
+        {{hash=cb100a235c445a30d2e03bcb1fa6e13b}{%
+           family={Bafghi},
+           familyi={B\bibinitperiod},
+           given={Abbas\bibnamedelima Ghaemi},
+           giveni={A\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=013202c34f21e205bb277e697e5ffd5b}{%
+           family={Dehghantanha},
+           familyi={D\bibinitperiod},
+           given={Ali},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{e043401011222d5e58caf132386a001a}
+      \strng{fullhash}{f7d83266032c17333721942cb2a3efe3}
+      \strng{bibnamehash}{e043401011222d5e58caf132386a001a}
+      \strng{authorbibnamehash}{e043401011222d5e58caf132386a001a}
+      \strng{authornamehash}{e043401011222d5e58caf132386a001a}
+      \strng{authorfullhash}{f7d83266032c17333721942cb2a3efe3}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:2306.04965}
+      \field{title}{Machine learning in digital forensics: a systematic literature review}
+      \field{year}{2023}
+    \endentry
+    \entry{neto2023survey}{article}{}
+      \name{author}{5}{}{%
+        {{hash=f3d50cc85fb7c58fe271e07ef625322b}{%
+           family={Neto},
+           familyi={N\bibinitperiod},
+           given={Helio\bibnamedelimb N\bibnamedelima Cunha},
+           giveni={H\bibinitperiod\bibinitdelim N\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=be0befbde794d8ebeb00418df4509b53}{%
+           family={Hribar},
+           familyi={H\bibinitperiod},
+           given={Jernej},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d9cfb32feeafc29e489d22e64a37a8a9}{%
+           family={Dusparic},
+           familyi={D\bibinitperiod},
+           given={Ivana},
+           giveni={I\bibinitperiod}}}%
+        {{hash=cd399f385659790924f5edce6db4d416}{%
+           family={Mattos},
+           familyi={M\bibinitperiod},
+           given={Diogo\bibnamedelimb Menezes\bibnamedelima Ferrazani},
+           giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=f2f10ed51ff76d85b71c889cdd659931}{%
+           family={Fernandes},
+           familyi={F\bibinitperiod},
+           given={Natalia\bibnamedelima C},
+           giveni={N\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{de470043e1f6db823a307bc509ded747}
+      \strng{fullhash}{e5ccb9048d2c4cf276b5dafbcdf0c534}
+      \strng{bibnamehash}{de470043e1f6db823a307bc509ded747}
+      \strng{authorbibnamehash}{de470043e1f6db823a307bc509ded747}
+      \strng{authornamehash}{de470043e1f6db823a307bc509ded747}
+      \strng{authorfullhash}{e5ccb9048d2c4cf276b5dafbcdf0c534}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{A survey on securing federated learning: Analysis of applications, attacks, challenges, and trends}
+      \field{volume}{11}
+      \field{year}{2023}
+      \field{pages}{41928\bibrangedash 41953}
+      \range{pages}{26}
+    \endentry
     \entry{tunguz2020_140kreal_fake_faces}{misc}{}
       \name{author}{1}{}{%
         {{hash=6a95ca8741d2939b5f18224024a35523}{%
@@ -70,6 +367,111 @@
       \field{note}{Accessed: 2025-01-05}
       \field{title}{140K Real and Fake Faces}
       \field{year}{2020}
+    \endentry
+    \entry{wang2019development}{article}{}
+      \name{author}{5}{}{%
+        {{hash=f27ec46ccd272a021fd78bdac92dd490}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod}}}%
+        {{hash=fc04fbea5b0ede79c78a671f7c0f9112}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Yujing},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=03d3e23852937fa39b0e34246c4ecd1d}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Xin},
+           giveni={X\bibinitperiod}}}%
+        {{hash=95a81c9902743f598da2616f71e3827d}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Weizheng},
+           giveni={W\bibinitperiod}}}%
+        {{hash=eddfe4f54afae41fd248eeffc46c6117}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Ji},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Society of Photo-Optical Instrumentation Engineers}%
+      }
+      \strng{namehash}{2e448f2e68ab2f1cd9e54269cab56966}
+      \strng{fullhash}{a95d9688f8a8ce63003e248e98e24f42}
+      \strng{bibnamehash}{2e448f2e68ab2f1cd9e54269cab56966}
+      \strng{authorbibnamehash}{2e448f2e68ab2f1cd9e54269cab56966}
+      \strng{authornamehash}{2e448f2e68ab2f1cd9e54269cab56966}
+      \strng{authorfullhash}{a95d9688f8a8ce63003e248e98e24f42}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Optical Engineering}
+      \field{number}{4}
+      \field{title}{Development of convolutional neural network and its application in image classification: a survey}
+      \field{volume}{58}
+      \field{year}{2019}
+      \field{pages}{040901\bibrangedash 040901}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1117/1.OE.58.4.040901
+      \endverb
+    \endentry
+    \entry{zhang2021survey}{article}{}
+      \name{author}{6}{}{%
+        {{hash=c9191dc69bc22ce41fc456ae9eb63db8}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Chen},
+           giveni={C\bibinitperiod}}}%
+        {{hash=153176ff7963589ce0e40105874a1d1a}{%
+           family={Xie},
+           familyi={X\bibinitperiod},
+           given={Yu},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=00ed25deb8b38c0d7df60af69caa377a}{%
+           family={Bai},
+           familyi={B\bibinitperiod},
+           given={Hang},
+           giveni={H\bibinitperiod}}}%
+        {{hash=43d22dc81cc0e5bb1d24d5eeb65ecbae}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Bin},
+           giveni={B\bibinitperiod}}}%
+        {{hash=0c0616c994dd3fcf18aba8a8673cc353}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Weihong},
+           giveni={W\bibinitperiod}}}%
+        {{hash=a85dcf731e772b177341998a236d587a}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Yuan},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{2348f5826634af872a0634ea83f5916a}
+      \strng{fullhash}{588dacea021ed1b666199053970668cc}
+      \strng{bibnamehash}{2348f5826634af872a0634ea83f5916a}
+      \strng{authorbibnamehash}{2348f5826634af872a0634ea83f5916a}
+      \strng{authornamehash}{2348f5826634af872a0634ea83f5916a}
+      \strng{authorfullhash}{588dacea021ed1b666199053970668cc}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Knowledge-Based Systems}
+      \field{title}{A survey on federated learning}
+      \field{volume}{216}
+      \field{year}{2021}
+      \field{pages}{106775}
+      \range{pages}{1}
     \endentry
   \enddatalist
 \endrefsection
