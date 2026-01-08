@@ -54,6 +54,7 @@ TBD
 
 \subsection{Federated Learning}
 
+\subsubsection{Fundamentals}
 In the age of big data, data privacy and security are becoming increasingly important and are receiving more attention. 
 The in 2018 published GDPR aims to protect individuals' data, users of services should be able to have their data deleted at any time and data may not be used for training ML models without consent.
 This leads to a problem in training classical ML models, as large amounts of data form the basis for them.
@@ -73,9 +74,19 @@ The clients initialize their local model with the parameters of the global model
 The last two steps are repeated until a specified number of epochs or a desired accuracy has been achieved.
 
 
-\subsection{Attack Vectors in FL}
+\subsubsection{Attack Vectors in FL}
 
-TBD
+Attack vectors on FL are divided into two large groups, which are described in~\cite{neto2023survey}.
+\newline
+On the one hand, there are model performance attacks, which focus on damaging the training process in various ways.
+These include data poisoning attacks, in which the training data is modified by replacing images or labels before the training.
+Model poisoning attacks, in which the gradients of the locally trained model are altered.
+Free-riding attacks, in which the model is only used without adding value to the global model.
+\newline
+On the other hand, there are privacy attacks that attempt to draw conclusions about training data from the local parameters of clients or the global parameters of the global model.
+These include model inversion and gradient inference attacks, as well as GAN reconstruction attacks, 
+in which private training data is to be reconstructed. 
+
 
 
 
