@@ -19,6 +19,32 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{alashjaee2025machine}{article}{}
+      \name{author}{1}{}{%
+        {{hash=247a7e8369bd0d967df44724179f23c7}{%
+           family={Alashjaee},
+           familyi={A\bibinitperiod},
+           given={Abdullah\bibnamedelima Mujawib},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{247a7e8369bd0d967df44724179f23c7}
+      \strng{fullhash}{247a7e8369bd0d967df44724179f23c7}
+      \strng{bibnamehash}{247a7e8369bd0d967df44724179f23c7}
+      \strng{authorbibnamehash}{247a7e8369bd0d967df44724179f23c7}
+      \strng{authornamehash}{247a7e8369bd0d967df44724179f23c7}
+      \strng{authorfullhash}{247a7e8369bd0d967df44724179f23c7}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{University of Bisha Journal for Basic and Applied Sciences}
+      \field{number}{1}
+      \field{title}{Machine Learning Approach for Fake Image Forensics}
+      \field{volume}{1}
+      \field{year}{2025}
+      \field{pages}{5}
+      \range{pages}{1}
+    \endentry
     \entry{bode2019every}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=4c29b806716b05b19bc7d8dc03e55281}{%
@@ -147,6 +173,33 @@
       \field{year}{2014}
       \field{pages}{2832\bibrangedash 2837}
       \range{pages}{6}
+    \endentry
+    \entry{jabbarli2024lightffdnets}{article}{}
+      \name{author}{2}{}{%
+        {{hash=41a81b8c776ad60618ee53c847a502d3}{%
+           family={Jabbarl{ı}},
+           familyi={J\bibinitperiod},
+           given={Günel},
+           giveni={G\bibinitperiod}}}%
+        {{hash=4fae8e320818153ba09f84aa31dfba85}{%
+           family={Kurt},
+           familyi={K\bibinitperiod},
+           given={Murat},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{ec46ff5ca9a5c4fc4e46722d7e091908}
+      \strng{fullhash}{ec46ff5ca9a5c4fc4e46722d7e091908}
+      \strng{bibnamehash}{ec46ff5ca9a5c4fc4e46722d7e091908}
+      \strng{authorbibnamehash}{ec46ff5ca9a5c4fc4e46722d7e091908}
+      \strng{authornamehash}{ec46ff5ca9a5c4fc4e46722d7e091908}
+      \strng{authorfullhash}{ec46ff5ca9a5c4fc4e46722d7e091908}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:2411.11826}
+      \field{title}{Lightffdnets: Lightweight convolutional neural networks for rapid facial forgery detection}
+      \field{year}{2024}
     \endentry
     \entry{khudeyer2023fake}{article}{}
       \name{author}{2}{}{%
@@ -344,6 +397,93 @@
       \field{year}{2023}
       \field{pages}{41928\bibrangedash 41953}
       \range{pages}{26}
+    \endentry
+    \entry{rafique2023deep}{article}{}
+      \name{author}{6}{}{%
+        {{hash=06a09c45b1e2fd568a4bccddb09606a5}{%
+           family={Rafique},
+           familyi={R\bibinitperiod},
+           given={Rimsha},
+           giveni={R\bibinitperiod}}}%
+        {{hash=28267907e9593c4441bdb2ef845d699d}{%
+           family={Gantassi},
+           familyi={G\bibinitperiod},
+           given={Rahma},
+           giveni={R\bibinitperiod}}}%
+        {{hash=45a21b0dee6bb64f33b9778b4ac8be21}{%
+           family={Amin},
+           familyi={A\bibinitperiod},
+           given={Rashid},
+           giveni={R\bibinitperiod}}}%
+        {{hash=ad996ca86eca09d4af1fbc909535da6f}{%
+           family={Frnda},
+           familyi={F\bibinitperiod},
+           given={Jaroslav},
+           giveni={J\bibinitperiod}}}%
+        {{hash=68bb6a8b66887324d6877679e050216d}{%
+           family={Mustapha},
+           familyi={M\bibinitperiod},
+           given={Aida},
+           giveni={A\bibinitperiod}}}%
+        {{hash=ee66fb9647d0f2f0c69be8ca641caa60}{%
+           family={Alshehri},
+           familyi={A\bibinitperiod},
+           given={Asma\bibnamedelima Hassan},
+           giveni={A\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group UK London}%
+      }
+      \strng{namehash}{416462391af1cbee522518735e1ea719}
+      \strng{fullhash}{0663e1046273098b17077e88f264da25}
+      \strng{bibnamehash}{416462391af1cbee522518735e1ea719}
+      \strng{authorbibnamehash}{416462391af1cbee522518735e1ea719}
+      \strng{authornamehash}{416462391af1cbee522518735e1ea719}
+      \strng{authorfullhash}{0663e1046273098b17077e88f264da25}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Scientific reports}
+      \field{number}{1}
+      \field{title}{Deep fake detection and classification using error-level analysis and deep learning}
+      \field{volume}{13}
+      \field{year}{2023}
+      \field{pages}{7422}
+      \range{pages}{1}
+    \endentry
+    \entry{csafak2024detection}{article}{}
+      \name{author}{2}{}{%
+        {{hash=58c0ac150c19898bff585f89359f4710}{%
+           family={Şafak},
+           familyi={Ş\bibinitperiod},
+           given={Emre},
+           giveni={E\bibinitperiod}}}%
+        {{hash=5e9a9d2c154c1942cd0d730b7925b0c6}{%
+           family={Bar{ı}şç{ı}},
+           familyi={B\bibinitperiod},
+           given={Necaattin},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {PeerJ Inc.}%
+      }
+      \strng{namehash}{11678c4ffc1a3e0611fa33db04dc8c5e}
+      \strng{fullhash}{11678c4ffc1a3e0611fa33db04dc8c5e}
+      \strng{bibnamehash}{11678c4ffc1a3e0611fa33db04dc8c5e}
+      \strng{authorbibnamehash}{11678c4ffc1a3e0611fa33db04dc8c5e}
+      \strng{authornamehash}{11678c4ffc1a3e0611fa33db04dc8c5e}
+      \strng{authorfullhash}{11678c4ffc1a3e0611fa33db04dc8c5e}
+      \field{sortinit}{Ş}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{PeerJ Computer Science}
+      \field{title}{Detection of fake face images using lightweight convolutional neural networks with stacking ensemble learning method}
+      \field{volume}{10}
+      \field{year}{2024}
+      \field{pages}{e2103}
+      \range{pages}{-1}
     \endentry
     \entry{tunguz2020_140kreal_fake_faces}{misc}{}
       \name{author}{1}{}{%

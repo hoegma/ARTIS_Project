@@ -1,4 +1,48 @@
 \section{Related Work}
 \label{sec:related_work}
 
-Related work of the paper.
+In the literature, there are various types of approaches to fake face detection without FL.
+\newline
+The first group of literature uses CNNs as feature extractors and trains ML models with these features for the classification task.
+In~\cite{alashjaee2025machine}, the authors use the VGG16 as a model and initialize it with the weights trained on ImageNet.
+The VGG16 consists of 13 convolutional layers, which extract the features of the input image.
+The output of the 13th layer is flattened and consists of 73984 features, which represent the high-level features of the image.
+The 140-real-fake-faces dataset is used as input and the features are extracted for each image.
+These features are then used to train various ML models such as 
+logistic regression,  K-means (KNN), decision trees, artificial neural networks (ANN) and random forests (RF).
+RF performs best with an accuracy of 78.6\%, 76\% precision, 79\% recall and an F1 score of 77.4\%.
+\newline
+In~\cite{rafique2023deep}, the authors use the same approach, but the 
+GoogLeNet, ResNet18, and SqueezeNet models are used to extract the features.
+In addition, the authors use the 140k-real-fake-faces-with-ELA dataset, in which all images have undergone an additional preprocessing step.
+This step is error level analysis (ELA), which is a forensic technique 
+for examining image segments for varying compression levels 
+that arise during digital editing of the image.
+The models again extract the high-level features of the images, which are used to train KNN and Support Vector Machine (SVM) models.
+The combination of ResNet18 and SVM performs best in fake face detection
+with an accuracy of 88.6\%, 88.5\% precision, 89\% recall and 85\% f1-score.
+\newline
+The second group of fake face detection approaches does not use CNNs as feature extractors, 
+but trains them and uses them for classification.
+Almost all of the papers mentioned use the 140k real-fake-faces dataset, which makes comparison easier.
+\newline
+In~\cite{jabbarli2024lightffdnets}, the authors developed a very lightweight fake face detection system that uses LightFDDNetv1 and v2,
+which contain 3 and 5 convolutional layers and one output layer, respectively.
+These models contain very few parameters so that they can be used on edge devices.
+Both models were trained using transfer learning.
+LightFDDNetv1 achieved a test accuracy of 69.9\%, 62\% precision, 85\% recall and an f1-score of 71.2\% after 10 epochs
+and LightFDDNetv2 accuracy of 71.2\%, 78.2\% precision, 71\% recall and an f1-score of 74.5\%.
+\newline
+In~\cite{csafak2024detection}, the authors used the stacking ensemble learning method,
+in which several models are trained separately from each other on the same dataset and the predictions are combined during the prediction process.
+The models used were EfficientNetB0, MobileNetv1 and MobileNetv2, which were trained on the 
+FFHQ dataset using transfer learning.
+This enabled the authors to achieve an accuracy of 96.4\%, 97.8\% precision, 97.4\% recall and 97.6\% f1-score.
+\newline
+In~\cite{khudeyer2023fake}, the authors use EfficientB0 with transfer learning.
+They use a learning rate scheduling technique to adjust the learning rate based on the training epoch.
+This allows them to achieve an accuracy of 99.06\% and a loss of 0.057.
+
+
+
+

@@ -2361,22 +2361,27 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">references.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1" intorder="1">bode2019every</bcf:citekey>
-    <bcf:citekey order="2" intorder="1">casino2022research</bcf:citekey>
-    <bcf:citekey order="3" intorder="1">casino2022research</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">nayerifard2023machine</bcf:citekey>
+    <bcf:citekey order="1" intorder="1">alashjaee2025machine</bcf:citekey>
+    <bcf:citekey order="2" intorder="1">rafique2023deep</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">jabbarli2024lightffdnets</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">csafak2024detection</bcf:citekey>
     <bcf:citekey order="5" intorder="1">khudeyer2023fake</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">wang2019development</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">lorena2008review</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">hadjadji2014multiple</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">wang2019development</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">bode2019every</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">casino2022research</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">casino2022research</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">nayerifard2023machine</bcf:citekey>
     <bcf:citekey order="10" intorder="1">khudeyer2023fake</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">zhang2021survey</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">mohamed2024harnessing</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">neto2023survey</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">tunguz2020_140kreal_fake_faces</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">wang2019development</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">lorena2008review</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">hadjadji2014multiple</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">wang2019development</bcf:citekey>
     <bcf:citekey order="15" intorder="1">khudeyer2023fake</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">khudeyer2023fake</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">zhang2021survey</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">mohamed2024harnessing</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">neto2023survey</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">tunguz2020_140kreal_fake_faces</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">khudeyer2023fake</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">khudeyer2023fake</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">
