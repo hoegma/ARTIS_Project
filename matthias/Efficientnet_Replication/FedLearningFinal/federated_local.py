@@ -126,28 +126,29 @@ class FakeImageClient(fl.client.NumPyClient):
             set_cipher(key)
             print(f"[Client {self.cid}] Encryption key received")
 
-            # First round → unencrypted weights
+            # First round → unencrypted weights (parameters is already a list of arrays)
             self.model.set_weights(parameters)
         else:
+            # Subsequent rounds → decrypt weights
             encrypted = parameters_to_ndarrays(parameters)[0].tobytes()
             self.model.set_weights(decrypt_weights(encrypted))
 
+        # Train the model
         self.model.fit(self.train_ds, epochs=LOCAL_EPOCHS, verbose=1)
 
+        # Get updated weights
         updated = self.model.get_weights()
 
+        # Return format: ALWAYS return (NDArrays, int, Dict)
         if cipher is None:
+            # First round: return plain weights
             return updated, self.num_samples, {}
         else:
+            # Subsequent rounds: return encrypted weights wrapped as single array
             encrypted = encrypt_weights(updated)
-            return (
-                ndarrays_to_parameters([np.frombuffer(encrypted, dtype=np.uint8)]),
-                self.num_samples,
-                {}
-            )
-
-    def evaluate(self, parameters, config):
-        return 0.0, self.num_samples, {}
+            encrypted_array = np.frombuffer(encrypted, dtype=np.uint8)
+            # Return as list containing single array (still NDArrays type)
+            return [encrypted_array], self.num_samples, {}
 
 # -------------------------------------------------------------
 # SERVER STRATEGY
