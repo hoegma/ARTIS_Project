@@ -1,4 +1,52 @@
+% \section{Results}
+% \label{sec:Results}
+
+% This are the results of the paper.
+
 \section{Results}
 \label{sec:Results}
 
-This are the results of the paper.
+In this section, we evaluate the performance of our digital forensics model across three development phases: the centralized baseline, the Flower-based Federated Learning (FL) implementation, and our custom Manual FL implementation designed for encryption integration.
+
+\subsection{Performance Metrics Comparison}
+The performance of each iteration was measured using Accuracy, Precision, Recall, F1-score, and ROC-AUC. Table~\ref{tab:results_comparison} summarizes these metrics.
+
+\begin{table}[h]
+    \centering
+    \caption{Performance Comparison of Model Versions}
+    \label{tab:results_comparison}
+    \begin{tabular}{lccccc}
+        \hline
+        \textbf{Model Version} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{ROC-AUC} \\
+        \hline
+        Baseline (Centralized) & 0.8256 & 0.7747 & 0.9184 & 0.8404 & 0.9279 \\
+        Flower Framework FL    & 0.7412 & 0.6658 & 0.9686 & 0.7891 & 0.9211 \\
+        Manual FL (Encrypted)* & \textit{0.0000} & \textit{0.0000} & \textit{0.0000} & \textit{0.0000} & \textit{0.0000} \\
+        \hline
+        \multicolumn{6}{l}{\small \textit{*Note: Results for Manual FL with encryption are pending final computation.}}
+    \end{tabular}
+\end{table}
+
+As shown in Figure~\ref{fig:metrics_bar_chart}, the baseline model maintains the highest overall accuracy, whereas the Flower framework shows a significant increase in Recall (0.9686), indicating a high sensitivity in detecting "Real" faces, albeit with a trade-off in "Fake" face precision.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{your_bar_chart_filename.png}
+    \caption{Comparison of evaluation metrics across the three model versions.}
+    \label{fig:metrics_bar_chart}
+\end{figure}
+
+\subsection{Confusion Matrix Analysis}
+To better understand the classification behavior, we compare the confusion matrices of the models (see Figure~\ref{fig:confusion_matrices}). 
+
+The Flower framework implementation exhibited a tendency to misclassify "Fake" samples as "Real" (4,862 instances), which explains the lower precision. In contrast, our Baseline model showed a more balanced distribution, correctly identifying 7,329 "Fake" samples compared to Flower's 5,138.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{your_confusion_matrix_filename.png}
+    \caption{Side-by-side comparison of Confusion Matrices for the Baseline and Flower-based models.}
+    \label{fig:confusion_matrices}
+\end{figure}
+
+% \subsection{Discussion of Manual FL Implementation}
+% The shift from the Flower framework to a manual FL implementation with weighted averaging was driven by the technical requirement for encryption integration. While the automated framework provided high recall, the manual approach (placeholder for findings) is expected to provide the necessary privacy-preserving robust digital forensics architecture intended for this research.
