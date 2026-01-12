@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex bbl format version 3.2 $
+% $ biblatex bbl format version 3.3 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -18,8 +18,8 @@
 
 
 \refsection{0}
-  \datalist[entry]{nty/global//global/global}
-    \entry{alashjaee2025machine}{article}{}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{alashjaee2025machine}{article}{}{}
       \name{author}{1}{}{%
         {{hash=247a7e8369bd0d967df44724179f23c7}{%
            family={Alashjaee},
@@ -29,10 +29,12 @@
       }
       \strng{namehash}{247a7e8369bd0d967df44724179f23c7}
       \strng{fullhash}{247a7e8369bd0d967df44724179f23c7}
+      \strng{fullhashraw}{247a7e8369bd0d967df44724179f23c7}
       \strng{bibnamehash}{247a7e8369bd0d967df44724179f23c7}
       \strng{authorbibnamehash}{247a7e8369bd0d967df44724179f23c7}
       \strng{authornamehash}{247a7e8369bd0d967df44724179f23c7}
       \strng{authorfullhash}{247a7e8369bd0d967df44724179f23c7}
+      \strng{authorfullhashraw}{247a7e8369bd0d967df44724179f23c7}
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
       \field{labelnamesource}{author}
@@ -45,7 +47,7 @@
       \field{pages}{5}
       \range{pages}{1}
     \endentry
-    \entry{bode2019every}{inproceedings}{}
+    \entry{bode2019every}{inproceedings}{}{}
       \name{author}{1}{}{%
         {{hash=4c29b806716b05b19bc7d8dc03e55281}{%
            family={Bode},
@@ -55,10 +57,12 @@
       }
       \strng{namehash}{4c29b806716b05b19bc7d8dc03e55281}
       \strng{fullhash}{4c29b806716b05b19bc7d8dc03e55281}
+      \strng{fullhashraw}{4c29b806716b05b19bc7d8dc03e55281}
       \strng{bibnamehash}{4c29b806716b05b19bc7d8dc03e55281}
       \strng{authorbibnamehash}{4c29b806716b05b19bc7d8dc03e55281}
       \strng{authornamehash}{4c29b806716b05b19bc7d8dc03e55281}
       \strng{authorfullhash}{4c29b806716b05b19bc7d8dc03e55281}
+      \strng{authorfullhashraw}{4c29b806716b05b19bc7d8dc03e55281}
       \field{sortinit}{B}
       \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
       \field{labelnamesource}{author}
@@ -69,7 +73,7 @@
       \field{pages}{18}
       \range{pages}{1}
     \endentry
-    \entry{casino2022research}{article}{}
+    \entry{casino2022research}{article}{}{}
       \name{author}{9}{}{%
         {{hash=9c08bd6394eb497ea4f80889f9cd1580}{%
            family={Casino},
@@ -122,10 +126,12 @@
       }
       \strng{namehash}{6fc5a2d14a123e1979df6c984c45f71a}
       \strng{fullhash}{fa4b270b6fdf80537615d89407d2b29e}
+      \strng{fullhashraw}{fa4b270b6fdf80537615d89407d2b29e}
       \strng{bibnamehash}{6fc5a2d14a123e1979df6c984c45f71a}
       \strng{authorbibnamehash}{6fc5a2d14a123e1979df6c984c45f71a}
       \strng{authornamehash}{6fc5a2d14a123e1979df6c984c45f71a}
       \strng{authorfullhash}{fa4b270b6fdf80537615d89407d2b29e}
+      \strng{authorfullhashraw}{fa4b270b6fdf80537615d89407d2b29e}
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{labelnamesource}{author}
@@ -137,7 +143,7 @@
       \field{pages}{25464\bibrangedash 25493}
       \range{pages}{30}
     \endentry
-    \entry{hadjadji2014multiple}{inproceedings}{}
+    \entry{hadjadji2014multiple}{inproceedings}{}{}
       \name{author}{3}{}{%
         {{hash=3a1a2defd849d7746c13e7024a4abd24}{%
            family={Hadjadji},
@@ -160,10 +166,12 @@
       }
       \strng{namehash}{9b8cb659f28320d782cc327fa3c88f94}
       \strng{fullhash}{9b8cb659f28320d782cc327fa3c88f94}
+      \strng{fullhashraw}{9b8cb659f28320d782cc327fa3c88f94}
       \strng{bibnamehash}{9b8cb659f28320d782cc327fa3c88f94}
       \strng{authorbibnamehash}{9b8cb659f28320d782cc327fa3c88f94}
       \strng{authornamehash}{9b8cb659f28320d782cc327fa3c88f94}
       \strng{authorfullhash}{9b8cb659f28320d782cc327fa3c88f94}
+      \strng{authorfullhashraw}{9b8cb659f28320d782cc327fa3c88f94}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
       \field{labelnamesource}{author}
@@ -174,7 +182,7 @@
       \field{pages}{2832\bibrangedash 2837}
       \range{pages}{6}
     \endentry
-    \entry{jabbarli2024lightffdnets}{article}{}
+    \entry{jabbarli2024lightffdnets}{article}{}{}
       \name{author}{2}{}{%
         {{hash=41a81b8c776ad60618ee53c847a502d3}{%
            family={Jabbarl{ı}},
@@ -189,10 +197,12 @@
       }
       \strng{namehash}{ec46ff5ca9a5c4fc4e46722d7e091908}
       \strng{fullhash}{ec46ff5ca9a5c4fc4e46722d7e091908}
+      \strng{fullhashraw}{ec46ff5ca9a5c4fc4e46722d7e091908}
       \strng{bibnamehash}{ec46ff5ca9a5c4fc4e46722d7e091908}
       \strng{authorbibnamehash}{ec46ff5ca9a5c4fc4e46722d7e091908}
       \strng{authornamehash}{ec46ff5ca9a5c4fc4e46722d7e091908}
       \strng{authorfullhash}{ec46ff5ca9a5c4fc4e46722d7e091908}
+      \strng{authorfullhashraw}{ec46ff5ca9a5c4fc4e46722d7e091908}
       \field{sortinit}{J}
       \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
       \field{labelnamesource}{author}
@@ -201,7 +211,7 @@
       \field{title}{Lightffdnets: Lightweight convolutional neural networks for rapid facial forgery detection}
       \field{year}{2024}
     \endentry
-    \entry{khudeyer2023fake}{article}{}
+    \entry{khudeyer2023fake}{article}{}{}
       \name{author}{2}{}{%
         {{hash=34957be428c7c82e73ece42d2268ee76}{%
            family={Khudeyer},
@@ -216,10 +226,12 @@
       }
       \strng{namehash}{488547504e6deb359ffec0cadba84a4d}
       \strng{fullhash}{488547504e6deb359ffec0cadba84a4d}
+      \strng{fullhashraw}{488547504e6deb359ffec0cadba84a4d}
       \strng{bibnamehash}{488547504e6deb359ffec0cadba84a4d}
       \strng{authorbibnamehash}{488547504e6deb359ffec0cadba84a4d}
       \strng{authornamehash}{488547504e6deb359ffec0cadba84a4d}
       \strng{authorfullhash}{488547504e6deb359ffec0cadba84a4d}
+      \strng{authorfullhashraw}{488547504e6deb359ffec0cadba84a4d}
       \field{sortinit}{K}
       \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
       \field{labelnamesource}{author}
@@ -230,7 +242,7 @@
       \field{volume}{47}
       \field{year}{2023}
     \endentry
-    \entry{lorena2008review}{article}{}
+    \entry{lorena2008review}{article}{}{}
       \name{author}{3}{}{%
         {{hash=1c1dd695358348c30262e543250c18a6}{%
            family={Lorena},
@@ -253,10 +265,12 @@
       }
       \strng{namehash}{9fd70033e73da36dd4c9aeccb80606c4}
       \strng{fullhash}{9fd70033e73da36dd4c9aeccb80606c4}
+      \strng{fullhashraw}{9fd70033e73da36dd4c9aeccb80606c4}
       \strng{bibnamehash}{9fd70033e73da36dd4c9aeccb80606c4}
       \strng{authorbibnamehash}{9fd70033e73da36dd4c9aeccb80606c4}
       \strng{authornamehash}{9fd70033e73da36dd4c9aeccb80606c4}
       \strng{authorfullhash}{9fd70033e73da36dd4c9aeccb80606c4}
+      \strng{authorfullhashraw}{9fd70033e73da36dd4c9aeccb80606c4}
       \field{sortinit}{L}
       \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
       \field{labelnamesource}{author}
@@ -268,7 +282,7 @@
       \field{pages}{19\bibrangedash 37}
       \range{pages}{19}
     \endentry
-    \entry{mohamed2024harnessing}{article}{}
+    \entry{mohamed2024harnessing}{article}{}{}
       \name{author}{5}{}{%
         {{hash=27b721f081a389e26a228ee9cc2fb532}{%
            family={Mohamed},
@@ -301,10 +315,12 @@
       }
       \strng{namehash}{d12e0534c6e25386d0a8bace9f6748ff}
       \strng{fullhash}{e74c1f90b27d9e836337b287071c8556}
+      \strng{fullhashraw}{e74c1f90b27d9e836337b287071c8556}
       \strng{bibnamehash}{d12e0534c6e25386d0a8bace9f6748ff}
       \strng{authorbibnamehash}{d12e0534c6e25386d0a8bace9f6748ff}
       \strng{authornamehash}{d12e0534c6e25386d0a8bace9f6748ff}
       \strng{authorfullhash}{e74c1f90b27d9e836337b287071c8556}
+      \strng{authorfullhashraw}{e74c1f90b27d9e836337b287071c8556}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
       \field{labelnamesource}{author}
@@ -313,7 +329,7 @@
       \field{title}{Harnessing federated learning for digital forensics in IoT: A survey and introduction to the IoT-LF framework}
       \field{year}{2024}
     \endentry
-    \entry{nayerifard2023machine}{article}{}
+    \entry{nayerifard2023machine}{article}{}{}
       \name{author}{4}{}{%
         {{hash=72f07fc7952fbc8cdb27040ad659628f}{%
            family={Nayerifard},
@@ -338,10 +354,12 @@
       }
       \strng{namehash}{e043401011222d5e58caf132386a001a}
       \strng{fullhash}{f7d83266032c17333721942cb2a3efe3}
+      \strng{fullhashraw}{f7d83266032c17333721942cb2a3efe3}
       \strng{bibnamehash}{e043401011222d5e58caf132386a001a}
       \strng{authorbibnamehash}{e043401011222d5e58caf132386a001a}
       \strng{authornamehash}{e043401011222d5e58caf132386a001a}
       \strng{authorfullhash}{f7d83266032c17333721942cb2a3efe3}
+      \strng{authorfullhashraw}{f7d83266032c17333721942cb2a3efe3}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
       \field{labelnamesource}{author}
@@ -350,7 +368,7 @@
       \field{title}{Machine learning in digital forensics: a systematic literature review}
       \field{year}{2023}
     \endentry
-    \entry{neto2023survey}{article}{}
+    \entry{neto2023survey}{article}{}{}
       \name{author}{5}{}{%
         {{hash=f3d50cc85fb7c58fe271e07ef625322b}{%
            family={Neto},
@@ -383,10 +401,12 @@
       }
       \strng{namehash}{de470043e1f6db823a307bc509ded747}
       \strng{fullhash}{e5ccb9048d2c4cf276b5dafbcdf0c534}
+      \strng{fullhashraw}{e5ccb9048d2c4cf276b5dafbcdf0c534}
       \strng{bibnamehash}{de470043e1f6db823a307bc509ded747}
       \strng{authorbibnamehash}{de470043e1f6db823a307bc509ded747}
       \strng{authornamehash}{de470043e1f6db823a307bc509ded747}
       \strng{authorfullhash}{e5ccb9048d2c4cf276b5dafbcdf0c534}
+      \strng{authorfullhashraw}{e5ccb9048d2c4cf276b5dafbcdf0c534}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
       \field{labelnamesource}{author}
@@ -398,7 +418,7 @@
       \field{pages}{41928\bibrangedash 41953}
       \range{pages}{26}
     \endentry
-    \entry{rafique2023deep}{article}{}
+    \entry{rafique2023deep}{article}{}{}
       \name{author}{6}{}{%
         {{hash=06a09c45b1e2fd568a4bccddb09606a5}{%
            family={Rafique},
@@ -436,10 +456,12 @@
       }
       \strng{namehash}{416462391af1cbee522518735e1ea719}
       \strng{fullhash}{0663e1046273098b17077e88f264da25}
+      \strng{fullhashraw}{0663e1046273098b17077e88f264da25}
       \strng{bibnamehash}{416462391af1cbee522518735e1ea719}
       \strng{authorbibnamehash}{416462391af1cbee522518735e1ea719}
       \strng{authornamehash}{416462391af1cbee522518735e1ea719}
       \strng{authorfullhash}{0663e1046273098b17077e88f264da25}
+      \strng{authorfullhashraw}{0663e1046273098b17077e88f264da25}
       \field{sortinit}{R}
       \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
       \field{labelnamesource}{author}
@@ -452,7 +474,7 @@
       \field{pages}{7422}
       \range{pages}{1}
     \endentry
-    \entry{csafak2024detection}{article}{}
+    \entry{csafak2024detection}{article}{}{}
       \name{author}{2}{}{%
         {{hash=58c0ac150c19898bff585f89359f4710}{%
            family={Şafak},
@@ -470,10 +492,12 @@
       }
       \strng{namehash}{11678c4ffc1a3e0611fa33db04dc8c5e}
       \strng{fullhash}{11678c4ffc1a3e0611fa33db04dc8c5e}
+      \strng{fullhashraw}{11678c4ffc1a3e0611fa33db04dc8c5e}
       \strng{bibnamehash}{11678c4ffc1a3e0611fa33db04dc8c5e}
       \strng{authorbibnamehash}{11678c4ffc1a3e0611fa33db04dc8c5e}
       \strng{authornamehash}{11678c4ffc1a3e0611fa33db04dc8c5e}
       \strng{authorfullhash}{11678c4ffc1a3e0611fa33db04dc8c5e}
+      \strng{authorfullhashraw}{11678c4ffc1a3e0611fa33db04dc8c5e}
       \field{sortinit}{Ş}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{labelnamesource}{author}
@@ -485,7 +509,7 @@
       \field{pages}{e2103}
       \range{pages}{-1}
     \endentry
-    \entry{tunguz2020_140kreal_fake_faces}{misc}{}
+    \entry{tunguz2020_140kreal_fake_faces}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=6a95ca8741d2939b5f18224024a35523}{%
            family={Tunguz},
@@ -495,10 +519,12 @@
       }
       \strng{namehash}{6a95ca8741d2939b5f18224024a35523}
       \strng{fullhash}{6a95ca8741d2939b5f18224024a35523}
+      \strng{fullhashraw}{6a95ca8741d2939b5f18224024a35523}
       \strng{bibnamehash}{6a95ca8741d2939b5f18224024a35523}
       \strng{authorbibnamehash}{6a95ca8741d2939b5f18224024a35523}
       \strng{authornamehash}{6a95ca8741d2939b5f18224024a35523}
       \strng{authorfullhash}{6a95ca8741d2939b5f18224024a35523}
+      \strng{authorfullhashraw}{6a95ca8741d2939b5f18224024a35523}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
       \field{labelnamesource}{author}
@@ -508,7 +534,7 @@
       \field{title}{140K Real and Fake Faces}
       \field{year}{2020}
     \endentry
-    \entry{wang2019development}{article}{}
+    \entry{wang2019development}{article}{}{}
       \name{author}{5}{}{%
         {{hash=f27ec46ccd272a021fd78bdac92dd490}{%
            family={Wang},
@@ -541,10 +567,12 @@
       }
       \strng{namehash}{2e448f2e68ab2f1cd9e54269cab56966}
       \strng{fullhash}{a95d9688f8a8ce63003e248e98e24f42}
+      \strng{fullhashraw}{a95d9688f8a8ce63003e248e98e24f42}
       \strng{bibnamehash}{2e448f2e68ab2f1cd9e54269cab56966}
       \strng{authorbibnamehash}{2e448f2e68ab2f1cd9e54269cab56966}
       \strng{authornamehash}{2e448f2e68ab2f1cd9e54269cab56966}
       \strng{authorfullhash}{a95d9688f8a8ce63003e248e98e24f42}
+      \strng{authorfullhashraw}{a95d9688f8a8ce63003e248e98e24f42}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
       \field{labelnamesource}{author}
@@ -560,7 +588,7 @@
       \verb 10.1117/1.OE.58.4.040901
       \endverb
     \endentry
-    \entry{zhang2021survey}{article}{}
+    \entry{zhang2021survey}{article}{}{}
       \name{author}{6}{}{%
         {{hash=c9191dc69bc22ce41fc456ae9eb63db8}{%
            family={Zhang},
@@ -598,10 +626,12 @@
       }
       \strng{namehash}{2348f5826634af872a0634ea83f5916a}
       \strng{fullhash}{588dacea021ed1b666199053970668cc}
+      \strng{fullhashraw}{588dacea021ed1b666199053970668cc}
       \strng{bibnamehash}{2348f5826634af872a0634ea83f5916a}
       \strng{authorbibnamehash}{2348f5826634af872a0634ea83f5916a}
       \strng{authornamehash}{2348f5826634af872a0634ea83f5916a}
       \strng{authorfullhash}{588dacea021ed1b666199053970668cc}
+      \strng{authorfullhashraw}{588dacea021ed1b666199053970668cc}
       \field{sortinit}{Z}
       \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
       \field{labelnamesource}{author}

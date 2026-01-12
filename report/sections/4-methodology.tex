@@ -53,60 +53,87 @@ This leads to faster convergence in early epochs, while weight optimizations can
 \newline
 Due to time constraints, the model was only trained once, as training was very computationally intensive due to the large amount of data.
 
-\subsection{Decentralized Fake Face Detection using FL}
+% \subsection{Decentralized Fake Face Detection using FL}
 
-In this section a decentralized trained fake face detection model is developed.
-The training process will be explained below.
-In addition, we will discuss how privacy attacks can be prevented during training.
+% In this section a decentralized trained fake face detection model is developed.
+% The training process will be explained below.
+% In addition, we will discuss how privacy attacks can be prevented during training.
 
-\subsubsection{Research Scenario}
+% \subsubsection{Research Scenario}
 
-The following scenario is fictional.
-\newline
-Several research organizations want to work together to train a fake face detection model.
-Each individual organization has images of fake faces, but also images of faces that belong to their customers.
-An ML model should be trained together that can distinguish between real and fake images.
-To do this, a large data set containing all images would have to be created in order to train the model.
-However, all organizations are interested in protecting the privacy of their customers and therefore do not want to share the real images.
-The solution is to train the model using FL.
-This fake face detection model should be trained with all data from all organizations and should be available to everyone
-without the need to share data between organizations.
+% The following scenario is fictional.
+% \newline
+% Several research organizations want to work together to train a fake face detection model.
+% Each individual organization has images of fake faces, but also images of faces that belong to their customers.
+% An ML model should be trained together that can distinguish between real and fake images.
+% To do this, a large data set containing all images would have to be created in order to train the model.
+% However, all organizations are interested in protecting the privacy of their customers and therefore do not want to share the real images.
+% The solution is to train the model using FL.
+% This fake face detection model should be trained with all data from all organizations and should be available to everyone
+% without the need to share data between organizations.
 
-\subsubsection{Thread Model}
+% \subsubsection{Thread Model}
 
-All participants in the fake face detection training process are trusted.
-This means that all model performance attacks that seek to undermine the convergence of the global model can be excluded.
-After training, participants send their model weights to a trusted third-party server.
-This ensures the secure aggregation of weights.
-Weights sent by participants to the trusted third party could be captured during transmission.
-Capturing the weights of individual organizations represents an attack vector for privacy attacks.
-This attack vector should be reduced by the proposed encryption.
+% All participants in the fake face detection training process are trusted.
+% This means that all model performance attacks that seek to undermine the convergence of the global model can be excluded.
+% After training, participants send their model weights to a trusted third-party server.
+% This ensures the secure aggregation of weights.
+% Weights sent by participants to the trusted third party could be captured during transmission.
+% Capturing the weights of individual organizations represents an attack vector for privacy attacks.
+% This attack vector should be reduced by the proposed encryption.
 
-\subsubsection{FL Simulation}
+% \subsubsection{FL Simulation}
 
-A simulation environment is developed to simulate a global model with any number of participants.
-The EfficientNetB0 with the hyperparameters of section~\ref{subsubsec:model} is used as the base model.
-A batch size of 128 is selected.
-The training data set was divided among five participants, with each receiving approximately 20,000 images, comprising 10,000 real faces and 10,000 fake faces.
-On the server, the global model is initialized with the weights from EfficientNetB0, which was pre-trained on the ImageNet dataset.
-The global model is trained in 10 epochs.
-\newline
-Each epoch consists of the following steps.
-\newline
-First, the weights of the global model are distributed among the 5 participants.
-Each participant initializes their local model with the global weights.
-The participants train their local models in 3 epochs.
-The weights of the local models are encrypted to prevent privacy attacks by intercepting the weights.
-The server receives the weights and decrypts them.
-The global model parameters are updated using weighted federated averaging (FedAvg), where each client's contribution is proportional to the number of local samples.
+% A simulation environment is developed to simulate a global model with any number of participants.
+% The EfficientNetB0 with the hyperparameters of section~\ref{subsubsec:model} is used as the base model.
+% A batch size of 128 is selected.
+% The training data set was divided among five participants, with each receiving approximately 20,000 images, comprising 10,000 real faces and 10,000 fake faces.
+% On the server, the global model is initialized with the weights from EfficientNetB0, which was pre-trained on the ImageNet dataset.
+% The global model is trained in 10 epochs.
+% \newline
+% Each epoch consists of the following steps.
+% \newline
+% First, the weights of the global model are distributed among the 5 participants.
+% Each participant initializes their local model with the global weights.
+% The participants train their local models in 3 epochs.
+% The weights of the local models are encrypted to prevent privacy attacks by intercepting the weights.
+% The server receives the weights and decrypts them.
+% The global model parameters are updated using weighted federated averaging (FedAvg), where each client's contribution is proportional to the number of local samples.
 
-\subsubsection{FL attack mitigations}
+% \subsubsection{FL attack mitigations}
 
-If the local updates of the participants are captured during transmission to the server, privacy attacks on the participants' data can be carried out.
-To counteract this, the weight updates must be encrypted.
-The weights are serialized in bytes and encrypted with AES-128.
-Each participant has a secret key that the server knows as a trusted third party.
-When a server receives the encrypted data, it can decrypt it for further processing.
+% If the local updates of the participants are captured during transmission to the server, privacy attacks on the participants' data can be carried out.
+% To counteract this, the weight updates must be encrypted.
+% The weights are serialized in bytes and encrypted with AES-128.
+% Each participant has a secret key that the server knows as a trusted third party.
+% When a server receives the encrypted data, it can decrypt it for further processing.
+
+\subsection{Decentralized Fake Face Detection Development}
+
+The transition from a centralized to a decentralized model was conducted in two phases: an initial implementation using an automated framework, followed by a custom-built manual Federated Learning (FL) system to accommodate specific security requirements.
+
+\subsubsection{Phase 1: Automated FL via Flower Framework}
+Initially, the decentralized model was implemented using the \textit{Flower} framework. This phase served to validate the feasibility of training EfficientNet-B0 in a multi-client environment. However, during development, significant technical challenges arose regarding the integration of custom encryption layers within the Flower abstraction. This limitation necessitated the development of a more transparent, manual FL pipeline.
+
+\subsubsection{Phase 2: Manual FL with Weight Encryption}
+To ensure full control over the aggregation process and security protocols, a manual FL simulation was developed. The environment simulates a global server and five distinct participants (clients). Each client is allocated a shard of the dataset (approximately 20,000 images) using $tf.data.shard$ to maintain memory efficiency.
+
+\paragraph{Training Loop:} 
+The global model is initialized with ImageNet weights. In each of the 10 federated rounds:
+\begin{enumerate}
+    \item The server broadcasts the current global weights to all active clients.
+    \item Each client performs 3 local epochs of training using a categorical cross-entropy loss and the Adam optimizer.
+    \item Clients serialize their local weight updates into byte streams.
+    \item These updates are encrypted using AES-128 via the Fernet symmetric encryption library before being transmitted back to the server.
+\end{enumerate}
+
+\paragraph{Secure Aggregation:}
+Upon receiving the encrypted updates, the server performs decryption and updates the global model using a \textit{Weighted Federated Averaging} (FedAvg) algorithm. The contribution of client $k$ is weighted by its sample size $n_k$ relative to the total samples $N$:
+\[ W_{global} = \sum_{k=1}^{K} \frac{n_k}{N} W_k \]
+This ensures that the global model converges effectively while preserving the privacy of the local data through the encryption of model parameters during transit.
+
+\subsubsection{Threat Model and Privacy}
+The primary attack vector addressed in this architecture is the interception of model weights during transmission. By implementing Fernet-based encryption, we ensure that even if a third party captures the packets between the client and the server, the underlying gradients—which could potentially be used for reconstruction attacks—remain inaccessible without the shared secret key.
 
 \subsection{Explainability using SHAP}
 
