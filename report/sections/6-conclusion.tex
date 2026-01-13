@@ -1,5 +1,24 @@
 \section{Conclusion}
-\label{sec:Conclusion}
 
-This is the conclusion of the paper.
+\subsection{Implementation Summary}
+This federated learning implementation successfully orchestrated 5 clients training EfficientNetB0 models on real-vs-fake image shards from the Kaggle dataset. Key components included:
+
+\begin{itemize}
+    \item \textbf{Data Distribution}: 100,000 training samples evenly sharded across clients (Client 1: 20,000 samples / 20\%, etc.)
+    \item \textbf{Training Protocol}: 10 federated rounds with 3 local epochs per client
+    \item \textbf{Secure Aggregation}: Fernet-encrypted weight updates + weighted FedAvg proportional to client data size
+    \item \textbf{Model Architecture}: Frozen EfficientNetB0 backbone + custom classification head
+\end{itemize}
+
+\subsection{Experimental Results}
+The system achieved strong convergence across federated rounds, culminating in final test performance [file:27][file:28]:
+
+\begin{itemize}
+    \item \textbf{Test Loss}: 0.1734
+    \item \textbf{Test Accuracy}: 93.27\%
+    \item \textbf{Test AUC}: 0.9868
+\end{itemize}
+
+Model checkpoints saved every 2 rounds; final model exported as both \texttt{.keras} and \texttt{.h5} formats. Training completed successfully on Kaggle GPU with optimal memory management via session clearing and garbage collection
+
 
