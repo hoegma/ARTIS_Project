@@ -1,11 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1768295724.43624 "main.aux" "main.bbl" "main" 1768295725.47195 0
-  "main.aux" 1768295724 5423 4e306b8319a43d1c54e8863aced53e88 "pdflatex"
+["bibtex main"] 1768297194.13832 "main.aux" "main.bbl" "main" 1768297198.41874 0
+  "./references.bib" 1768296964 5668 dfe2ccfb7abf2a4cce49423a2194dc58 ""
+  "./splncs04.bst" 1768293104 33694 ee21ae2a29028dc8ad842a97200982c7 ""
+  "main.aux" 1768297198 5586 0a46fff276bcdd706073c5abba20bbc1 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1768295721.31463 "d:/Uni_Ulm/4.Semester/ARTIS_Project/report_springer/main.tex" "main.pdf" "main" 1768295725.47266 0
+["pdflatex"] 1768297194.9635 "d:/Uni_Ulm/4.Semester/ARTIS_Project/report/main.tex" "main.pdf" "main" 1768297198.42016 0
   "C:/Users/matth/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1768293003 392991 dc69d26daea79e89862ee223d05359ca ""
   "C:/Users/matth/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx0900.pk" 1763980064 22504 0325987faf4dc7bad6e5290f7fdaf63f ""
   "C:/Users/matth/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1000.pk" 1763980074 25420 0a0144b679f73a714994a35f174644d7 ""
@@ -58,12 +60,12 @@
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1704400941 30006 57b07afb710ee2f649c65cfbafda39c1 ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/tex/latex/oberdiek/aliascnt.sty" 1701783979 2652 813491e2bc95c1dafbb39cd7c54b380b ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/tex/latex/tools/multicol.sty" 1700599895 32515 51caec75eda9c8890135f12f1a4eddc3 ""
-  "d:/Uni_Ulm/4.Semester/ARTIS_Project/report_springer/main.tex" 1768295720 2189 8055c0c4be0161eabb0989c292296946 ""
+  "d:/Uni_Ulm/4.Semester/ARTIS_Project/report/main.tex" 1768295720 2189 8055c0c4be0161eabb0989c292296946 ""
   "llncs.cls" 1768293032 43512 2e448be633a7384490d8a95a08572607 ""
-  "main.aux" 1768295724 5423 4e306b8319a43d1c54e8863aced53e88 "pdflatex"
-  "main.bbl" 1768295726 3558 31f4b43e091142ecd724c5d4e2ae8438 "bibtex main"
+  "main.aux" 1768297198 5586 0a46fff276bcdd706073c5abba20bbc1 "pdflatex"
+  "main.bbl" 1768297196 3892 7598f2d72a2e9127431d308472a70687 "bibtex main"
   "main.tex" 1768295720 2189 8055c0c4be0161eabb0989c292296946 ""
-  "sections/1-introduction.tex" 1767908216 3104 f9bdee9a16967563f0a3d59f55157430 ""
+  "sections/1-introduction.tex" 1768297190 3248 9f7cac42f9a0591c679f093f0e510874 ""
   "sections/2-related_work.tex" 1767996082 3393 dceab2d6ce765920c2e448b3b42af7e8 ""
   "sections/3-background.tex" 1767904930 9389 1b3a44ec8436b50bd6ad17ce61f2c1ef ""
   "sections/4-methodology.tex" 1768292852 10150 96c14607c1a9d599e338566b4268c7d9 ""

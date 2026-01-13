@@ -67,6 +67,12 @@ Tunguz, B.: 140k real and fake faces.
   \url{https://www.kaggle.com/datasets/xhlulu/140k-real-and-fake-faces} (2020),
   accessed: 2025-01-05
 
+\bibitem{iotbds17}
+Vervier, L., Zeissig, E.M., Lidynia, C., Ziefle, M.: Perceptions of digital
+  footprints and the value of privacy. In: Proceedings of the 2nd International
+  Conference on Internet of Things, Big Data and Security - Volume 1: IoTBDS,.
+  pp. 80--91. INSTICC, SciTePress (2017). \doi{10.5220/0006301000800091}
+
 \bibitem{wang2019development}
 Wang, W., Yang, Y., Wang, X., Wang, W., Li, J.: Development of convolutional
   neural network and its application in image classification: a survey. Optical

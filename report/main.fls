@@ -1,6 +1,6 @@
-PWD d:\Uni_Ulm\4.Semester\ARTIS_Project\report_springer
+PWD d:\Uni_Ulm\4.Semester\ARTIS_Project\report
 INPUT C:\Users\matth\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT d:\Uni_Ulm\4.Semester\ARTIS_Project\report_springer\main.tex
+INPUT d:\Uni_Ulm\4.Semester\ARTIS_Project\report\main.tex
 OUTPUT main.log
 INPUT .\llncs.cls
 INPUT llncs.cls
