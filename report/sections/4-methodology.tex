@@ -128,6 +128,10 @@ The global model is initialized with ImageNet weights. In each of the 10 federat
 \end{enumerate}
 
 \paragraph{Secure Aggregation:}
+We initially explored \textbf{Secure Aggregation} protocols using ready-made frameworks (TensorFlow Federated SecAgg, Flower SecAgg) but faced integration challenges with our custom TensorFlow/Keras pipeline. We ultimately selected \textbf{Fernet} symmetric encryption for seamless compatibility.
+
+Clients encrypt model weights via \texttt{Fernet.encrypt()} before transmission; the server decrypts with the shared key prior to aggregation.
+
 Upon receiving the encrypted updates, the server performs decryption and updates the global model using a \textit{Weighted Federated Averaging} (FedAvg) algorithm. The contribution of client $k$ is weighted by its sample size $n_k$ relative to the total samples $N$:
 \[ W_{global} = \sum_{k=1}^{K} \frac{n_k}{N} W_k \]
 This ensures that the global model converges effectively while preserving the privacy of the local data through the encryption of model parameters during transit.
