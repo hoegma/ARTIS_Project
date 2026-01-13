@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex main"] 1768321406.21061 "main.aux" "main.bbl" "main" 1768321406.7444 0
+["bibtex main"] 1768331216.20842 "main.aux" "main.bbl" "main" 1768331216.79676 0
   "./references.bib" 1768311110.91136 6013 61d2dd279e11a179fa0aba0b70a10083 ""
   "./splncs04.bst" 1768301951.21032 32146 ee21ae2a29028dc8ad842a97200982c7 ""
-  "main.aux" 1768321406.66289 8257 2f23914d95e9ec353d2d9e85cf9db74a "pdflatex"
+  "main.aux" 1768331216.71332 9146 e25741ca720fbc556390eaca3e29d7ff "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1768321406.22511 "/Users/kokamalooka/Documents/GitHub/ARTIS_Project/report/main.tex" "main.pdf" "main" 1768321406.74451 0
-  "/Users/kokamalooka/Documents/GitHub/ARTIS_Project/report/main.tex" 1768318770.33653 2149 c4fc2499d8c611391ad8af9f336fc75e ""
+["pdflatex"] 1768331216.22631 "/Users/kokamalooka/Documents/GitHub/ARTIS_Project/report/main.tex" "main.pdf" "main" 1768331216.79689 0
+  "/Users/kokamalooka/Documents/GitHub/ARTIS_Project/report/main.tex" 1768331215.42474 2790 1b8cebbcf3a7a8bc7d801c85f86fb009 ""
   "/Users/kokamalooka/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.600pk" 1768310828.95779 22480 cccd75bc617e89e13d2759b40cf04aef ""
   "/Users/kokamalooka/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk" 1768310828.64139 25396 6e24559c8d5ee22658d90e10239cae2c ""
   "/Users/kokamalooka/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1768310829.58413 31928 d323a02cb0238b5ee2233a21c7e244c0 ""
@@ -18,7 +18,6 @@
   "/Users/kokamalooka/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk" 1768310828.4568 31872 9ff81059bf81788b14c286b0df555b81 ""
   "/Users/kokamalooka/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0900.600pk" 1768310827.93033 17492 d701968d5c6d064ba67ae281927b7606 ""
   "/Users/kokamalooka/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk" 1768318338.27559 20008 0c2302e1b5563ddc4802f60e42e91c3c ""
-  "/Users/kokamalooka/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.600pk" 1768310828.77253 10448 53287d2928a67f7c5a40ac71c7f05bac ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/tfm/jknappen/ec/ecbx0900.tfm" 1136768653 3584 1a7de6c99457381c64abc1a7c545505f ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm" 1136768653 3584 2d666ecf6d466d8b007246bc2f94d9da ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm" 1136768653 3584 402da0b29eafbad07963b1224b222f18 ""
@@ -30,7 +29,6 @@
   "/usr/local/texlive/2025basic/texmf-dist/fonts/tfm/jknappen/ec/ecti1000.tfm" 1136768653 3072 3bce340d4c075dffe6d4ec732b4c32fe ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/tfm/jknappen/ec/ectt0900.tfm" 1136768653 1536 ae7aab2f8a4bc9edfce2899f53ba88c3 ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm" 1136768653 1536 06717a2b50de47d4087ac0e6cd759455 ""
-  "/usr/local/texlive/2025basic/texmf-dist/fonts/tfm/jknappen/ec/tcrm0900.tfm" 1136768653 1536 c4f439db76ef96a9c53bc437f35ffe20 ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm" 1136768653 1332 f817c21a1ba54560425663374f1b651a ""
   "/usr/local/texlive/2025basic/texmf-dist/fonts/tfm/public/cm/cmbx6.tfm" 1136768653 1344 8a0be4fe4d376203000810ad4dc81558 ""
@@ -111,16 +109,16 @@
   "figures/Sample_65.png" 1768313257.42601 624309 cba5875ffc8302ad1774801cac2628ff ""
   "figures/Sample_7.png" 1768312728.8301 645341 b1e4299bc8b637ba2f5fa453c2eddba9 ""
   "llncs.cls" 1768301951.20358 42294 2e448be633a7384490d8a95a08572607 ""
-  "main.aux" 1768321406.66289 8257 2f23914d95e9ec353d2d9e85cf9db74a "pdflatex"
-  "main.bbl" 1768321406.22351 3928 18634f2a4a78a225a393ef63266f06f5 "bibtex main"
-  "main.out" 1768321406.66371 857 1b938c7eaff7597dc91f96cc968d0f24 "pdflatex"
-  "main.tex" 1768318770.33653 2149 c4fc2499d8c611391ad8af9f336fc75e ""
-  "sections/1-introduction.tex" 1768301951.2099 3212 9f7cac42f9a0591c679f093f0e510874 ""
+  "main.aux" 1768331216.71332 9146 e25741ca720fbc556390eaca3e29d7ff "pdflatex"
+  "main.bbl" 1768331216.22457 3928 18634f2a4a78a225a393ef63266f06f5 "bibtex main"
+  "main.out" 1768331216.71421 857 1b938c7eaff7597dc91f96cc968d0f24 "pdflatex"
+  "main.tex" 1768331215.42474 2790 1b8cebbcf3a7a8bc7d801c85f86fb009 ""
+  "sections/1-introduction.tex" 1768330680.8366 3212 9f7cac42f9a0591c679f093f0e510874 ""
   "sections/2-related_work.tex" 1768042971.16349 3345 dceab2d6ce765920c2e448b3b42af7e8 ""
   "sections/3-background.tex" 1768318001.8814 10653 fb5d6ffd81b644f8a35d9c8ac57547b0 ""
   "sections/4-methodology.tex" 1768321405.47677 11872 c2a1f00b1056f237823039ba135b0c78 ""
   "sections/5-results.tex" 1768321339.37587 7759 aaa96b1517b1e30c1fed89210d61b750 ""
-  "sections/6-conclusion.tex" 1768311090.31248 83 257e98af4ad06a348f450828a8e2aada ""
+  "sections/6-conclusion.tex" 1768330488.70276 2542 342fd5e01db7302042277f4072822fc8 ""
   (generated)
   "main.aux"
   "main.log"
