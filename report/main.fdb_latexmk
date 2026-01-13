@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1768320805.92983 "main.aux" "main.bbl" "main" 1768321340.23529 0
+["bibtex main"] 1768321406.21061 "main.aux" "main.bbl" "main" 1768321406.7444 0
   "./references.bib" 1768311110.91136 6013 61d2dd279e11a179fa0aba0b70a10083 ""
   "./splncs04.bst" 1768301951.21032 32146 ee21ae2a29028dc8ad842a97200982c7 ""
-  "main.aux" 1768321340.13084 8255 1f865ae72eb0c4e129358fc1bb509e56 "pdflatex"
+  "main.aux" 1768321406.66289 8257 2f23914d95e9ec353d2d9e85cf9db74a "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1768321339.60912 "/Users/kokamalooka/Documents/GitHub/ARTIS_Project/report/main.tex" "main.pdf" "main" 1768321340.23542 0
+["pdflatex"] 1768321406.22511 "/Users/kokamalooka/Documents/GitHub/ARTIS_Project/report/main.tex" "main.pdf" "main" 1768321406.74451 0
   "/Users/kokamalooka/Documents/GitHub/ARTIS_Project/report/main.tex" 1768318770.33653 2149 c4fc2499d8c611391ad8af9f336fc75e ""
   "/Users/kokamalooka/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.600pk" 1768310828.95779 22480 cccd75bc617e89e13d2759b40cf04aef ""
   "/Users/kokamalooka/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk" 1768310828.64139 25396 6e24559c8d5ee22658d90e10239cae2c ""
@@ -111,14 +111,14 @@
   "figures/Sample_65.png" 1768313257.42601 624309 cba5875ffc8302ad1774801cac2628ff ""
   "figures/Sample_7.png" 1768312728.8301 645341 b1e4299bc8b637ba2f5fa453c2eddba9 ""
   "llncs.cls" 1768301951.20358 42294 2e448be633a7384490d8a95a08572607 ""
-  "main.aux" 1768321340.13084 8255 1f865ae72eb0c4e129358fc1bb509e56 "pdflatex"
-  "main.bbl" 1768320805.94235 3928 18634f2a4a78a225a393ef63266f06f5 "bibtex main"
-  "main.out" 1768321340.13176 857 1b938c7eaff7597dc91f96cc968d0f24 "pdflatex"
+  "main.aux" 1768321406.66289 8257 2f23914d95e9ec353d2d9e85cf9db74a "pdflatex"
+  "main.bbl" 1768321406.22351 3928 18634f2a4a78a225a393ef63266f06f5 "bibtex main"
+  "main.out" 1768321406.66371 857 1b938c7eaff7597dc91f96cc968d0f24 "pdflatex"
   "main.tex" 1768318770.33653 2149 c4fc2499d8c611391ad8af9f336fc75e ""
   "sections/1-introduction.tex" 1768301951.2099 3212 9f7cac42f9a0591c679f093f0e510874 ""
   "sections/2-related_work.tex" 1768042971.16349 3345 dceab2d6ce765920c2e448b3b42af7e8 ""
   "sections/3-background.tex" 1768318001.8814 10653 fb5d6ffd81b644f8a35d9c8ac57547b0 ""
-  "sections/4-methodology.tex" 1768318001.88274 11430 a0c0d5ddc2a2174224bc11da71f638c0 ""
+  "sections/4-methodology.tex" 1768321405.47677 11872 c2a1f00b1056f237823039ba135b0c78 ""
   "sections/5-results.tex" 1768321339.37587 7759 aaa96b1517b1e30c1fed89210d61b750 ""
   "sections/6-conclusion.tex" 1768311090.31248 83 257e98af4ad06a348f450828a8e2aada ""
   (generated)
