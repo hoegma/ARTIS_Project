@@ -94,6 +94,14 @@ It provides a flexible and extensible architecture that enables machine learning
 \end{enumerate}
 
 
+\subsection{Fernet Background}
+
+Fernet, launched in 2014 within Python's \texttt{cryptography} library, standardizes symmetric authenticated encryption using AES-128-CBC + HMAC-SHA256. Designed by the PyCA team for developer safety, it produces self-contained tokens with built-in replay protection via timestamps.
+
+\textbf{Primary use cases}: API tokens, session encryption, database credentials, and federated learning weight protection (as used here). Its URL-safe Base64 output and ``one key, one algorithm'' simplicity prevent common crypto mistakes, making it ideal for securing client-server model updates.
+
+
+
 \subsubsection{Attack Vectors in FL}
 
 Attack vectors on FL are divided into two large groups, which are described in~\cite{neto2023survey}.
