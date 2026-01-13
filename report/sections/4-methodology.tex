@@ -135,6 +135,26 @@ This ensures that the global model converges effectively while preserving the pr
 \subsubsection{Threat Model and Privacy}
 The primary attack vector addressed in this architecture is the interception of model weights during transmission. By implementing Fernet-based encryption, we ensure that even if a third party captures the packets between the client and the server, the underlying gradients—which could potentially be used for reconstruction attacks—remain inaccessible without the shared secret key.
 
+\subsection{Fernet Encryption for Secure Weight Transmission}
+
+To ensure privacy-preserving communication, this implementation employs \textbf{Fernet symmetric encryption} from Python's \texttt{cryptography} library. Model weights are encrypted on clients before transmission to the central server, preventing eavesdropping and ensuring data integrity via AES-128-CBC encryption combined with HMAC-SHA256 authentication.
+
+\subsubsection{Encryption Workflow}
+The secure aggregation pipeline operates as follows:
+
+\begin{enumerate}
+    \item \textbf{Client Training}: Local model produces updated weights $\mathbf{W}_i$ after $E=3$ epochs
+    \item \textbf{Serialization}: $\mathbf{W}_i \rightarrow$ \texttt{pickle.dumps()} $\rightarrow$ raw bytes
+    \item \textbf{Encryption}: Bytes $\rightarrow$ \texttt{cipher.encrypt()} $\rightarrow$ Fernet token $T_i$
+    \item \textbf{Transmission}: Client sends compact $T_i$ (33\% overhead) over untrusted channel
+    \item \textbf{Server Decryption}: $T_i \rightarrow$ \texttt{cipher.decrypt()} $\rightarrow$ verified $\mathbf{W}_i$
+    \item \textbf{Weighted FedAvg}: $\mathbf{W}_{global} = \sum_i \frac{n_i}{N} \mathbf{W}_i$ where $n_i$ = client samples
+\end{enumerate}
+
+Fernet tokens self-contain timestamp, IV, ciphertext, and HMAC, providing confidentiality, authenticity, and replay protection. A single 32-byte key (16B AES + 16B HMAC) is shared securely for the simulation.
+
+
+
 \subsection{Explainability using SHAP}
 
 In order to analyze the centrally trained model and the decentralized trained model, the decisions made by the models should be compared for individual inputs.
