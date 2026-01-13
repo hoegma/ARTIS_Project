@@ -29,24 +29,24 @@ The performance of each iteration was measured using Accuracy, Precision, Recall
 
 As shown in Figure~\ref{fig:metrics_bar_chart}, the baseline model maintains the highest overall accuracy, whereas the Flower framework shows a significant increase in Recall (0.9686), indicating a high sensitivity in detecting "Real" faces, albeit with a trade-off in "Fake" face precision.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{your_bar_chart_filename.png}
-    \caption{Comparison of evaluation metrics across the three model versions.}
-    \label{fig:metrics_bar_chart}
-\end{figure}
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{your_bar_chart_filename.png}
+%     \caption{Comparison of evaluation metrics across the three model versions.}
+%     \label{fig:metrics_bar_chart}
+% \end{figure}
 
 \subsection{Confusion Matrix Analysis}
 To better understand the classification behavior, we compare the confusion matrices of the models (see Figure~\ref{fig:confusion_matrices}). 
 
 The Flower framework implementation exhibited a tendency to misclassify "Fake" samples as "Real" (4,862 instances), which explains the lower precision. In contrast, our Baseline model showed a more balanced distribution, correctly identifying 7,329 "Fake" samples compared to Flower's 5,138.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.9\textwidth]{your_confusion_matrix_filename.png}
-    \caption{Side-by-side comparison of Confusion Matrices for the Baseline and Flower-based models.}
-    \label{fig:confusion_matrices}
-\end{figure}
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=0.9\textwidth]{your_confusion_matrix_filename.png}
+%     \caption{Side-by-side comparison of Confusion Matrices for the Baseline and Flower-based models.}
+%     \label{fig:confusion_matrices}
+% \end{figure}
 
 % \subsection{Discussion of Manual FL Implementation}
 % The shift from the Flower framework to a manual FL implementation with weighted averaging was driven by the technical requirement for encryption integration. While the automated framework provided high recall, the manual approach (placeholder for findings) is expected to provide the necessary privacy-preserving robust digital forensics architecture intended for this research.

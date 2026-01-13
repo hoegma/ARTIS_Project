@@ -1,18 +1,48 @@
-[0] Config.pm:328> INFO - This is Biber 2.21
-[0] Config.pm:331> INFO - Logfile is 'main.blg'
-[195] biber-MSWIN64:342> INFO - === 
-[239] Biber.pm:421> INFO - Reading 'main.bcf'
-[396] Biber.pm:1002> INFO - Found 15 citekeys in bib section 0
-[415] Biber.pm:4487> INFO - Processing section 0
-[431] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
-[492] bibtex.pm:1713> INFO - LaTeX decoding ...
-[534] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
-[721] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[721] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[722] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'en-US'
-[722] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
-[743] bbl.pm:676> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[758] bbl.pm:779> INFO - Output to main.bbl
-[759] Biber.pm:132> WARN - Duplicate entry key: 'khudeyer2023fake' in file 'references.bib', skipping ...
-[759] Biber.pm:132> WARN - Duplicate entry key: 'khudeyer2023fake' in file 'references.bib', skipping ...
-[759] Biber.pm:134> INFO - WARNINGS: 2
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: splncs04.bst
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+Database file #1: references.bib
+You've used 15 entries,
+            2850 wiz_defined-function locations,
+            687 strings with 7728 characters,
+and the built_in function-call counts, 8803 in all, are:
+= -- 709
+> -- 305
+< -- 18
++ -- 128
+- -- 110
+* -- 562
+:= -- 1129
+add.period$ -- 19
+call.type$ -- 15
+change.case$ -- 105
+chr.to.int$ -- 0
+cite$ -- 15
+duplicate$ -- 784
+empty$ -- 752
+format.name$ -- 122
+if$ -- 1902
+int.to.chr$ -- 0
+int.to.str$ -- 15
+missing$ -- 162
+newline$ -- 51
+num.names$ -- 30
+pop$ -- 302
+preamble$ -- 1
+purify$ -- 85
+quote$ -- 0
+skip$ -- 241
+stack$ -- 0
+substring$ -- 470
+swap$ -- 454
+text.length$ -- 18
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 60
+warning$ -- 0
+while$ -- 67
+width$ -- 17
+write$ -- 155
