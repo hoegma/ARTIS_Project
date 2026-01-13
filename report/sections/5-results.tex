@@ -3,13 +3,23 @@
 
 % This are the results of the paper.
 
-\section{Results}
+\section{Results and Discussion}
 \label{sec:Results}
 
-In this section, we evaluate the performance of our digital forensics model across three development phases: the centralized baseline, the Flower-based Federated Learning (FL) implementation, and our custom Manual FL implementation designed for encryption integration.
+This section presents and discusses the experimental results obtained from evaluating both the centralized baseline model and the FL model with encrypted weights implemented using the Flower framework. We provide a quantitative comparison of key performance metrics, including accuracy, precision, recall, F1-score, and ROC-AUC. Additionally, we analyze model interpretability through SHAP explanations to understand how each model makes its predictions.
 
-\subsection{Performance Metrics Comparison}
-The performance of each iteration was measured using Accuracy, Precision, Recall, F1-score, and ROC-AUC. Table~\ref{tab:results_comparison} summarizes these metrics.
+
+
+
+\subsection{Quantitative Results Comparison}
+Table~\ref{tab:results_comparison} summarizes the evaluation results for the centralized baseline model and the Flower-based FL model. The centralized model achieved the highest overall performance, with an accuracy of 0.8256, F1-score of 0.8404, and ROC-AUC of 0.9279, indicating strong and balanced classification across both Real and Fake classes. In contrast, the federated model obtained a lower accuracy (0.7412) and F1-score (0.7891), which reflects the expected performance degradation caused by decentralized training and heterogeneous client data.
+
+Despite this reduction, the federated model achieved a very high recall (0.9686), outperforming the baseline (0.9184). This indicates that the FL model is highly effective at detecting Real faces, minimizing false rejections. However, this gain in recall comes at the cost of reduced precision (0.6658 compared to 0.7747 for the baseline), meaning that the federated model more frequently misclassified Fake faces as Real.
+
+The confusion matrix analysis further supports this observation. As illustrated in Figure~\ref{fig:confusion_matrix}, the FL model misclassified 4,862 Fake samples as Real, whereas the centralized model correctly identified 7,329 Fake samples, showing a more balanced classification behavior. The tendency of the FL model to favor the Real class is likely due to non-IID data distributions across clients and limited exposure to diverse fake samples during local training.
+
+Overall, while the centralized model provides superior predictive performance, the federated approach maintains strong discriminative capability (ROC-AUC = 0.9211) and very high recall, demonstrating that privacy-preserving federated learning can achieve competitive results with only a moderate trade-off in accuracy.
+
 
 \begin{table}[h]
     \centering
@@ -20,38 +30,63 @@ The performance of each iteration was measured using Accuracy, Precision, Recall
         \textbf{Model Version} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{ROC-AUC} \\
         \hline
         Baseline (Centralized) & 0.8256 & 0.7747 & 0.9184 & 0.8404 & 0.9279 \\
-        Flower Framework FL    & 0.7412 & 0.6658 & 0.9686 & 0.7891 & 0.9211 \\
-        Manual FL (Encrypted)* & \textit{0.0000} & \textit{0.0000} & \textit{0.0000} & \textit{0.0000} & \textit{0.0000} \\
+        FL with Weight Encryption   & 0.7412 & 0.6658 & 0.9686 & 0.7891 & 0.9211 \\
+   
         \hline
-        \multicolumn{6}{l}{\small \textit{*Note: Results for Manual FL with encryption are pending final computation.}}
+       
     \end{tabular}
 \end{table}
 
-As shown in Figure~\ref{fig:metrics_bar_chart}, the baseline model maintains the highest overall accuracy, whereas the Flower framework shows a significant increase in Recall (0.9686), indicating a high sensitivity in detecting "Real" faces, albeit with a trade-off in "Fake" face precision.
-
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{your_bar_chart_filename.png}
-%     \caption{Comparison of evaluation metrics across the three model versions.}
-%     \label{fig:metrics_bar_chart}
-% \end{figure}
-
-\subsection{Confusion Matrix Analysis}
-To better understand the classification behavior, we compare the confusion matrices of the models (see Figure~\ref{fig:confusion_matrices}). 
-
-The Flower framework implementation exhibited a tendency to misclassify "Fake" samples as "Real" (4,862 instances), which explains the lower precision. In contrast, our Baseline model showed a more balanced distribution, correctly identifying 7,329 "Fake" samples compared to Flower's 5,138.
-
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=0.9\textwidth]{your_confusion_matrix_filename.png}
-%     \caption{Side-by-side comparison of Confusion Matrices for the Baseline and Flower-based models.}
-%     \label{fig:confusion_matrices}
-% \end{figure}
-
-% \subsection{Discussion of Manual FL Implementation}
-% The shift from the Flower framework to a manual FL implementation with weighted averaging was driven by the technical requirement for encryption integration. While the automated framework provided high recall, the manual approach (placeholder for findings) is expected to provide the necessary privacy-preserving robust digital forensics architecture intended for this research.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/Confusion_Matrices.png}
+    \caption{Confusion Matrices for FL Model and Baseline Model.}
+    \label{fig:confusion_matrix}
+\end{figure}
 
 
-\subsection{SHAP Results}
 
-To assess model interpretability, we applied SHAP (SHapley Additive exPlanations) to both the Baseline and Federated models. Figure~\ref{fig:shap_comparison} illustrates the SHAP value distributions for key features across both models.
+\subsection{SHAP Results and Model Interpretability}
+
+To interpret and compare how the centralized and federated models make their predictions, we employ SHAP , which assigns an importance value to each pixel indicating how strongly it contributes to a model’s output. This allows us to analyze not only whether the two models produce similar predictions, but also whether they rely on the same visual evidence when classifying real and fake faces.
+
+\subsubsection{Local SHAP Explanations}
+The local SHAP maps for two representative samples—one Fake (Sample 65) and one Real (Sample 7)—are shown in the top rows of the figures \ref{fig:shap_sample65}, \ref{fig:shap_sample7}. These maps visualize which pixels most influenced each individual prediction. In both samples, the centralized and federated models focus on similar facial regions, particularly around the eyes, nose, cheeks, and mouth.
+
+For Sample 65 shown in Figure \ref{fig:shap_sample65}, both models correctly classify the image as fake, although the centralized model is more confident (92.14\%) than the federated model (76.26\%). Despite this difference in confidence, their SHAP maps are highly aligned, indicating that both models are using the same underlying facial cues to detect manipulation. For Sample 7 shown in Figure \ref{fig:shap_sample7}, both models predict the image as real with nearly identical confidence (97.30\% vs. 97.03\%), and the SHAP maps are visually almost indistinguishable, further confirming consistent decision logic.
+
+To further analyze explanation alignment, the top 5\% most influential pixels were extracted and compared between the two models. The resulting visualization categorizes regions that are important only to the centralized model, only to the federated model, and those identified as important by both. The dominant presence of overlapping regions demonstrates that both models consistently focus on the same key facial features, particularly around the eyes, cheeks, nose, and mouth—areas where deepfake generation methods commonly introduce subtle artifacts. Regions unique to either model are sparse and dispersed, suggesting only minor differences in attribution strength rather than fundamentally different decision strategies.
+
+The SHAP difference maps are sparse and low in magnitude, showing that there are only minor variations in pixel-level importance between the two models.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Sample_65.png}
+   \caption{Local SHAP maps for Sample 65 (Fake).}
+    \label{fig:shap_sample65}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Sample_7.png}
+   \caption{Local SHAP maps for Sample 7 (Real).}
+    \label{fig:shap_sample7}
+\end{figure}
+
+
+
+\subsubsection{Global SHAP Explanations}
+
+Beyond individual sample analysis, global SHAP maps were computed to capture the average importance of each pixel across a large number of images, providing insight into what each model has learned to be generally important for classification. As shown in Figure \ref{fig:global_shap}, both centralized and federated models, the global SHAP maps strongly emphasize the central facial region, including the eyes, nose bridge, mouth, cheeks, and overall face outline.
+
+These facial regions are well known to contain critical identity cues and common deepfake artifacts, such as texture inconsistencies, blending errors, and subtle geometric distortions introduced during face synthesis. The strong visual similarity between the centralized and federated global SHAP maps indicates that federated training preserves the same high-level feature representations learned through centralized training. This observation is further reinforced by the global SHAP difference maps, which exhibit only minor, spatially scattered variations and no systematic shift in attention or semantic focus.
+
+This strong spatial agreement is also supported quantitatively by a SHAP cosine similarity of 0.9961, indicating near-perfect alignment between the pixel-level explanations of the two models. While the centralized model exhibits slightly higher mean absolute SHAP values, reflecting marginally stronger feature weighting, the overall attribution patterns remain highly consistent. Together, these findings confirm that federated learning preserves global explanation structure and semantic focus comparable to centralized training.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Global_SHAP.png}
+    \caption{Global SHAP attribution maps for centralized and federated models.}
+    \label{fig:global_shap}
+\end{figure}
