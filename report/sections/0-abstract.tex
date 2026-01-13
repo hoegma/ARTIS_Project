@@ -1,4 +1,8 @@
-Write abstract of the paper
+\begin{abstract}
+This implementation demonstrates a federated learning system for fake image detection using EfficientNetB0, where 5 clients train locally on data shards for 3 epochs per round across 10 federated rounds. Client weight updates are secured via Fernet encryption (AES-128-CBC + HMAC-SHA256) before transmission to the central server for weighted FedAvg aggregation. 
+
+In digital forensics context, this addresses deepfake proliferation by enabling \textbf{privacy-preserving distributed training} across forensic agencies while incorporating \textbf{explainability analysis} to reveal why the model classified images as fake or real. Each agency retains data locality while collectively building a robust, interpretable deepfake detector crucial for cross-jurisdictional forensic investigations.
+\end{abstract}
 
 
 
