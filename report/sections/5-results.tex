@@ -3,17 +3,17 @@
 \section{Results and Discussion}
 \label{sec:Results}
 
-This section presents and discusses the experimental results obtained from evaluating both the centralized baseline model and the federated learning (FL) model with encrypted weights. We provide a quantitative comparison of key performance metrics, including accuracy, precision, recall, F1-score, and ROC-AUC. Additionally, we analyze model interpretability through SHAP explanations to understand how each model makes its predictions.
+This section presents and discusses the experimental results obtained from evaluating both the centralized baseline model and the FL model with encrypted weights. We provide a quantitative comparison of key performance metrics, including accuracy, precision, recall, F1-score, and ROC-AUC. Additionally, we analyze model interpretability through SHAP explanations to understand how each model makes its predictions.
 
 \subsection{Quantitative Results Comparison}
 Table~\ref{tab:results_comparison} summarizes the evaluation results for the centralized baseline model and the federated learning model. The centralized model achieved an accuracy of 0.8460, an F1-score of 0.8460, and a ROC-AUC of 0.9276, demonstrating strong and balanced performance across both Real and Fake classes.
-
+\newline
 Notably, the federated model outperformed the centralized baseline across all major metrics, achieving an accuracy of 0.8558, precision of 0.8577, F1-score of 0.8556, and a ROC-AUC of 0.9358. This indicates that the encrypted federated training process not only preserves model utility but also leads to a modest improvement in generalization performance. This improvement can be attributed to the aggregation of diverse data distributions across clients, which enables the model to learn more robust and transferable feature representations.
-
+\newline
 The confusion matrix analysis further supports this observation. As shown in Figure~\ref{fig:confusion_matrix}, the federated model correctly classified 8,927 Fake samples compared to 8,236 for the centralized model, significantly reducing false acceptances of fake faces. Although the federated model produced slightly more false rejections of real faces (1,812 vs. 1,315), it substantially lowered the number of fake samples misclassified as real (1,073 vs. 1,764), which is particularly important in security-sensitive deepfake detection scenarios.
-
+\newline
 Overall, the federated model achieves better discrimination between Real and Fake classes, as reflected by its higher ROC-AUC and precision. These results demonstrate that federated learning with encrypted weight aggregation can match and even surpass centralized training, while providing strong privacy guarantees and avoiding direct data sharing.
-
+\newline
 \begin{table}[h]
     \centering
     \caption{Performance Comparison of Model Versions}
@@ -43,12 +43,19 @@ FL with Weight Encryption & 0.8558 & 0.8577 & 0.8558 & 0.8556 & 0.9358 \\
 To interpret and compare how the centralized and federated models make their predictions, we employ SHAP, which assigns an importance value to each pixel indicating how strongly it contributes to a model’s output. This allows us to analyze not only whether the two models produce similar predictions, but also whether they rely on the same visual evidence when classifying real and fake faces.
 
 \subsubsection{Local SHAP Explanations}
-The local SHAP maps for two representative samples—one Fake (Sample 65) and one Real (Sample 7)—are shown in the top rows of the figures \ref{fig:shap_sample65}, \ref{fig:shap_sample7}. These maps visualize which pixels most influenced each individual prediction. In both samples, the centralized and federated models focus on similar facial regions, particularly around the eyes, nose, cheeks, and mouth.
-
-For Sample 65 shown in Figure \ref{fig:shap_sample65}, both models correctly classify the image as fake, although the centralized model is more confident (92.14\%) than the federated model (76.26\%). Despite this difference in confidence, their SHAP maps are highly aligned, indicating that both models are using the same underlying facial cues to detect manipulation. For Sample 7 shown in Figure \ref{fig:shap_sample7}, both models predict the image as real with nearly identical confidence 97.30\% vs. 97.03\%, and the SHAP maps are visually almost indistinguishable, further confirming consistent decision logic.
-
-To further analyze explanation alignment, the top 5\% most influential pixels were extracted and compared between the two models. The resulting visualization categorizes regions that are important only to the centralized model, only to the federated model, and those identified as important by both. The dominant presence of overlapping regions demonstrates that both models consistently focus on the same key facial features, particularly around the eyes, cheeks, nose, and mouth—areas where deepfake generation methods commonly introduce subtle artifacts. Regions unique to either model are sparse and dispersed, suggesting only minor differences in attribution strength rather than fundamentally different decision strategies.
-
+The local SHAP maps for two representative samples—one Fake (Sample 65) and one Real (Sample 7)—are shown in the top rows of the figures \ref{fig:shap_sample65}, \ref{fig:shap_sample7}. 
+These maps visualize which pixels most influenced each individual prediction. 
+In both samples, the centralized and federated models focus on similar facial regions, particularly around the eyes, nose, cheeks, and mouth.
+\newline
+For Sample 65 shown in Figure \ref{fig:shap_sample65}, both models correctly classify the image as fake, although the centralized model is more confident (92.14\%) than the federated model (76.26\%). 
+Despite this difference in confidence, their SHAP maps are highly aligned, indicating that both models are using the same underlying facial cues to detect manipulation. 
+For Sample 7 shown in Figure \ref{fig:shap_sample7}, both models predict the image as real with nearly identical confidence 97.30\% vs. 97.03\%, and the SHAP maps are visually almost indistinguishable, further confirming consistent decision logic.
+\newline
+To further analyze explanation alignment, the top 5\% most influential pixels were extracted and compared between the two models. 
+The resulting visualization categorizes regions that are important only to the centralized model, only to the federated model, and those identified as important by both. 
+The dominant presence of overlapping regions demonstrates that both models consistently focus on the same key facial features, particularly around the eyes, cheeks, nose, and mouth-areas where deepfake generation methods commonly introduce subtle artifacts. 
+Regions unique to either model are sparse and dispersed, suggesting only minor differences in attribution strength rather than fundamentally different decision strategies.
+\newline
 The SHAP difference maps are sparse and low in magnitude, showing that there are only minor variations in pixel-level importance between the two models.
 
 
@@ -71,9 +78,9 @@ The SHAP difference maps are sparse and low in magnitude, showing that there are
 \subsubsection{Global SHAP Explanations}
 
 Beyond individual sample analysis, global SHAP maps were computed to capture the average importance of each pixel across a large number of images, providing insight into what each model has learned to be generally important for classification. As shown in Figure \ref{fig:global_shap}, both centralized and federated models, the global SHAP maps strongly emphasize the central facial region, including the eyes, nose bridge, mouth, cheeks, and overall face outline.
-
+\newline
 These facial regions are well known to contain critical identity cues and common deepfake artifacts, such as texture inconsistencies, blending errors, and subtle geometric distortions introduced during face synthesis. The strong visual similarity between the centralized and federated global SHAP maps indicates that federated training preserves the same high-level feature representations learned through centralized training. This observation is further reinforced by the global SHAP difference maps, which exhibit only minor, spatially scattered variations and no systematic shift in attention or semantic focus.
-%
+\newline
 This strong spatial agreement is also supported quantitatively by a SHAP cosine similarity of 0.9961, indicating near-perfect alignment between the pixel-level explanations of the two models. While the centralized model exhibits slightly higher mean absolute SHAP values, reflecting marginally stronger feature weighting, the overall attribution patterns remain highly consistent. Together, these findings confirm that federated learning preserves global explanation structure and semantic focus comparable to centralized training.
 
 \begin{figure}[H]

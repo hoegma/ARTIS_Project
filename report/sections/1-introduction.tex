@@ -3,35 +3,34 @@
 
 Electronic devices are now involved in 85\% of all criminal investigations.
 Each device generates and stores data, leaving behind a digital footprint~\cite{casino2022research}. 
-This footprint can be used as evidence in subsequent investigations and consists of GPS coordinates, text messages, wearables and more~\cite{iotbds17}cite{casino2022research}.
-In the age of big data, the amount of data is growing exponentially, making it much more difficult to search for important evidence and human capacity is not sufficient.
+This footprint can be used as evidence in subsequent investigations and consists of GPS coordinates, text messages, wearables and more~\cite{iotbds17}\cite{casino2022research}.
+In the age of big data, the amount of data is growing, making it much more difficult to search for important evidence and human capacity is not sufficient.
 Machine learning (ML) is intended to remedy this lack of capacity and the increasing complexity of data.
-ML models can be used to search for complex patterns and anomalies in large data sets~\cite{wang2019development}.
+ML models can be used to search for complex patterns and anomalies in large datasets~\cite{wang2019development}.
 However, privacy and data security are also playing an increasingly important role.
 In 2018, the GDPR was published in Europe to protect the data of individuals.
 Data may not be shared between organizations without consent in order to train ML models.
-This leads to data islands, which are a problem for classic ML models that require a large data set for the training process.
-Federated learning aims to counteract these data islands by pursuing a decentralized approach to training an ML model.
+This leads to data islands, which are a problem for classic ML models that require a large dataset for the training process.
+Federated learning aims to counteract these data islands by pursuing a decentralized approach to train an ML model.
 Each client owns a portion of the data and trains an ML model locally.
 After the training phase, all clients send their learned parameters to a server, which aggregates these parameters from all clients.
 This method allows ML models to be trained in a decentralized manner without having to share client data.
 However, this method also has vulnerabilities that can be exploited by attackers.
-Attackers can attempt to disrupt the training process or draw conclusions about training data by reading the clients' parameters.~\cite{zhang2021survey}
+Attackers can attempt to disrupt the training process or draw conclusions about training data by reading the clients parameters.~\cite{zhang2021survey}
 \newline
-The DF has a multimedia division that specializes in image forgery.
-This also includes the detection of fake faces.
-Training a fake face detection model requires real faces, which constitute sensitive data and cannot be shared without further ado.
-That is why a decentralized approach using FL is one way to connect the data islands between organizations.~\cite{alashjaee2025machine}
+A subarea of DF is multimedia that specializes in image forgery and also includes the detection of fake faces.
+Training a fake face detection model requires real faces, which is sensitive data and can not be shared without consent.
+With a decentralized apporach using FL the data islands between organizations can be connected.~\cite{alashjaee2025machine}
 \newline
 The contributions of our project are as follows:
 \begin{enumerate}
     \item We want to analyze existing forensic ML models in the field of fake face detection and reimplement one of them in an FL architecture without reducing accuracy.
-    \item We want to develop a XAI module that provides insights into the model's decisions. This should reveal whether FL leads to different decisions being made.
+    \item We want to develop a Explainable AI (XAI) module that provides insights into the model's decisions. This should reveal whether FL leads to different decisions.
     \item The FL model should be protected against attackers by integrating robust defense mechanisms.
 \end{enumerate}
 
 The rest of the project report is structured as follows.
-Section 1 provides an overview of existing central ML models in the field of fake face detection.
-The following section 2 introduces the basic concepts.
-This is followed by a description of an ML model and how it is converted into FL, as well as the presentation of a simulation to simulate the training process.
-Section 4 presents the results, which are then discussed and classified in section 5.
+Section 1 provides an overview of existing state of the art central ML models in the field of fake face detection.
+The following section 2 introduces the basic concepts for FL in DF.
+This is followed by a description of an fake face detection ML model and how it is converted into FL, as well as the presentation of a simulation of the training process.
+Section 4 presents the results, which are then discussed in section 5.

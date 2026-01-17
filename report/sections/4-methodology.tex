@@ -3,13 +3,13 @@
 
 \subsection{Experimental Setup}
 
-A fake face detection model is developed using federated learning (FL) to distinguish between real and fake faces.
+A fake face detection model is developed using FL to distinguish between real and fake faces.
 First, a centrally trained model without FL is implemented and used as a baseline for performance comparison.
 Second, a decentralized fake face detection model is trained using FL in a simulated multi-client environment.
 
 \subsubsection{Dataset}
 
-The well-known 140k real-fake faces dataset was used, which consists of 70,000 real faces and 70,000 fake faces with a image size of 256px~\cite{tunguz2020_140kreal_fake_faces}.
+The 140k real-fake faces dataset was used, which consists of 70,000 real faces and 70,000 fake faces with a image size of 256px~\cite{tunguz2020_140kreal_fake_faces}.
 The fake faces were generated using StyleGAN, a generative adversarial network developed by NVIDIA that is capable of producing highly photorealistic synthetic facial images.
 
 \subsubsection{Model}\label{subsubsec:model}
@@ -17,20 +17,20 @@ The fake faces were generated using StyleGAN, a generative adversarial network d
 The base model chosen is EfficientNet-B0, a convolutional neural network (CNN), which was also used by Khudeyer et al.~\cite{khudeyer2023fake}.
 The authors trained a fake face detection model using transfer learning.
 For this purpose, the model was initialized with the pretrained weights of EfficientNetB0 on the ImageNet dataset.
-A lightweight head was attached to the pre-trained base model, consisting of global average pooling, a 256-dimensional fully connected layer with ReLU activation, batch normalization, and dropout, followed by a 2 dimensional softmax output layer.
-The output is a 2-dimensional vector with probabilities indicating whether the input image is a fake or real face.
+A lightweight head was attached to the pre-trained base model, consisting of global average pooling, a 256-dimensional fully connected layer with ReLU activation, batch normalization and dropout, followed by a 2 dimensional softmax output layer.
+The output is a 1-dimensional vector with probabilities indicating whether the input image is a fake or real face.
 The model was optimized with binary cross-entropy loss and the Adam optimizer.
 All input images for training were resized to 244px.
 
 \subsection{Centralized Fake Face Detection Model}
 
 The authors of~\cite{khudeyer2023fake} developed a method for fake face detection using CNN, which achieves an accuracy of 99.06\%.
-This approach is used as a benchmark for comparing central fake face detection with fake face detection using FL.
+Because of the high accuracy this approach is used as a benchmark for comparing central fake face detection with fake face detection using FL.
 This work was reimplemented for verification purposes in order to ensure a meaningful comparison.
 \newline
 The dataset was divided into 100.000 training images, 20.000 test images, and 20.000 validation images.
 EfficientNetB0 with the hyperparameters of section~\ref{subsubsec:model} is used.
-Training was performed with a batch size of 32 over 30 epochs with early stopping to reduce training time.
+Training was performed with a batch size of 32 over 30 epochs.
 \newline
 The paper presented a learning rate scheduler that adjusts the learning rate during training based on the epoch, as shown in Table~\ref{tab:learning_rate_scheduler}.
 \begin{table}[t]
@@ -50,7 +50,6 @@ The paper presented a learning rate scheduler that adjusts the learning rate dur
 The learning rate scheduler ensures that significant weight adjustments are made early in training.
 Furthermore, in later iterations, a strong adjustment is prevented by the decreasing learning rate.
 This leads to faster convergence in early epochs, while weight optimizations can be performed in later itterations.
-\newline
 Due to time constraints, the model was only trained once, as training was very computationally intensive due to the large amount of data.
 
 % \subsection{Decentralized Fake Face Detection using FL}
@@ -110,7 +109,7 @@ Due to time constraints, the model was only trained once, as training was very c
 
 \subsection{Decentralized Fake Face Detection Development}
 
-The transition from a centralized to a decentralized model was conducted in two phases: an initial implementation using an automated framework, followed by a custom-built manual Federated Learning (FL) system to accommodate specific security requirements.
+The transition from a centralized to a decentralized model was conducted in two phases: an initial implementation using an automated framework, followed by a custom-built manual FL system to accommodate specific security requirements.
 
 \subsubsection{Phase 1: Automated FL via Flower Framework}
 Initially, the decentralized model was implemented using the \textit{Flower} framework. This phase served to validate the feasibility of training EfficientNet-B0 in a multi-client environment. However, during development, significant technical challenges arose regarding the integration of custom encryption layers within the Flower abstraction. This limitation necessitated the development of a more transparent, manual FL pipeline.
@@ -129,9 +128,9 @@ The global model is initialized with ImageNet weights. In each of the 10 federat
 
 \paragraph{Secure Aggregation:}
 We initially explored \textbf{Secure Aggregation} protocols using ready-made frameworks (TensorFlow Federated SecAgg, Flower SecAgg) but faced integration challenges with our custom TensorFlow/Keras pipeline. We ultimately selected \textbf{Fernet} symmetric encryption for seamless compatibility.
-
+\newline
 Clients encrypt model weights via \texttt{Fernet.encrypt()} before transmission; the server decrypts with the shared key prior to aggregation.
-
+\newline
 Upon receiving the encrypted updates, the server performs decryption and updates the global model using a \textit{Weighted Federated Averaging} (FedAvg) algorithm. The contribution of client $k$ is weighted by its sample size $n_k$ relative to the total samples $N$:
 \[ W_{global} = \sum_{k=1}^{K} \frac{n_k}{N} W_k \]
 This ensures that the global model converges effectively while preserving the privacy of the local data through the encryption of model parameters during transit.
@@ -145,7 +144,6 @@ To ensure privacy-preserving communication, this implementation employs \textbf{
 
 \subsubsection{Encryption Workflow}
 The secure aggregation pipeline operates as follows:
-
 \begin{enumerate}
     \item \textbf{Client Training}: Local model produces updated weights $\mathbf{W}_i$ after $E=3$ epochs
     \item \textbf{Serialization}: $\mathbf{W}_i \rightarrow$ \texttt{pickle.dumps()} $\rightarrow$ raw bytes
@@ -154,7 +152,6 @@ The secure aggregation pipeline operates as follows:
     \item \textbf{Server Decryption}: $T_i \rightarrow$ \texttt{cipher.decrypt()} $\rightarrow$ verified $\mathbf{W}_i$
     \item \textbf{Weighted FedAvg}: $\mathbf{W}_{global} = \sum_i \frac{n_i}{N} \mathbf{W}_i$ where $n_i$ = client samples
 \end{enumerate}
-
 Fernet tokens self-contain timestamp, IV, ciphertext, and HMAC, providing confidentiality, authenticity, and replay protection. A single 32-byte key (16B AES + 16B HMAC) is shared securely for the simulation.
 
 

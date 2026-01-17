@@ -4,54 +4,100 @@
 \providecommand{\doi}[1]{https://doi.org/#1}
 
 \bibitem{alashjaee2025machine}
-Alashjaee, A.M.: Machine learning approach for fake image forensics. University of Bisha Journal for Basic and Applied Sciences  \textbf{1}(1), ~5 (2025)
+Alashjaee, A.M.: Machine learning approach for fake image forensics. University
+  of Bisha Journal for Basic and Applied Sciences  \textbf{1}(1), ~5 (2025)
+
+\bibitem{beutel2020flower}
+Beutel, D.J., Topal, T., Mathur, A., Qiu, X., Fernandez-Marques, J., Gao, Y.,
+  Sani, L., Li, K.H., Parcollet, T., De~Gusm{\~a}o, P.P.B., et~al.: Flower: A
+  friendly federated learning research framework. arXiv preprint
+  arXiv:2007.14390  (2020)
 
 \bibitem{bode2019every}
-Bode, J.: Every contact leaves a trace: A literary reality of locard’s exchange principle. In: Outside the Box: A Multi-Lingual Forum. p.~18 (2019)
+Bode, J.: Every contact leaves a trace: A literary reality of locard’s
+  exchange principle. In: Outside the Box: A Multi-Lingual Forum. p.~18 (2019)
 
 \bibitem{casino2022research}
-Casino, F., Dasaklis, T.K., Spathoulas, G.P., Anagnostopoulos, M., Ghosal, A., Borocz, I., Solanas, A., Conti, M., Patsakis, C.: Research trends, challenges, and emerging topics in digital forensics: A review of reviews. Ieee Access  \textbf{10},  25464--25493 (2022)
+Casino, F., Dasaklis, T.K., Spathoulas, G.P., Anagnostopoulos, M., Ghosal, A.,
+  Borocz, I., Solanas, A., Conti, M., Patsakis, C.: Research trends,
+  challenges, and emerging topics in digital forensics: A review of reviews.
+  Ieee Access  \textbf{10},  25464--25493 (2022)
 
 \bibitem{hadjadji2014multiple}
-Hadjadji, B., Chibani, Y., Guerbai, Y.: Multiple one-class classifier combination for multi-class classification. In: 2014 22nd International Conference on Pattern Recognition. pp. 2832--2837. IEEE (2014)
+Hadjadji, B., Chibani, Y., Guerbai, Y.: Multiple one-class classifier
+  combination for multi-class classification. In: 2014 22nd International
+  Conference on Pattern Recognition. pp. 2832--2837. IEEE (2014)
 
 \bibitem{jabbarli2024lightffdnets}
-Jabbarl{\i}, G., Kurt, M.: Lightffdnets: Lightweight convolutional neural networks for rapid facial forgery detection. arXiv preprint arXiv:2411.11826  (2024)
+Jabbarl{\i}, G., Kurt, M.: Lightffdnets: Lightweight convolutional neural
+  networks for rapid facial forgery detection. arXiv preprint arXiv:2411.11826
+  (2024)
 
 \bibitem{khudeyer2023fake}
-Khudeyer, R.S., Almoosawi, N.M.: Fake image detection using deep learning. Informatica  \textbf{47}(7) (2023)
+Khudeyer, R.S., Almoosawi, N.M.: Fake image detection using deep learning.
+  Informatica  \textbf{47}(7) (2023)
 
 \bibitem{lorena2008review}
-Lorena, A.C., De~Carvalho, A.C., Gama, J.M.: A review on the combination of binary classifiers in multiclass problems. Artificial Intelligence Review  \textbf{30},  19--37 (2008)
+Lorena, A.C., De~Carvalho, A.C., Gama, J.M.: A review on the combination of
+  binary classifiers in multiclass problems. Artificial Intelligence Review
+  \textbf{30},  19--37 (2008)
 
 \bibitem{mohamed2024harnessing}
-Mohamed, H., Koroniotis, N., Moustafa, N., Schiliro, F., Zomaya, A.Y.: Harnessing federated learning for digital forensics in iot: A survey and introduction to the iot-lf framework. IEEE Open Journal of the Communications Society  (2024)
+Mohamed, H., Koroniotis, N., Moustafa, N., Schiliro, F., Zomaya, A.Y.:
+  Harnessing federated learning for digital forensics in iot: A survey and
+  introduction to the iot-lf framework. IEEE Open Journal of the Communications
+  Society  (2024)
 
 \bibitem{nayerifard2023machine}
-Nayerifard, T., Amintoosi, H., Bafghi, A.G., Dehghantanha, A.: Machine learning in digital forensics: a systematic literature review. arXiv preprint arXiv:2306.04965  (2023)
+Nayerifard, T., Amintoosi, H., Bafghi, A.G., Dehghantanha, A.: Machine learning
+  in digital forensics: a systematic literature review. arXiv preprint
+  arXiv:2306.04965  (2023)
 
 \bibitem{neto2023survey}
-Neto, H.N.C., Hribar, J., Dusparic, I., Mattos, D.M.F., Fernandes, N.C.: A survey on securing federated learning: Analysis of applications, attacks, challenges, and trends. IEEE Access  \textbf{11},  41928--41953 (2023)
+Neto, H.N.C., Hribar, J., Dusparic, I., Mattos, D.M.F., Fernandes, N.C.: A
+  survey on securing federated learning: Analysis of applications, attacks,
+  challenges, and trends. IEEE Access  \textbf{11},  41928--41953 (2023)
 
 \bibitem{rafique2023deep}
-Rafique, R., Gantassi, R., Amin, R., Frnda, J., Mustapha, A., Alshehri, A.H.: Deep fake detection and classification using error-level analysis and deep learning. Scientific reports  \textbf{13}(1), ~7422 (2023)
+Rafique, R., Gantassi, R., Amin, R., Frnda, J., Mustapha, A., Alshehri, A.H.:
+  Deep fake detection and classification using error-level analysis and deep
+  learning. Scientific reports  \textbf{13}(1), ~7422 (2023)
 
 \bibitem{csafak2024detection}
-{\c{S}}afak, E., Bar{\i}{\c{s}}{\c{c}}{\i}, N.: Detection of fake face images using lightweight convolutional neural networks with stacking ensemble learning method. PeerJ Computer Science  \textbf{10},  e2103 (2024)
+{\c{S}}afak, E., Bar{\i}{\c{s}}{\c{c}}{\i}, N.: Detection of fake face images
+  using lightweight convolutional neural networks with stacking ensemble
+  learning method. PeerJ Computer Science  \textbf{10},  e2103 (2024)
 
 \bibitem{tunguz2020_140kreal_fake_faces}
-Tunguz, B.: 140k real and fake faces. \url{https://www.kaggle.com/datasets/xhlulu/140k-real-and-fake-faces} (2020), accessed: 2025-01-05
+Tunguz, B.: 140k real and fake faces.
+  \url{https://www.kaggle.com/datasets/xhlulu/140k-real-and-fake-faces} (2020),
+  accessed: 2025-01-05
+
+\bibitem{tyagi2021enhancing}
+Tyagi, S., et~al.: Enhancing security of cloud data through encryption with aes
+  and fernet algorithm through convolutional-neural-networks (cnn).
+  International Journal of Computer Networks and Applications  \textbf{8}(4),
+  288--299 (2021)
 
 \bibitem{iotbds17}
-Vervier, L., Zeissig, E.M., Lidynia, C., Ziefle, M.: Perceptions of digital footprints and the value of privacy. In: Proceedings of the 2nd International Conference on Internet of Things, Big Data and Security - Volume 1: IoTBDS,. pp. 80--91. INSTICC, SciTePress (2017). \doi{10.5220/0006301000800091}
+Vervier, L., Zeissig, E.M., Lidynia, C., Ziefle, M.: Perceptions of digital
+  footprints and the value of privacy. In: Proceedings of the 2nd International
+  Conference on Internet of Things, Big Data and Security - Volume 1: IoTBDS,.
+  pp. 80--91. INSTICC, SciTePress (2017). \doi{10.5220/0006301000800091}
 
 \bibitem{wang2019development}
-Wang, W., Yang, Y., Wang, X., Wang, W., Li, J.: Development of convolutional neural network and its application in image classification: a survey. Optical Engineering  \textbf{58}(4),  040901--040901 (2019). \doi{10.1117/1.OE.58.4.040901}
+Wang, W., Yang, Y., Wang, X., Wang, W., Li, J.: Development of convolutional
+  neural network and its application in image classification: a survey. Optical
+  Engineering  \textbf{58}(4),  040901--040901 (2019).
+  \doi{10.1117/1.OE.58.4.040901}
 
 \bibitem{yadav2024shap}
-Yadav, A.: Shap values explained. \url{https://medium.com/biased-algorithms/shap-values-explained-08764ab16466} (September 19 2024), medium, Biased-Algorithms
+Yadav, A.: Shap values explained.
+  \url{https://medium.com/biased-algorithms/shap-values-explained-08764ab16466}
+  (September 19 2024), medium, Biased-Algorithms
 
 \bibitem{zhang2021survey}
-Zhang, C., Xie, Y., Bai, H., Yu, B., Li, W., Gao, Y.: A survey on federated learning. Knowledge-Based Systems  \textbf{216} (2021)
+Zhang, C., Xie, Y., Bai, H., Yu, B., Li, W., Gao, Y.: A survey on federated
+  learning. Knowledge-Based Systems  \textbf{216} (2021)
 
 \end{thebibliography}
